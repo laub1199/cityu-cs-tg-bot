@@ -74,7 +74,7 @@ def main():
     dp = updater.dispatcher
 
     # on different commands - answer in Telegram
-    dp.add_handler(CommandHandler("start", start, filters=~Filters.group)))
+    dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("source", source, filters=~Filters.group))
 
