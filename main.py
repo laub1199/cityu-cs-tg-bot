@@ -76,7 +76,7 @@ FIRST, SECOND = range(2)
 # Callback data
 ONE, TWO, THREE, FOUR = range(4)
 
-def test_start(update: Update, context: CallbackContext) -> int:
+def test(update: Update, context: CallbackContext) -> int:
     """Send message on `/start`."""
     # Get user that sent /start and log his name
     user = update.message.from_user
@@ -214,7 +214,7 @@ def main():
 
 ###################################################################################################################
     conv_handler = ConversationHandler(
-        entry_points=[CommandHandler('start', start)],
+        entry_points=[CommandHandler('test', test)],
         states={
             FIRST: [
                 CallbackQueryHandler(one, pattern='^' + str(ONE) + '$'),
@@ -227,7 +227,7 @@ def main():
                 CallbackQueryHandler(end, pattern='^' + str(TWO) + '$'),
             ],
         },
-        fallbacks=[CommandHandler('start', start)],
+        fallbacks=[CommandHandler('test', test)],
     )
 
     dispatcher.add_handler(conv_handler)
