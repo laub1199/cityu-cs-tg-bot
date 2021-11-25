@@ -13,12 +13,47 @@ PORT = int(os.environ.get("PORT", "8443"))
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
-    """Send a message when the command /start is issued."""
-    update.message.reply_text('Hi!')
+    update.message.reply_text('/source for getting source')
+
+def source(update, context):
+    subjects_keyboard = [
+                [InlineKeyboardButton("CS3334 Data Structure", callback_data='CS3334 Data Structure')]
+                ]
+
+    subjects = InlineKeyboardMarkup(keyboard)
+    
+    if (subjects == 'CS3334 Data Structure'):
+        source_types_keyboard = [
+                [InlineKeyboardButton("Weekly Coding", callback_data='Weekly Coding')]
+            ]
+        
+        source_types = InlineKeyboardMarkup(source_types_keyboard)
+
+        if (source_types == 'CS3334 Data Structure'):
+            files_keyboard = []
+            qno = [
+                    '78',
+                    '142',
+                    '272',
+                    '372',
+                    '737', '738', '739',
+                    '740', '741', '742', '743', '744', '745', '746', '747', '748', '749',
+                    '750', '751', '752', '753', '754', '755', '756', '757', '758',
+                    '814', '815', '819',
+                    '820', '821', '822', '823', '824', '825', '826', '827', '828', '829',
+                    '830', '832', '833', '835', '836'
+                    
+                ]
+            for no in qno:
+                files_keyboard.append[InlineKeyboardButton(no, callback_data=no)]
+            reply_markup = InlineKeyboardMarkup(files_keyboard)
+
+
+    update.message.reply_text('Please choose:', reply_markup='CS3334 Data Structure/' + reply_markup)
 
 def help(update, context):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
+    update.message.reply_text('/source for getting source')
 
 def echo(update, context):
     """Echo the user message."""
@@ -39,8 +74,9 @@ def main():
     dp = updater.dispatcher
 
     # on different commands - answer in Telegram
-    dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("start", start, filters=~Filters.group)))
     dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("source", source, filters=~Filters.group))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
