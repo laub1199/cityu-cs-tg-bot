@@ -1,6 +1,7 @@
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler, ConversationHandler, CallbackContext
 from telegram import  InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.utils import helpers
 import os
 import requests
 
@@ -92,8 +93,12 @@ def fileHandler(update, context):
     print(document)
 
 def help(update, context):
-    """Send a message when the command /help is issued."""
-    update.message.reply_text('/source for getting source')
+    url = helpers.create_deep_linked_url(context.bot.get_me().username, 'city-cs')
+    keyboard = InlineKeyboardMarkup.from_button(
+        InlineKeyboardButton(text='Get Resource here!', url=url)
+    )
+
+    update.message.reply_text("Heyyy", reply_markup=keyboard)
 
 def echo(update, context):
     """Echo the user message."""
@@ -120,8 +125,8 @@ def main():
     dp = updater.dispatcher
 
     # on different commands - answer in Telegram
-    dp.add_handler(CommandHandler("start", start, filters=~Filters.chat_type.group))
-    dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
+    dp.add_handler(CommandHandler("help", help, filters=Filters.group))
 
     # on noncommand i.e message - echo the message on Telegram
     # dp.add_handler(MessageHandler(Filters.text, echo))
@@ -130,7 +135,7 @@ def main():
     dp.add_error_handler(error)
     
     source_conv_handler = ConversationHandler(
-        entry_points=[CommandHandler('source', source, filters=~Filters.chat_type.group)],
+        entry_points=[CommandHandler('source', source, filters=~Filters.group)],
         states={
             Subject: [CallbackQueryHandler(source_subject_query)],
             Type: [CallbackQueryHandler(source_type_query)],
@@ -156,3 +161,8 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+'''
+help - launch the bot and get some help
+'''
+
