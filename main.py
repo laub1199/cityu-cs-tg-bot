@@ -22,6 +22,8 @@ def source(update, context):
                 ]
 
     subjects = InlineKeyboardMarkup(subjects_keyboard)
+
+    reply_markup = None
     
     if (subjects == 'CS3334 Data Structure'):
         source_types_keyboard = [
@@ -50,7 +52,8 @@ def source(update, context):
             reply_markup = InlineKeyboardMarkup(files_keyboard)
 
 
-    update.message.reply_text('Please choose:', reply_markup='CS3334 Data Structure/' + reply_markup)
+    if reply_markup:
+        update.message.reply_text('Please choose:', reply_markup='CS3334 Data Structure/' + reply_markup)
 
 def help(update, context):
     """Send a message when the command /help is issued."""
