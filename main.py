@@ -21,7 +21,7 @@ def source(update, context):
                 [InlineKeyboardButton("CS3334 Data Structure", callback_data='CS3334 Data Structure')]
                 ]
 
-    subjects = InlineKeyboardMarkup(keyboard)
+    subjects = InlineKeyboardMarkup(subjects_keyboard)
     
     if (subjects == 'CS3334 Data Structure'):
         source_types_keyboard = [
