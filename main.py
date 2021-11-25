@@ -15,10 +15,7 @@ def main():
 
     dp.add_handler(CommandHandler("start", start,filters=~Filters.group))
 
-    updater.start_webhook(listen="0.0.0.0",
-                          port=int(PORT),
-                          url_path=TOKEN)
-    updater.bot.setWebhook('https://serene-depths-59599.herokuapp.com/' + TOKEN)
+    updater.start_polling()
     
 if __name__ == "__main__":
     main()
