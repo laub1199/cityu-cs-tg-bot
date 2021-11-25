@@ -239,7 +239,7 @@ def main():
         fallbacks=[CommandHandler('test', test)],
     )
 
-    dispatcher.add_handler(conv_handler)
+    dp.add_handler(conv_handler)
 ###################################################################################################################
 
 
