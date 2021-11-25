@@ -187,6 +187,15 @@ def four(update: Update, context: CallbackContext) -> int:
     )
     return FIRST
 
+def end(update: Update, context: CallbackContext) -> int:
+    """Returns `ConversationHandler.END`, which tells the
+    ConversationHandler that the conversation is over.
+    """
+    query = update.callback_query
+    query.answer()
+    query.edit_message_text(text="See you next time!")
+    return ConversationHandler.END
+
 
 ###################################################################################################################
 
