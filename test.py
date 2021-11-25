@@ -2,6 +2,7 @@ import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler, ConversationHandler, CallbackContext
 from telegram import  InlineKeyboardButton, InlineKeyboardMarkup, Update
 import os
+import requests
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -64,7 +65,7 @@ def source_type_query(update, context):
             '830', '832', '833', '835', '836'
             ]
         for no in qno:
-            keyboard += [[InlineKeyboardButton(no, callback_data='CS3334 Data Structure/' + no + '.cpp')]]
+            keyboard += [[InlineKeyboardButton(no, callback_data='CS3334 Data Structure/Weekly Coding/' + no + '.cpp')]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     text = 'Please select'
     
@@ -76,12 +77,19 @@ def fileHandler(update, context):
     query = update.callback_query
     update.callback_query.answer()
     query.edit_message_text(text="Selected option: {}".format(query.data))
-    path="https://github.com/laub1199/cityu-cs-tg-bot/blob/master/source/"
-    #document = path + str(query.data)
-    document = 'https://github.com/laub1199/cityu-cs-tg-bot/raw/master/source/CS3334 Data Structure/741.cpp'
-    print(document)
+    path="https://github.com/laub1199/cityu-cs-tg-bot/raw/master/source/"
+    document = path + str(query.data)
     
-    context.bot.sendDocument(chat_id=query.message.chat.id, document=document)
+    r = requests.get(document)
+
+    filename = 'untitled.txt'
+
+    if('Weekly Coding' in query.data):
+        filename = query.data.split('/Weekly Coding/')[1]
+
+    
+    context.bot.sendDocument(chat_id=query.message.chat.id, document=r.content, filename=filename)
+    print(document)
 
 def help(update, context):
     """Send a message when the command /help is issued."""
