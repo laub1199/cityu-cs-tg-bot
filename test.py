@@ -5,7 +5,6 @@ from telegram.utils import helpers
 import os
 import requests
 
-# Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
@@ -15,8 +14,6 @@ PORT = int(os.environ.get("PORT", "8443"))
 
 Subject, Type, File = range(3)
 
-# Define a few command handlers. These usually take the two arguments update and
-# context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     update.message.reply_text('/source for getting source')
 
@@ -120,24 +117,16 @@ def end():
 
 def main():
     """Start the bot."""
-    # Create the Updater and pass it your bot's token.
-    # Make sure to set use_context=True to use the new context based callbacks
-    # Post version 12 this will no longer be necessary
     updater = Updater(TOKEN, use_context=True)
-
-    # Get the dispatcher to register handlers
+    
     dp = updater.dispatcher
 
-    # on different commands - answer in Telegram
-    dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
+
+    
     dp.add_handler(CommandHandler("help", help, filters=Filters.group))
     dp.add_handler(CommandHandler("updatelog", updatelog))
-
-    # on noncommand i.e message - echo the message on Telegram
-    # dp.add_handler(MessageHandler(Filters.text, echo))
-
-    # log all errors
-    dp.add_error_handler(error)
+    
+    dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
     
     source_conv_handler = ConversationHandler(
         entry_points=[CommandHandler('source', source, filters=~Filters.group)],
@@ -151,6 +140,7 @@ def main():
 
     dp.add_handler(source_conv_handler)
 
+    dp.add_error_handler(error)
 
     # Start the Bot
     updater.start_polling()
