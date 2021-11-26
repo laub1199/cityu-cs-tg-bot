@@ -113,7 +113,7 @@ def geguide(update, context):
         url = 'http://cityuge.swiftzer.net/courses/' + str(context.args[0]).lower()
         text = 'Check out ' + str(context.args[0]).upper() + '!'
         keyboard = InlineKeyboardMarkup.from_button(
-            InlineKeyboardButton(text='', url=url)
+            InlineKeyboardButton(text=text, url=url)
         )
 
         update.message.reply_text("Quick link!", reply_markup=keyboard)
