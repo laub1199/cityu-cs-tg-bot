@@ -136,7 +136,7 @@ def main():
 
 
     
-    dp.add_handler(CommandHandler("help", help, filters=Filters.group))
+    dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("updatelog", updatelog))
     dp.add_handler(CommandHandler('geguide', geguide))
     
