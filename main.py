@@ -96,9 +96,19 @@ def updatelog(update, context):
     txt = open("update_log.txt", "r").read()
     context.bot.sendMessage(chat_id=chat_id,text = txt, parse_mode= 'HTML')
 
-def echo(update, context):
-    """Echo the user message."""
-    update.message.reply_text(update.message.text)
+def geguide(update, context):
+    if (not context.args):
+        update.message.reply_text("Course code missing, e.g. /geguide ge1401")
+    elif (len(context.args) > 1):
+        update.message.reply_text("Only 1 couse code is required, e.g. /geguide ge1401")
+    else:
+        url = 'http://cityuge.swiftzer.net/courses/' + str(context.args[0]).lower()
+        text = 'Check out ' + str(context.args[0]).upper() + '!'
+        keyboard = InlineKeyboardMarkup.from_button(
+            InlineKeyboardButton(text='', url=url)
+        )
+
+        update.message.reply_text("Quick link!", reply_markup=keyboard)
 
 def error(update, context):
     """Log Errors caused by Updates."""
@@ -120,6 +130,7 @@ def main():
     
     dp.add_handler(CommandHandler("help", help, filters=Filters.group))
     dp.add_handler(CommandHandler("updatelog", updatelog))
+    dp.add_handler(CommandHandler('geguide', geguide))
     
     dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
     
@@ -155,5 +166,6 @@ if __name__ == '__main__':
 '''
 help - launch the bot and get some help
 updatelog - get update log
+geguide - get quick link to ge guide
 '''
 
