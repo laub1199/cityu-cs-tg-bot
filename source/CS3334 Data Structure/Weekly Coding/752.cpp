@@ -3,126 +3,137 @@
 #include <string>
 #include <fstream>
 #include <cmath>
-#include <queue> 
-
-
+#include <queue>
 using namespace std;
-
-class Process {
+class mtchan {
 private:
-	int id;
-	int arrivingTime;
-	int processingTime;
-	int priority;
-	int doneTime;
+	int cwk;
+	int jackie;
+	int tony;
+	int ben;
+	int ken;
 public:
-	Process() = default;
-	Process(int, int, int, int);
-	int getId();
-	int getArrivingTime();
-	int getProcessingTime();
-	int getPriority();
-	int getDoneTime();
-	void setId(int);
-	void setArrvingTime(int);
-	void setProcessingTime(int);
-	void setPriority(int);
-	void setDoneTime(int);
+	mtchan() = default;
+	mtchan(int, int, int, int);
+	int f1();
+	int f2();
+	int f3();
+	int liza();
+	int lisa();
+	void ccp(int);
+	void hk(int);
+	void no(int);
+	void it(int);
+	void so9sad(int);
 };
-
-
 int main() {
-	int num;
-
-	while (cin >> num) {
-		int at, pt, pr, dt = 0;
-		queue<Process> high;
-		queue<Process> low;
-
-		Process* process = new Process[num];
-
-		for (int i = 0; i < num; i++) {
-			cin >> at >> pt >> pr;
-			process[i].setId(i);
-			process[i].setArrvingTime(at);
-			process[i].setProcessingTime(pt);
-			process[i].setPriority(pr);
+	int meow;
+	while (cin >> meow) {
+		int city, hku, ust, cu = 0;
+		queue<mtchan> poly;
+		queue<mtchan> treeu;
+		mtchan* lingu = new mtchan[meow];
+		for (int fucku = 0; fucku < meow; fucku++) {
+			cin >> city >> hku >> ust;
+			lingu[fucku].ccp(fucku);
+			lingu[fucku].hk(city);
+			lingu[fucku].no(hku);
+			lingu[fucku].it(ust);
 		}
-
-		bool processing = false;
-
-		for (int ri = 0; ri < 6000; ri++) {
-			for (int i = 0; i < num; i++) {
-				if (process[i].getArrivingTime() == ri) {
-					if (process[i].getPriority() == 0) {
-						high.push(process[i]);
-					}
-					else {
-						low.push(process[i]);
-					}
+		bool mu = false;
+		for (int xijinpin = 0; xijinpin < 6000; xijinpin++) {
+			for (int fucku = 0; fucku < meow; fucku++) {
+				if (lingu[fucku].f2() == xijinpin) {
+					if (lingu[fucku].liza() == 0) {poly.push(lingu[fucku]);}
+					else {treeu.push(lingu[fucku]);}
 				}
-				else {
-					continue;
-				}
+				else {continue;}
 			}
-
-			if (dt == ri) {
-				processing = false;
-			}
-
-			if (!processing) {
-				if (!high.empty()) {
-					Process temp = high.front();
-					for (int i = 0; i < num; i++) {
-						if (temp.getId() == i) {
-							process[i].setDoneTime(ri);
-							dt = process[i].getDoneTime();
-							high.pop();
-							processing = true;
+			if (cu == xijinpin) {mu = false;}
+			if (!mu) {
+				if (!poly.empty()) {
+					mtchan temp = poly.front();
+					for (int fucku = 0; fucku < meow; fucku++) {
+						if (temp.f1() == fucku) {
+							lingu[fucku].so9sad(xijinpin);
+							cu = lingu[fucku].lisa();
+							poly.pop();
+							mu = true;
 							break;
 						}
 					}
 				}
-				else if (!low.empty()) {
-					Process temp = low.front();
-					for (int i = 0; i < num; i++) {
-						if (temp.getId() == i) {
-							process[i].setDoneTime(ri);
-							dt = process[i].getDoneTime();
-							low.pop();
-							processing = true;
+				else if (!treeu.empty()) {
+					mtchan temp = treeu.front();
+					for (int fucku = 0; fucku < meow; fucku++) {
+						if (temp.f1() == fucku) {
+							lingu[fucku].so9sad(xijinpin);
+							cu = lingu[fucku].lisa();
+							treeu.pop();
+							mu = true;
 							break;
 						}
 					}
 				}
 			}
 		}
-		for (int i = 0; i < num - 1; i++) {
-			cout << process[i].getDoneTime() << " ";
-		}
-
-		cout << process[num - 1].getDoneTime();
+		for (int fucku = 0; fucku < meow - 1; fucku++) {cout << lingu[fucku].lisa() << " ";}
+		cout << lingu[meow - 1].lisa();
 		cout << endl;
-		delete[] process;
+		delete[] lingu;
 	}
-
-	system("pause");
 	return 0;
 }
-
-Process::Process(int inID, int aT, int pT, int pri) {
-	id = inID;
-	arrivingTime = aT;
-	processingTime = pT;
-	priority = pri;
+mtchan::mtchan(int inID, int aT, int pT, int pri) {
+	cwk = inID;
+	jackie = aT;
+	tony = pT;
+	ben = pri;
 }
-int Process::getId() { return id; }
-int Process::getArrivingTime() { return arrivingTime; }
-int Process::getProcessingTime() { return processingTime; }
-int Process::getPriority() { return priority; }
-int Process::getDoneTime() { return doneTime; }
-void Process::setId(int inID) { id = inID; }
-void Process::setArrvingTime(int aT) { arrivingTime = aT; }
-void Process::setProcessingTime(int pT) { processingTime = pT; }
-void Process::setPriority(int pri) { priority = pri; }
-void Process::setDoneTime(int dT) { doneTime = dT + processingTime; }
+int mtchan::f1() { return cwk; }
+int mtchan::f2() { return jackie; }
+int mtchan::f3() { return tony; }
+int mtchan::liza() { return ben; }
+int mtchan::lisa() { return ken; }
+void mtchan::ccp(int inID) { cwk = inID; }
+void mtchan::hk(int aT) { jackie = aT; }
+void mtchan::no(int pT) { tony = pT; }
+void mtchan::it(int pri) { ben = pri; }
+void mtchan::so9sad(int dT) { ken = dT + tony; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

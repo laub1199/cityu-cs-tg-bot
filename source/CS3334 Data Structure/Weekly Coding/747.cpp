@@ -2,64 +2,92 @@
 #include <utility>
 #include <queue>
 using namespace std;
-
-int findMin(int, int);
-
+int az(int, int);
 int main() {
-	int num, length, k, i, p, temp, vMax, index;
-	pair <int, int>newPair;
-	cin >> num;
-	for (int j = 0; j < num; j++) {
-		cin >> length >> k;
-		deque <pair<int, int> >firstLine;
-		deque <pair<int, int> >secondLine;
-
-		for (i = 1; i <= length; i++) {
-			cin >> temp;
-			firstLine.push_back(make_pair(temp, i));
+	int nas, nsas, sm, sma, smsa, smjsa, smkjsa, kjsa;
+	pair <int, int>sjksa;
+	cin >> nas;
+	for (int kjksa = 0; kjksa < nas; kjksa++) {
+		cin >> nsas >> sm;
+		deque <pair<int, int> >lkjksa;
+		deque <pair<int, int> >ljkjksa;
+		for (sma = 1; sma <= nsas; sma++) {
+			cin >> smjsa;
+			lkjksa.push_back(make_pair(smjsa, sma));
 		}
-
-		for (i = 1; i <= length; i++) {
-
-			int time = findMin(k, firstLine.size());
-			vMax = firstLine.front().first;
-			index = firstLine.front().second;
-
-			for (p = 1; p <= time; p++) {
-				newPair = firstLine.front();
-				if (vMax < newPair.first)
+		for (sma = 1; sma <= nsas; sma++) {
+			int ljkmasjksa = az(sm, lkjksa.size());
+			smkjsa = lkjksa.front().first;
+			kjsa = lkjksa.front().second;
+			for (smsa = 1; smsa <= ljkmasjksa; smsa++) {
+				sjksa = lkjksa.front();
+				if (smkjsa < sjksa.first)
 				{
-					vMax = newPair.first;
-					index = newPair.second;
+					smkjsa = sjksa.first;
+					kjsa = sjksa.second;
 				}
-				firstLine.pop_front();
-				secondLine.push_back(newPair);
+				lkjksa.pop_front();
+				ljkjksa.push_back(sjksa);
 			}
-
-			time = secondLine.size();
-			for (p = 1; p <= time; p++) {
-				newPair = secondLine.front();
-				secondLine.pop_front();
-				if (index != newPair.second) {
-					newPair.first--;
-					firstLine.push_back(newPair);
+			ljkmasjksa = ljkjksa.size();
+			for (smsa = 1; smsa <= ljkmasjksa; smsa++) {
+				sjksa = ljkjksa.front();
+				ljkjksa.pop_front();
+				if (kjsa != sjksa.second) {
+					sjksa.first--;
+					lkjksa.push_back(sjksa);
 				}
 			}
-			if (i != length) {
-				cout << index;
+			if (sma != nsas) {
+				cout << kjsa;
 				cout << " ";
 			}
 			else {
-				cout << index;
+				cout << kjsa;
 			}
 		}
 		cout << endl;
 	}
 	return 0;
 }
-
-int findMin(int a, int b) {
+int az(int a, int b) {
 	if (a < b)
 		return a;
 	return b;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

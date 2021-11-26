@@ -2,34 +2,60 @@
 #include <vector>
 #include <sstream>
 #include <string>
-
 using namespace std;
-
-int Fibonacci(int);
-
+int F(int);
 int main() {
-	
-	int input;
-
-	while (cin >> input) {
-		cout << Fibonacci(input) << endl;
+	int x;
+	while (cin >> x) {
+		cout << F(x) << endl;
 	}
-	system("Pause");
-
+}
+int F(int nx) {
+	if (nx <= 1) return nx;
+	int fn = 0;
+	int sn = 1;
+	int t;
+	for (int i = 1; i < nx; i++) {
+		t = (fn + sn) % 10;
+		fn = sn;
+		sn = t;
+	}
+	return sn;
 }
 
-int Fibonacci(int num) {
-	if (num <= 1) return num;
-	
-	int firstNum = 0;
-	int secondNum = 1;
-	int temp;
 
-	for (int i = 1; i < num; i++) {
-		temp = (firstNum + secondNum) % 10;
-		firstNum = secondNum;
-		secondNum = temp;
-	}
 
-	return secondNum;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

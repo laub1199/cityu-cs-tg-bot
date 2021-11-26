@@ -1,46 +1,76 @@
 #include <iostream>
 #include <stack>
 using namespace std;
-
-
-long long int calMaxArea(long long int arr[], long long int s) {
-	stack <int> prices;
-	long long int maxArea = 0, topEdge, topArea, i;
-	i = 0;
-
-	while (i < s) {
-		if (prices.empty() || arr[prices.top()] <= arr[i]) prices.push(i++);
+long long int cs3334(long long int cs4486[], long long int cs3440) {
+	stack <int> cs2456;
+	long long int ugh = 0, somafan, malunfan, jm9;
+	jm9 = 0;
+	while (jm9 < cs3440) {
+		if (cs2456.empty() || cs4486[cs2456.top()] <= cs4486[jm9]) cs2456.push(jm9++);
 		else {
-			topEdge = prices.top();
-			prices.pop();
-			if (prices.empty()) topArea = arr[topEdge] * i;
-			else topArea = arr[topEdge] * (i - prices.top() - 1);
-			if (maxArea < topArea) maxArea = topArea;
+			somafan = cs2456.top();
+			cs2456.pop();
+			if (cs2456.empty()) malunfan = cs4486[somafan] * jm9;
+			else malunfan = cs4486[somafan] * (jm9 - cs2456.top() - 1);
+			if (ugh < malunfan) ugh = malunfan;
 		}
 	}
-
-	while (!prices.empty()) {
-		topEdge = prices.top();
-		prices.pop();
-		if (prices.empty()) topArea = arr[topEdge] * i;
-		else topArea = arr[topEdge] * (i - prices.top() - 1);
-		if (maxArea < topArea) maxArea = topArea;
+	while (!cs2456.empty()) {
+		somafan = cs2456.top();
+		cs2456.pop();
+		if (cs2456.empty()) malunfan = cs4486[somafan] * jm9;
+		else malunfan = cs4486[somafan] * (jm9 - cs2456.top() - 1);
+		if (ugh < malunfan) ugh = malunfan;
 	}
-	return maxArea;
+	return ugh;
 }
-
-
 int main() {
-	long long int cases;
-	cin >> cases;
-	for (long long int i = 0; i < cases; i++) {
-		long long int noOfDays;
-		cin >> noOfDays;
-		long long int *dayLength = new long long int[noOfDays];
-		for (long long int i = 0; i < noOfDays; i++)
-			cin >> dayLength[i];
-		cout << calMaxArea(dayLength, noOfDays) << endl;
-		delete[] dayLength;
+	long long int longlongdick;
+	cin >> longlongdick;
+	for (long long int jm9 = 0; jm9 < longlongdick; jm9++) {
+		long long int wet;
+		cin >> wet;
+		long long int *length = new long long int[wet];
+		for (long long int jm9 = 0; jm9 < wet; jm9++)
+			cin >> length[jm9];
+		cout << cs3334(length, wet) << endl;
+		delete[] length;
 	}
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

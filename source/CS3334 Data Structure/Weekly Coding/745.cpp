@@ -2,48 +2,69 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
 int main() {
-	int num, numOfCards;
-	cin >> num;
-
-	for (int i = 0; i < num; i++) {
-		cin >> numOfCards;
-		vector <int> allPiles;
-		for (int j = 0; j < numOfCards; j++) {
-			int input;
-			cin >> input;
-			allPiles.push_back(input);
+	int zxc, zxcs;
+	cin >> zxc;
+	for (int i = 0; i < zxc; i++) {
+		cin >> zxcs;
+		vector <int> zxchs;
+		for (int zxvhchs = 0; zxvhchs < zxcs; zxvhchs++) {
+			int zxhchs;
+			cin >> zxhchs;
+			zxchs.push_back(zxhchs);
 		}
-
-		int numOfOp;
-		cin >> numOfOp;
-
-		for (int j = 0; j < numOfOp; j++) {
-			char inputChar;
-			cin >> inputChar;
-
-			if (inputChar == 'm') {
-				cout << *max_element(allPiles.begin(), allPiles.end()) << endl;
-			}
-
-			if (inputChar == 'r') {
-				allPiles.pop_back();
-
-			}
-
-			if (inputChar == 'a') {
-				int value;
-				cin >> value;
-
-				allPiles.push_back(value);
+		int zxnvhchs;
+		cin >> zxnvhchs;
+		for (int zxvhchs = 0; zxvhchs < zxnvhchs; zxvhchs++) {
+			char zxnvzchs;
+			cin >> zxnvzchs;
+			if (zxnvzchs == 'm') {cout << *max_element(zxchs.begin(), zxchs.end()) << endl;}
+			if (zxnvzchs == 'r') {zxchs.pop_back();}
+			if (zxnvzchs == 'a') {
+				int zxnnvzchs;
+				cin >> zxnnvzchs;
+				zxchs.push_back(zxnnvzchs);
 			}
 		}
-		allPiles.clear();
+		zxchs.clear();
 	}
-
 	return 0;
-
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?
 

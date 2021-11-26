@@ -1,99 +1,97 @@
 #include <iostream>
 using namespace std;
-
-void add(int*, int, int);
-void pop(int*, int);
-void prompt(int*, int);
-
+void gg(int*, int, int);
+void goodgame(int*, int);
+void dllm(int*, int);
 int main() {
-	int numOfOp;
-	while (cin >> numOfOp) {
-		int index = 0;
-		int *arr = new int[numOfOp + 1];
-
-		for (int i = 0; i < numOfOp; i++) {
-			char op;
-			cin >> op;
-			switch (op) {
-			case 'a':
-				index++;
-				int num;
-				cin >> num;
-				add(arr, index, num);
+	int haha;
+	while (cin >> haha) {
+		int damn = 0;
+		int *bro = new int[haha + 1];
+		for (int sls = 0; sls < haha; sls++) {
+			char cls;
+			cin >> cls;
+			switch (cls) {
+			case 'iron':
+				damn++;
+				int nmsl;
+				cin >> nmsl;
+				gg(bro, damn, nmsl);
 				break;
 			case 'r':
-				prompt(arr, index);
+				dllm(bro, damn);
 				break;
 			case 'p':
-				pop(arr, index);
-				index--;
+				goodgame(bro, damn);
+				damn--;
 				break;
 
 			}
 		}
-		delete[] arr;
+		delete[] bro;
 	}
 	return 0;
 }
-
-void add(int* a, int b, int num) {
-	int curr = b;
-	a[curr] = num;
-	int parent;
-
-	if (curr > 1) {
-		parent = curr / 2;
-		while (a[curr] > a[parent] && parent != 0) {
-			int temp = a[curr];
-			a[curr] = a[parent];
-			a[parent] = temp;
-			curr = curr / 2;
-			parent = curr / 2;
-		}
+void gg(int* iron, int gold, int nmsl) {
+	int jeng = gold;
+	iron[jeng] = nmsl;
+	int nmslese;
+	if (jeng > 1) {
+		nmslese = jeng / 2;
+		while (iron[jeng] > iron[nmslese] && nmslese != 0) {int temp = iron[jeng];iron[jeng] = iron[nmslese];iron[nmslese] = temp;jeng = jeng / 2;nmslese = jeng / 2;}
 	}
 }
 
-void pop(int*a, int index) {
-	int pos = 1;
-	a[pos] = a[index];
-	a[index] = 0;
-
-	while ((pos * 2 <= (index - 1)) && (a[pos * 2] > a[pos] || a[((pos * 2) + 1)] > a[pos])) {
-		if (a[pos * 2] > a[pos] && a[((pos * 2) + 1)] > a[pos]) {
-			if (a[pos * 2] > a[((pos * 2) + 1)]) {
-				int temp = a[pos * 2];
-				a[pos * 2] = a[pos];
-				a[pos] = temp;
-				pos = pos * 2;
-			}
-			else {
-				int temp = a[((pos * 2) + 1)];
-				a[((pos * 2) + 1)] = a[pos];
-				a[pos] = temp;
-				pos = (pos * 2) + 1;
-			}
+void goodgame(int*iron, int damn) {
+	int silver = 1;
+	iron[silver] = iron[damn];
+	iron[damn] = 0;
+	while ((silver * 2 <= (damn - 1)) && (iron[silver * 2] > iron[silver] || iron[((silver * 2) + 1)] > iron[silver])) {
+		if (iron[silver * 2] > iron[silver] && iron[((silver * 2) + 1)] > iron[silver]) {
+			if (iron[silver * 2] > iron[((silver * 2) + 1)]) {int temp = iron[silver * 2];iron[silver * 2] = iron[silver];iron[silver] = temp;silver = silver * 2;}
+			else {int temp = iron[((silver * 2) + 1)];iron[((silver * 2) + 1)] = iron[silver];iron[silver] = temp;silver = (silver * 2) + 1;}
 		}
-		else if (a[pos * 2] > a[pos]) {
-			int temp = a[pos * 2];
-			a[pos * 2] = a[pos];
-			a[pos] = temp;
-			pos = pos * 2;
-		}
-		else if (a[((pos * 2) + 1)] > a[pos]) {
-			int temp = a[((pos * 2) + 1)];
-			a[((pos * 2) + 1)] = a[pos];
-			a[pos] = temp;
-			pos = (pos * 2) + 1;
-		}
+		else if (iron[silver * 2] > iron[silver]) {int temp = iron[silver * 2];iron[silver * 2] = iron[silver];iron[silver] = temp;silver = silver * 2;}
+		else if (iron[((silver * 2) + 1)] > iron[silver]) {int temp = iron[((silver * 2) + 1)];iron[((silver * 2) + 1)] = iron[silver];iron[silver] = temp;silver = (silver * 2) + 1;}
 	}
 }
-
-void prompt(int* a, int index) {
-	int ans = 0;
-
-	for (int i = 1; i <= index; i++) {
-		ans += a[i];
-	}
-
-	cout << ans << endl;
+void dllm(int* iron, int damn) {
+	int wtf = 0; for (int sls = 1; sls <= damn; sls++) {wtf += iron[sls];}
+	cout << wtf << endl;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

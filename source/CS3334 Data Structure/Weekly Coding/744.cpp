@@ -3,96 +3,115 @@
 #include <string>
 #include <stack>
 #include <cmath>
-
 using namespace std;
-
-
 int main() {
-	int numOfCases;
-
-	cin >> numOfCases;
-	for (int i = 0; i < numOfCases; i++) {
-		int numOfData;
-		stack<int> tempA;
-		stack<int> A;
-		stack<int> B;
-		stack<int> S;
-		
-		cin >> numOfData;
-
-		for (int j = 0; j < numOfData; j++) {
-			int temp;
-			cin >> temp;
-			tempA.push(temp);
+	int qa;
+	cin >> qa;
+	for (int qaf = 0; qaf < qa; qaf++) {
+		int qafx;
+		stack<int> qafxz;
+		stack<int> qafxzb;
+		stack<int> xzb;
+		stack<int> xzbs;
+		cin >> qafx;
+		for (int abas = 0; abas < qafx; abas++) {
+			int xzbss;
+			cin >> xzbss;
+			qafxz.push(xzbss);
 		}
-
-		int numOfTestCases;
-
-		cin >> numOfTestCases;
-
-		for (int j = 0; j < numOfTestCases; j++) {
-			A = tempA;
-			int* target = new int[numOfData];
-			for (int k = 0; k < numOfData; k++) {
-				cin >> target[k];
+		int abass;
+		cin >> abass;
+		for (int abas = 0; abas < abass; abas++) {
+			qafxzb = qafxz;
+			int* abxass = new int[qafx];
+			for (int k = 0; k < qafx; k++) {
+				cin >> abxass[k];
 			}
-
-			int curr = 0;
-			while (!A.empty()) {
-				if (target[curr] == A.top()) {
-					B.push(A.top());
-					A.pop();
-					curr++;
+			int abxhass = 0;
+			while (!qafxzb.empty()) {
+				if (abxass[abxhass] == qafxzb.top()) {
+					xzb.push(qafxzb.top());
+					qafxzb.pop();
+					abxhass++;
 				}
-				else if (target[curr] != A.top() && S.empty())
+				else if (abxass[abxhass] != qafxzb.top() && xzbs.empty())
 				{
-					S.push(A.top());
-					A.pop();
+					xzbs.push(qafxzb.top());
+					qafxzb.pop();
 				}
-				else if (target[curr] == S.top()) {
-					B.push(S.top());
-					S.pop();
-					curr++;
+				else if (abxass[abxhass] == xzbs.top()) {
+					xzb.push(xzbs.top());
+					xzbs.pop();
+					abxhass++;
 				}
-				else if (target[curr] != A.top() && target[curr] != S.top()) {
-					S.push(A.top());
-					A.pop(); 
+				else if (abxass[abxhass] != qafxzb.top() && abxass[abxhass] != xzbs.top()) {
+					xzbs.push(qafxzb.top());
+					qafxzb.pop();
 				}
 			}
-			while (!S.empty()) {
-				B.push(S.top());
-				S.pop();
+			while (!xzbs.empty()) {
+				xzb.push(xzbs.top());
+				xzbs.pop();
 			}
-
-			bool aye = true;
-			for (int k = numOfData - 1; k >= 0; k--) {
-				if (B.empty()) {
-					aye = false;
+			bool ssg = true;
+			for (int k = qafx - 1; k >= 0; k--) {
+				if (xzb.empty()) {
+					ssg = false;
 					cout << "Impossible" << endl;
 					break;
 				}
 				else {
-					if (target[k] == B.top()) {
-						B.pop();
+					if (abxass[k] == xzb.top()) {
+						xzb.pop();
 					}
 					else {
-						aye = false;
+						ssg = false;
 						cout << "Impossible" << endl;
 						break;
 					}
 				}
 			}
-
-			if (aye) cout << "Aye" << endl;
-
-			while (!B.empty()) {
-				B.pop();
+			if (ssg) cout << "Aye" << endl;
+			while (!xzb.empty()) {
+				xzb.pop();
 			}
 		}
-		
-		
-
 	}
-
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

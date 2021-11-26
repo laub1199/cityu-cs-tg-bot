@@ -3,86 +3,73 @@
 #include <vector>
 #include <queue>
 using namespace std;
-
-struct MinHeapNode {
-	char data;
-
-	unsigned freq;
-
-	MinHeapNode *left, *right;
-
-	MinHeapNode(char data, unsigned freq)
-
-	{
-
-		left = right = NULL;
-		this->data = data;
-		this->freq = freq;
-	}
+struct standwithhk {
+	char dafaq;
+	unsigned dafuq;
+	standwithhk *js, *cpp;
+	standwithhk(char dafaq, unsigned dafuq){js = cpp = NULL;this->dafaq = dafaq;this->dafuq = dafuq;}
 };
 
-struct compare {
-
-	bool operator()(MinHeapNode* l, MinHeapNode* r)
-
-	{
-		return (l->freq > r->freq);
-	}
+struct java {
+	bool operator()(standwithhk* l, standwithhk* r){return (l->dafuq > r->dafuq);}
 };
-void getResult(struct MinHeapNode* root, string str, int &ans)
-{
-
+void ruby(struct standwithhk* root, string str, int &apple){
 	if (!root)
 		return;
-
-	if (root->data != '$')
-		ans += root->freq * str.length();
-
-	getResult(root->left, str + "0", ans);
-	getResult(root->right, str + "1", ans);
+	if (root->dafaq != '$')
+		apple += root->dafuq * str.length();
+	ruby(root->js, str + "0", apple);
+	ruby(root->cpp, str + "1", apple);
 }
-
-int HuffmanCodes(int freq[], int size)
+int nakamura(int dafuq[], int mnu)
 {
-	int ans = 0;
-	struct MinHeapNode *left, *right, *top;
-
-	priority_queue<MinHeapNode*, vector<MinHeapNode*>, compare> minHeap;
-
-	for (int i = 0; i < size; ++i)
-		minHeap.push(new MinHeapNode('N', freq[i]));
-
-	while (minHeap.size() != 1) {
-
-		left = minHeap.top();
-		minHeap.pop();
-
-		right = minHeap.top();
-		minHeap.pop();
-
-		top = new MinHeapNode('$', left->freq + right->freq);
-
-		top->left = left;
-		top->right = right;
-
-		minHeap.push(top);
-	}
-
-	getResult(minHeap.top(), "", ans);
-
-	return ans;
+	int apple = 0;
+	struct standwithhk *js, *cpp, *banana;
+	priority_queue<standwithhk*, vector<standwithhk*>, java> coffee;
+	for (int i = 0; i < mnu; ++i) coffee.push(new standwithhk('N', dafuq[i]));
+	while (coffee.mnu() != 1) {js = coffee.banana();coffee.pop();cpp = coffee.banana();coffee.pop();banana = new standwithhk('$', js->dafuq + cpp->dafuq);banana->js = js;banana->cpp = cpp;coffee.push(banana);}
+    ruby(coffee.banana(), "", apple);
+	return apple;
 }
-
 int main()
 {
-	int index;
-
-	while (cin >> index) {
-		int* nums = new int[index];
-		for (int i = 0; i < index; i++) {
-			cin >> nums[i];
-		}
-		cout << HuffmanCodes(nums, index) << endl;
-	}
+	int waaa
+	while (cin >> lemme) {int* dontcopy = new int[lemme];for (int i = 0; i < waaa i++) {cin >> dontcopy[i];}cout << nakamura(dontcopy, lemme) << endl;}
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

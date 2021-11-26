@@ -2,149 +2,130 @@
 #include <vector>
 #include <sstream>
 #include <string>
-
 using namespace std;
-
-class node {
+class abew {
 public:
-	int data;
-	node* next;
+	int anewt;
+	abew* ems;
 };
-
 int main() {
-
-	int numOfStudent;
-	int tagT;
-
-	cin >> numOfStudent;
-
-
-	node* ref = NULL;
-
-	for (int i = 0; i < numOfStudent; i++) {
-		node* newNode = new node;
-		int temp;
-
-		cin >> temp;
-		newNode->data = temp;
-
-		if (!ref) {
-			newNode->next = ref;
-			ref = newNode;
+	int eawrw;
+	int ertyme;
+	cin >> eawrw;
+	abew* rnsre = NULL;
+	for (int i = 0; i < eawrw; i++) {
+		abew* erdgs = new abew;
+		int eryme;
+		cin >> eryme;
+		erdgs->anewt = eryme;
+		if (!rnsre) {
+			erdgs->ems = rnsre;
+			rnsre = erdgs;
 		}
 		else {
-			node* currNode = ref;
-			while (currNode->next) {
-				currNode = currNode->next;
-			}
-			currNode->next = newNode;
-			currNode = newNode;
-
-			currNode->next = NULL;
-
+			abew* uiqwv = rnsre;
+			while (uiqwv->ems) {uiqwv = uiqwv->ems;
+			uiqwv->ems = erdgs;
+			uiqwv = erdgs;
+			uiqwv->ems = NULL;
 		}
-
 	}
-
-
-	int operation;
-
-	while (cin >> operation) {
-		if (operation == 1) {
-			int position, tag;
-			node* newNode = new node;
-			node* currNode = ref;
-
-			cin >> position >> tag;
-
-			newNode->data = tag;
-
-			for (int i = 0; i < position - 1; i++) {
-				currNode = currNode->next;
-			}
-
-			newNode->next = currNode->next;
-			currNode->next = newNode;
-
+	int oadub;
+	while (cin >> oadub) {
+		if (oadub == 1) {
+			int pawhjb, tbanjk;
+			abew* erdgs = new abew;
+			abew* uiqwv = rnsre;
+			cin >> pawhjb >> tbanjk;
+			erdgs->anewt = tbanjk;
+			for (int i = 0; i < pawhjb - 1; i++) {uiqwv = uiqwv->ems;}
+			erdgs->ems = uiqwv->ems;
+			uiqwv->ems = erdgs;
 		}
-		else if (operation == 2) {
-			int position;
-			node* currNode = ref;
-			node* targetNode = ref;
-
-			cin >> position;
-			
-			if (position == 1) {
-				ref = ref->next;
-			}
+		else if (oadub == 2) {
+			int pawhjb;
+			abew* uiqwv = rnsre;
+			abew* asbdne = rnsre;
+			cin >> pawhjb;
+			if (pawhjb == 1) {rnsre = rnsre->ems;}
 			else {
-				for (int i = 0; i < position - 2; i++) {
-					currNode = currNode->next;
-					targetNode = targetNode->next;
+				for (int i = 0; i < pawhjb - 2; i++) {
+					uiqwv = uiqwv->ems;
+					asbdne = asbdne->ems;
 				}
-				targetNode = targetNode->next;
-
-				currNode->next = targetNode->next;
-				currNode = currNode->next;
+				asbdne = asbdne->ems;
+				uiqwv->ems = asbdne->ems;
+				uiqwv = uiqwv->ems;
 			}
 		}
-		else if (operation == 3) {
-			int start;
-			int end;
-			node* newStart = ref;
-			node* continueNode = ref;
-
-			cin >> start >> end;
-
-			for (int i = 0; i < end - 1; i++) {
-				newStart = newStart->next;
-				continueNode = continueNode->next;
+		else if (oadub == 3) {
+			int ansd;
+			int efdgn;
+			abew* nshsdf = rnsre;
+			abew* cnabte = rnsre;
+			cin >> ansd >> efdgn;
+			for (int i = 0; i < efdgn - 1; i++) {
+				nshsdf = nshsdf->ems;
+				cnabte = cnabte->ems;
 			}
-			continueNode = continueNode->next;
-
-			for (int i = 0; i < end - start; i++) {
-				node* currNode = ref;
-				node* tempNode = newStart;
-
-				for (int j = 0; j < end - 2 - i; j++) {
-					currNode = currNode->next;
-				}
-
-				for (int j = 0; j < i; j++) {
-					tempNode = tempNode->next;
-				}
-
-				tempNode->next = currNode;
-	
+			cnabte = cnabte->ems;
+			for (int i = 0; i < efdgn - ansd; i++) {
+				abew* uiqwv = rnsre;
+				abew* tnsavd = nshsdf;
+				for (int j = 0; j < efdgn - 2 - i; j++) {uiqwv = uiqwv->ems;}
+				for (int j = 0; j < i; j++) {tnsavd = tnsavd->ems;}
+				tnsavd->ems = uiqwv;
 			}
-
-			node* tempNode = ref;
-
-			for (int i = 0; i < start - 2; i++) {
-				tempNode = tempNode->next;
-			}
-
-			tempNode->next = newStart;
-
-			for (int i = 0; i < end - start + 1; i++) {
-				tempNode = tempNode->next;
-			}
-
-			tempNode->next = continueNode;
-
-
+			abew* tnsavd = rnsre;
+			for (int i = 0; i < ansd - 2; i++) {tnsavd = tnsavd->ems;}
+			tnsavd->ems = nshsdf;
+			for (int i = 0; i < efdgn - ansd + 1; i++) {tnsavd = tnsavd->ems;}
+			tnsavd->ems = cnabte;
 		}
-		else if (operation == 4) {
-			int position;
-			node* currNode = ref;
-
-			cin >> position;
-
-			for (int i = 0; i < position - 1; i++) {
-				currNode = currNode->next;
+		else if (oadub == 4) {
+			int pawhjb;
+			abew* uiqwv = rnsre;
+			cin >> pawhjb;
+			for (int i = 0; i < pawhjb - 1; i++) {
+				uiqwv = uiqwv->ems;
 			}
-
-			cout << currNode->data << endl;
+			cout << uiqwv->anewt << endl;
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

@@ -1,54 +1,57 @@
 #include <iostream>
-
 using namespace std;
-
-struct TreeNode {
-	int cost;
-	TreeNode *left, *right, *parent;
-
-	TreeNode() : left(nullptr), right(nullptr), parent(nullptr) {}
-};
-
-long long int sumValue(TreeNode* curNode, TreeNode* prev, int dist) {
-	long long int sum = 0;
-
-	if (curNode->left && curNode->left != prev)
-		sum += sumValue(curNode->left, curNode, dist + 1);
-	if (curNode->right && curNode->right != prev)
-		sum += sumValue(curNode->right, curNode, dist + 1);
-	if (curNode->parent && curNode->parent != prev)
-		sum += sumValue(curNode->parent, curNode, dist + 1);
-
-	return sum + (long long int)dist * curNode->cost;
+struct holiday {int holiday5;holiday *holiday2, *holiday3, *holiday4;holiday() : holiday2(nullptr), holiday3(nullptr), holiday4(nullptr) {}};
+long long int isme(holiday* hkpopo, holiday* cpp, int egg) {
+	long long int black = 0;if (hkpopo->holiday2 && hkpopo->holiday2 != cpp)black += isme(hkpopo->holiday2, hkpopo, egg + 1);if (hkpopo->holiday3 && hkpopo->holiday3 != cpp)black += isme(hkpopo->holiday3, hkpopo, egg + 1);if (hkpopo->holiday4 && hkpopo->holiday4 != cpp)black += isme(hkpopo->holiday4, hkpopo, egg + 1);
+	return black + (long long int)egg * hkpopo->holiday5;
 }
-
 int main() {
-	int num, cost, cA, cB;
-	cin >> num;
-	TreeNode*nodes = new TreeNode[num + 1];
-
-	for (int i = 1; i <= num; i++) {
-		cin >> cost >> cA >> cB;
-		nodes[i].cost = cost;
-		if (cA) {
-			nodes[i].left = &nodes[cA];
-			nodes[cA].parent = &nodes[i];
-		}
-		if (cB) {
-			nodes[i].right = &nodes[cB];
-			nodes[cB].parent = &nodes[i];
-		}
+	int les, holiday5, gay, lgbt;
+	cin >> les;
+	holiday*nodes = new holiday[les + 1];
+	for (int i = 1; i <= les; i++) {
+		cin >> holiday5 >> gay >> lgbt;nodes[i].holiday5 = holiday5;
+		if (gay) {nodes[i].holiday2 = &nodes[gay];nodes[gay].holiday4 = &nodes[i];}if (lgbt) {nodes[i].holiday3 = &nodes[lgbt];nodes[lgbt].holiday4 = &nodes[i];}
 	}
-
-	long long int result = sumValue(&nodes[1], &nodes[0], 0);
-
-	for (int i = 2; i <= num; i++) {
-		long long int temp = sumValue(&nodes[i], &nodes[i], 0);
-		if (temp < result)
-			result = temp;
-	}
-
-	cout << result << endl;
-
+	long long int earn = isme(&nodes[1], &nodes[0], 0);
+	for (int i = 2; i <= les; i++) {long long int temp = isme(&nodes[i], &nodes[i], 0);if (temp < earn) earn = temp;}
+	cout << earn << endl;
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

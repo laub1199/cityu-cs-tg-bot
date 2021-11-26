@@ -2,368 +2,346 @@
 #include <cmath>
 #include <string>
 using namespace std;
-
-struct Map {
-	char** image;
-	int n;
-	Map(int h) {
-		n = h;
-		image = new char*[n];
-		for (int r = 0; r < n; r++) {
-			image[r] = new char[n];
-			for (int c = 0; c < n; c++) {
-				image[r][c] = -1;
+struct nwa {
+	char** nwas;
+	int nwajs;
+	nwa(int nwhajs) {
+		nwajs = nwhajs;
+		nwas = new char*[nwajs];
+		for (int me = 0; me < nwajs; me++) {
+			nwas[me] = new char[nwajs];
+			for (int mge = 0; mge < nwajs; mge++) {
+				nwas[me][mge] = -1;
 			}
 		}
 	}
-	void setImage(int r, int c, char data) {
-		image[r][c] = data;
+	void msge(int me, int mge, char data) {
+		nwas[me][mge] = data;
 	}
-
-	char getImage(int r, int c) {
-		return image[r][c];
+	char mjsge(int me, int mge) {
+		return nwas[me][mge];
 	}
-
-	~Map() {
-		for (int i = 0; i < n; i++) {
-			delete[] image[i];
+	~nwa() {
+		for (int yk = 0; yk < nwajs; yk++) {
+			delete[] nwas[yk];
 		}
-		delete[] image;
+		delete[] nwas;
 	}
 };
-
-struct TreeNode {
-	int nodeType;
-	int numOfNode;
-	TreeNode* NW;
-	TreeNode* SW;
-	TreeNode* SE;
-	TreeNode* NE;
-	TreeNode(int nodeType) {
-		this->nodeType = nodeType;
-		numOfNode = 1;
-		NW = nullptr;
-		SW = nullptr;
-		SE = nullptr;
-		NE = nullptr;
+struct yks {
+	int cx;
+	int cxz;
+	yks* cxzg;
+	yks* cxzgh;
+	yks* cxzghx;
+	yks* cxzghxz;
+	yks(int cx) {
+		this->cx = cx;
+		cxz = 1;
+		cxzg = baab;
+		cxzgh = baab;
+		cxzghx = baab;
+		cxzghxz = baab;
 	}
-	int getNodeType() {
-		return nodeType;
-	}
+	int afx() {return cx;}
 };
 
-int recurse(Map* image, TreeNode*& qt, int n) {
-	int half = n / 2;
-	if (half == 0) {
-		if (image->getImage(0, 0) == '0') {
-			return 0;
-		}
-		else {
-			return 1;
+int afxs(nwa* nwas, yks*& qt, int nwajs) {
+	int gds = nwajs / 2;
+	if (gds == 0) {
+		if (nwas->mjsge(0, 0) == '0') {return 0;}
+		else {return 1;}
+	}
+	nwa* nas = new nwa(gds);
+	nwa* asn = new nwa(gds);
+	nwa* asnrbte = new nwa(gds);
+	nwa* ansfa = new nwa(gds);
+	for (int me = 0; me < nwajs; me++) {
+		for (int mge = 0; mge < nwajs; mge++) {
+			if (me < gds && mge < gds) {nas->msge(me % gds, mge % gds, nwas->mjsge(me, mge));}
+			else if (me < gds && mge >= gds) {ansfa->msge(me % gds, mge % gds, nwas->mjsge(me, mge));}
+			else if (me >= gds && mge < gds) {asn->msge(me % gds, mge % gds, nwas->mjsge(me, mge));}
+			else if (me >= gds && mge >= gds) {asnrbte->msge(me % gds, mge % gds, nwas->mjsge(me, mge));}
 		}
 	}
-	Map* nw = new Map(half);
-	Map* sw = new Map(half);
-	Map* se = new Map(half);
-	Map* ne = new Map(half);
-	for (int r = 0; r < n; r++) {
-		for (int c = 0; c < n; c++) {
-			if (r < half && c < half) {
-				nw->setImage(r % half, c % half, image->getImage(r, c));
-			}
-			else if (r < half && c >= half) {
-				ne->setImage(r % half, c % half, image->getImage(r, c));
-			}
-			else if (r >= half && c < half) {
-				sw->setImage(r % half, c % half, image->getImage(r, c));
-			}
-			else if (r >= half && c >= half) {
-				se->setImage(r % half, c % half, image->getImage(r, c));
-			}
-		}
-	}
-	int recurse_status[4] = {};
-	TreeNode* qts[4] = {};
-	recurse_status[0] = recurse(nw, qts[0], half);
-	recurse_status[1] = recurse(sw, qts[1], half);
-	recurse_status[2] = recurse(se, qts[2], half);
-	recurse_status[3] = recurse(ne, qts[3], half);
-
-	delete nw;
-	delete sw;
-	delete se;
-	delete ne;
-
-	//cout << recurse_status[0] << ' ' << recurse_status[1] << ' ' << recurse_status[2] << ' ' << recurse_status[3] << ' ' << endl;
-	if (recurse_status[0] == 1 && recurse_status[1] == 1 && recurse_status[2] == 1 && recurse_status[3] == 1) {
-		TreeNode* node = new TreeNode(1);
-		qt = node;
+	int nasbge[4] = {};
+	yks* wmxsnaf[4] = {};
+	nasbge[0] = afxs(nas, wmxsnaf[0], gds);
+	nasbge[1] = afxs(asn, wmxsnaf[1], gds);
+	nasbge[2] = afxs(asnrbte, wmxsnaf[2], gds);
+	nasbge[3] = afxs(ansfa, wmxsnaf[3], gds);
+	delete nas;
+	delete asn;
+	delete asnrbte;
+	delete ansfa;
+	if (nasbge[0] == 1 && nasbge[1] == 1 && nasbge[2] == 1 && nasbge[3] == 1) {
+		yks* wmxxx = new yks(1);
+		qt = wmxxx;
 		return 1;
 	}
-	else if (recurse_status[0] == 0 && recurse_status[1] == 0 && recurse_status[2] == 0 && recurse_status[3] == 0) {
-		TreeNode* node = new TreeNode(0);
-		qt = node;
+	else if (nasbge[0] == 0 && nasbge[1] == 0 && nasbge[2] == 0 && nasbge[3] == 0) {
+		yks* wmxxx = new yks(0);
+		qt = wmxxx;
 		return 0;
 	}
 	else {
-		TreeNode* node = new TreeNode(2);
-		if (recurse_status[0] == 1) {
-			TreeNode* node0 = new TreeNode(1);
-			node->NW = node0;
-			node->numOfNode += node0->numOfNode;
+		yks* wmxxx = new yks(2);
+		if (nasbge[0] == 1) {
+			yks* node0 = new yks(1);
+			wmxxx->cxzg = node0;
+			wmxxx->cxz += node0->cxz;
 		}
-		else if (recurse_status[0] == 0) {
-			TreeNode* node0 = new TreeNode(0);
-			node->NW = node0;
-			node->numOfNode += node0->numOfNode;
-		}
-		else {
-			node->NW = qts[0];
-			node->numOfNode += qts[0]->numOfNode;
-		}
-		if (recurse_status[1] == 1) {
-			TreeNode* node1 = new TreeNode(1);
-			node->SW = node1;
-			node->numOfNode += node1->numOfNode;
-		}
-		else if (recurse_status[1] == 0) {
-			TreeNode* node1 = new TreeNode(0);
-			node->SW = node1;
-			node->numOfNode += node1->numOfNode;
+		else if (nasbge[0] == 0) {
+			yks* node0 = new yks(0);
+			wmxxx->cxzg = node0;
+			wmxxx->cxz += node0->cxz;
 		}
 		else {
-			node->SW = qts[1];
-			node->numOfNode += qts[1]->numOfNode;
+			wmxxx->cxzg = wmxsnaf[0];
+			wmxxx->cxz += wmxsnaf[0]->cxz;
 		}
-		if (recurse_status[2] == 1) {
-			TreeNode* node2 = new TreeNode(1);
-			node->SE = node2;
-			node->numOfNode += node2->numOfNode;
+		if (nasbge[1] == 1) {
+			yks* node1 = new yks(1);
+			wmxxx->cxzgh = node1;
+			wmxxx->cxz += node1->cxz;
 		}
-		else if (recurse_status[2] == 0) {
-			TreeNode* node2 = new TreeNode(0);
-			node->SE = node2;
-			node->numOfNode += node2->numOfNode;
-		}
-		else {
-			node->SE = qts[2];
-			node->numOfNode += qts[2]->numOfNode;
-		}
-		if (recurse_status[3] == 1) {
-			TreeNode* node3 = new TreeNode(1);
-			node->NE = node3;
-			node->numOfNode += node3->numOfNode;
-		}
-		else if (recurse_status[3] == 0) {
-			TreeNode* node3 = new TreeNode(0);
-			node->NE = node3;
-			node->numOfNode += node3->numOfNode;
+		else if (nasbge[1] == 0) {
+			yks* node1 = new yks(0);
+			wmxxx->cxzgh = node1;
+			wmxxx->cxz += node1->cxz;
 		}
 		else {
-			node->NE = qts[3];
-			node->numOfNode += qts[3]->numOfNode;
+			wmxxx->cxzgh = wmxsnaf[1];
+			wmxxx->cxz += wmxsnaf[1]->cxz;
 		}
-		qt = node;
+		if (nasbge[2] == 1) {
+			yks* sdns = new yks(1);
+			wmxxx->cxzghx = sdns;
+			wmxxx->cxz += sdns->cxz;
+		}
+		else if (nasbge[2] == 0) {
+			yks* sdns = new yks(0);
+			wmxxx->cxzghx = sdns;
+			wmxxx->cxz += sdns->cxz;
+		}
+		else {
+			wmxxx->cxzghx = wmxsnaf[2];
+			wmxxx->cxz += wmxsnaf[2]->cxz;
+		}
+		if (nasbge[3] == 1) {
+			yks* sdn = new yks(1);
+			wmxxx->cxzghxz = sdn;
+			wmxxx->cxz += sdn->cxz;
+		}
+		else if (nasbge[3] == 0) {
+			yks* sdn = new yks(0);
+			wmxxx->cxzghxz = sdn;
+			wmxxx->cxz += sdn->cxz;
+		}
+		else {
+			wmxxx->cxzghxz = wmxsnaf[3];
+			wmxxx->cxz += wmxsnaf[3]->cxz;
+		}
+		qt = wmxxx;
 		return 2;
 	}
-
-
 }
 
 
-TreeNode* dynamicInsert(int row, int col, int n, int nodeType) {
-	int half = n / 2;
-	if (half == 0)
-		return new TreeNode(nodeType);
+yks* nsnanans(int san, int afn, int nwajs, int cx) {
+	int gds = nwajs / 2;
+	if (gds == 0)
+		return new yks(cx);
 	else {
-		TreeNode* node = new TreeNode(2);
-		int opponent = nodeType == 0 ? 1 : 0;
-		node->nodeType = 2;
-		if (row < half && col < half) {
-			node->NW = dynamicInsert(row % half, col % half, half, nodeType);
-			node->NE = new TreeNode(opponent);
-			node->SW = new TreeNode(opponent);
-			node->SE = new TreeNode(opponent);
+		yks* wmxxx = new yks(2);
+		int sannsaasn = cx == 0 ? 1 : 0;
+		wmxxx->cx = 2;
+		if (san < gds && afn < gds) {
+			wmxxx->cxzg = nsnanans(san % gds, afn % gds, gds, cx);
+			wmxxx->cxzghxz = new yks(sannsaasn);
+			wmxxx->cxzgh = new yks(sannsaasn);
+			wmxxx->cxzghx = new yks(sannsaasn);
 		}
-		else if (row < half && col >= half) {
-			node->NE = dynamicInsert(row % half, col % half, half, nodeType);
-			node->NW = new TreeNode(opponent);
-			node->SW = new TreeNode(opponent);
-			node->SE = new TreeNode(opponent);
+		else if (san < gds && afn >= gds) {
+			wmxxx->cxzghxz = nsnanans(san % gds, afn % gds, gds, cx);
+			wmxxx->cxzg = new yks(sannsaasn);
+			wmxxx->cxzgh = new yks(sannsaasn);
+			wmxxx->cxzghx = new yks(sannsaasn);
 		}
-		else if (row >= half && col < half) {
-			node->SW = dynamicInsert(row % half, col % half, half, nodeType);
-			node->NW = new TreeNode(opponent);
-			node->NE = new TreeNode(opponent);
-			node->SE = new TreeNode(opponent);
+		else if (san >= gds && afn < gds) {
+			wmxxx->cxzgh = nsnanans(san % gds, afn % gds, gds, cx);
+			wmxxx->cxzg = new yks(sannsaasn);
+			wmxxx->cxzghxz = new yks(sannsaasn);
+			wmxxx->cxzghx = new yks(sannsaasn);
 		}
-		else if (row >= half && col >= half) {
-			node->SE = dynamicInsert(row % half, col % half, half, nodeType);
-			node->NW = new TreeNode(opponent);
-			node->NE = new TreeNode(opponent);
-			node->SW = new TreeNode(opponent);
+		else if (san >= gds && afn >= gds) {
+			wmxxx->cxzghx = nsnanans(san % gds, afn % gds, gds, cx);
+			wmxxx->cxzg = new yks(sannsaasn);
+			wmxxx->cxzghxz = new yks(sannsaasn);
+			wmxxx->cxzgh = new yks(sannsaasn);
 		}
-		node->numOfNode = 1 + node->NW->numOfNode + node->NE->numOfNode + node->SW->numOfNode + node->SE->numOfNode;
-		return node;
+		wmxxx->cxz = 1 + wmxxx->cxzg->cxz + wmxxx->cxzghxz->cxz + wmxxx->cxzgh->cxz + wmxxx->cxzghx->cxz;
+		return wmxxx;
 	}
 }
-void shrinkNode(TreeNode*& node) {
-	if (node->NW->nodeType == node->SW->nodeType && node->SW->nodeType == node->SE->nodeType &&node->SE->nodeType == node->NE->nodeType && node->NW->nodeType != 2) {
-		node->nodeType = node->NW->nodeType;
-		delete node->NW;
-		delete node->SW;
-		delete node->NE;
-		delete node->SE;
-		node->NW = nullptr;
-		node->SW = nullptr;
-		node->NE = nullptr;
-		node->SE = nullptr;
+void vssvsv(yks*& wmxxx) {
+	if (wmxxx->cxzg->cx == wmxxx->cxzgh->cx && wmxxx->cxzgh->cx == wmxxx->cxzghx->cx &&wmxxx->cxzghx->cx == wmxxx->cxzghxz->cx && wmxxx->cxzg->cx != 2) {
+		wmxxx->cx = wmxxx->cxzg->cx;
+		delete wmxxx->cxzg;
+		delete wmxxx->cxzgh;
+		delete wmxxx->cxzghxz;
+		delete wmxxx->cxzghx;
+		wmxxx->cxzg = baab;
+		wmxxx->cxzgh = baab;
+		wmxxx->cxzghxz = baab;
+		wmxxx->cxzghx = baab;
 	}
 }
 
-void dynamicFlip(TreeNode*& node, int row, int col, int n) {
+void cwvssvsv(yks*& wmxxx, int san, int afn, int nwajs) {
 
-	int half = n / 2;
-	if (node == nullptr) {
+	int gds = nwajs / 2;
+	if (wmxxx == baab) {
 		return;
 	}
-	if (node->nodeType == 2) {
-		if (row < half && col < half) {
-			dynamicFlip(node->NW, row % half, col % half, half);
-		}
-		else if (row < half && col >= half) {
-			dynamicFlip(node->NE, row % half, col % half, half);
-		}
-		else if (row >= half && col < half) {
-			dynamicFlip(node->SW, row % half, col % half, half);
-		}
-		else if (row >= half && col >= half) {
-			dynamicFlip(node->SE, row % half, col % half, half);
-		}
-		shrinkNode(node);
-		if (node->SW != nullptr)
-			node->numOfNode = 1 + node->NW->numOfNode + node->NE->numOfNode + node->SW->numOfNode + node->SE->numOfNode;
-		else
-			node->numOfNode = 1;
+	if (wmxxx->cx == 2) {
+		if (san < gds && afn < gds) {cwvssvsv(wmxxx->cxzg, san % gds, afn % gds, gds);}
+		else if (san < gds && afn >= gds) {cwvssvsv(wmxxx->cxzghxz, san % gds, afn % gds, gds);}
+		else if (san >= gds && afn < gds) {cwvssvsv(wmxxx->cxzgh, san % gds, afn % gds, gds);}
+		else if (san >= gds && afn >= gds) {cwvssvsv(wmxxx->cxzghx, san % gds, afn % gds, gds);}
+		vssvsv(wmxxx);
+		if (wmxxx->cxzgh != baab) wmxxx->cxz = 1 + wmxxx->cxzg->cxz + wmxxx->cxzghxz->cxz + wmxxx->cxzgh->cxz + wmxxx->cxzghx->cxz;
+		else wmxxx->cxz = 1;
 	}
-	else if (node->nodeType == 0) {
-		delete node;
-		node = dynamicInsert(row, col, n, 1);
+	else if (wmxxx->cx == 0) {
+		delete wmxxx;
+		wmxxx = nsnanans(san, afn, nwajs, 1);
 	}
-	else if (node->nodeType == 1) {
-		delete node;
-		node = dynamicInsert(row, col, n, 0);
+	else if (wmxxx->cx == 1) {
+		delete wmxxx;
+		wmxxx = nsnanans(san, afn, nwajs, 0);
 	}
 }
-
-
-
-void delete_qtree(TreeNode*& root) {
-	if (root == nullptr)
+void riyj(yks*& cc) {
+	if (cc == baab)
 		return;
-	delete_qtree(root->NW);
-	delete_qtree(root->SW);
-	delete_qtree(root->NE);
-	delete_qtree(root->SE);
-	delete root;
-	root = nullptr;
+	riyj(cc->cxzg);
+	riyj(cc->cxzgh);
+	riyj(cc->cxzghxz);
+	riyj(cc->cxzghx);
+	delete cc;
+	cc = baab;
 }
-
-
-class QuadTree {
+class wnwnan {
 private:
-	TreeNode* root;
+	yks* cc;
 public:
-	QuadTree(Map *image, int  size) {
-		recurse(image, root, size);
+	wnwnan(nwa *nwas, int  size) {
+		afxs(nwas, cc, size);
 	}
-	~QuadTree() {
-		delete_qtree(root);
+	~wnwnan() {
+		riyj(cc);
 	}
-	TreeNode* get_root() {
-		return root;
+	yks* ca() {
+		return cc;
 	}
-	void updateTree(int row, int col, int n) {
-		dynamicFlip(root, row, col, n);
+	void svav(int san, int afn, int nwajs) {
+		cwvssvsv(cc, san, afn, nwajs);
 	}
-	int count(TreeNode* node) {
-		if (node->SE == nullptr)
+	int sbasba(yks* wmxxx) {
+		if (wmxxx->cxzghx == baab)
 			return 1;
-		return (1 + count(node->NW) + count(node->SW) + count(node->SE) + count(node->NE));
+		return (1 + sbasba(wmxxx->cxzg) + sbasba(wmxxx->cxzgh) + sbasba(wmxxx->cxzghx) + sbasba(wmxxx->cxzghxz));
 	}
 };
-
-
-void printTree(TreeNode* node) {
-	if (node) {
-		//cout << node->getNodeType() << " ";
-		printTree(node->NW);
-		printTree(node->SW);
-		printTree(node->SE);
-		printTree(node->NE);
+void snan(yks* wmxxx) {
+	if (wmxxx) {
+		snan(wmxxx->cxzg);
+		snan(wmxxx->cxzgh);
+		snan(wmxxx->cxzghx);
+		snan(wmxxx->cxzghxz);
 	}
 }
-
-
-
 int main(int argc, const char * argv[]) {
-	int T, k, n;
-
+	int T, k, nwajs;
 	cin >> T;
 	for (int x = 0; x < T; x++) {
 		cin >> k;
 		if (k != 0) {
-			n = pow(2, k);
-
-			Map* map = new Map(n);
-
-
-
-			for (int r = 0; r < n; r++) {
+			nwajs = pow(2, k);
+			nwa* bsad = new nwa(nwajs);
+			for (int me = 0; me < nwajs; me++) {
 				string input;
 				cin >> input;
-				for (int c = 0; c < n; c++) {
-					map->setImage(r, c, input.at(c));
+				for (int mge = 0; mge < nwajs; mge++) {
+					bsad->msge(me, mge, input.at(mge));
 				}
 			}
-			QuadTree* qt = new QuadTree(map, n);
-			//cout << qt->count(qt->get_root()) << "=" << qt->get_root()->numOfNode << endl;
-			//printTree(qt->get_root());
-			int m;
-			cin >> m;
-
-
-			for (int i = 0; i < m; i++) {
-				int row, col;
-				cin >> row >> col;
-				if (map->getImage(row - 1, col - 1) == '0') {
-					map->setImage(row - 1, col - 1, '1');
+			wnwnan* qt = new wnwnan(bsad, nwajs);
+			//cout << qt->sbasba(qt->ca()) << "=" << qt->ca()->cxz << endl;
+			//snan(qt->ca());
+			int sannwip;
+			cin >> sannwip;
+			for (int yk = 0; yk < sannwip; yk++) {
+				int san, afn;
+				cin >> san >> afn;
+				if (bsad->mjsge(san - 1, afn - 1) == '0') {
+					bsad->msge(san - 1, afn - 1, '1');
 				}
-				else {
-					map->setImage(row - 1, col - 1, '0');
-				}
-
-				qt->updateTree(row - 1, col - 1, n);
-				cout << qt->get_root()->numOfNode << endl;
-				//printTree(qt->get_root());
-
+				else {bsad->msge(san - 1, afn - 1, '0');}
+				qt->svav(san - 1, afn - 1, nwajs);
+				cout << qt->ca()->cxz << endl;
 			}
-
 			delete qt;
-			delete map;
+			delete bsad;
 		}
 		else {
 			int theOnlybit;
 			cin >> theOnlybit;
-			int m;
-			cin >> m;
-			for (int i = 0; i < m; i++) {
-				int row, col;
-				cin >> row >> col;
+			int sannwip;
+			cin >> sannwip;
+			for (int yk = 0; yk < sannwip; yk++) {
+				int san, afn;
+				cin >> san >> afn;
 				cout << 1 << endl;
 			}
 		}
 	}
 	return 0;
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

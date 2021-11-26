@@ -2,106 +2,115 @@
 #include <vector>
 #include <sstream>
 #include <string>
-
 using namespace std;
-
-class node {
+class wdqs {
 public:
-	int data;
-	node* next;
+	int d;
+	wdqs* ascx;
 };
-
 int main() {
-
-	int numOfStudent;
-	int tagT;
-
-	cin >> numOfStudent;
-
-
-	node* ref = NULL;
-
-	for (int i = 0; i < numOfStudent; i++) {
-		node* newNode = new node;
-		int temp;
-		
-		cin >> temp;
-		newNode->data = temp;
-
-		if (!ref) {
-			newNode->next = ref;
-			ref = newNode;
+	int wcacv;
+	int saveads;
+	cin >> wcacv;
+	wdqs* ascwgw = NULL;
+	for (int i = 0; i < wcacv; i++) {
+		wdqs* fuyk = new wdqs;
+		int grsebt;
+		cin >> grsebt;
+		fuyk->d = grsebt;
+		if (!ascwgw) {
+			fuyk->ascx = ascwgw;
+			ascwgw = fuyk;
 		}
 		else {
-			node* currNode = ref;
-			while (currNode->next) {
-				currNode = currNode->next;
+			wdqs* amy = ascwgw;
+			while (amy->ascx) {
+				amy = amy->ascx;
 			}
-			currNode->next = newNode;
-			currNode = newNode;
-			if (i == numOfStudent - 1) {
-				currNode->next = ref;
+			amy->ascx = fuyk;
+			amy = fuyk;
+			if (i == wcacv - 1) {
+				amy->ascx = ascwgw;
 			}
 			else {
-				currNode->next = NULL;
+				amy->ascx = NULL;
 			}
-		}
-
-	}
-
-
-	int operation;
-
-	while (cin >> operation) {
-		if (operation == 1) {
-			int position, tag;
-			node* newNode = new node;
-			node* currNode = ref;
-
-			cin >> position >> tag;
-
-			newNode->data = tag;
-
-			for (int i = 0; i < position - 1; i++) {
-				currNode = currNode->next;
-			}
-
-			newNode->next = currNode->next;
-			currNode->next = newNode;
-
-			for (int i = 0; i < position; i++) {
-				ref = ref->next;
-			}
-		}
-		else if (operation == 2) {
-			int position;
-			node* currNode = ref;
-			node* targetNode = ref;
-
-			cin >> position;
-
-			for (int i = 0; i < position - 2; i++) {
-				currNode = currNode->next;
-				targetNode = targetNode->next;
-			}
-			targetNode = targetNode->next;
-
-			currNode->next = targetNode->next;
-			currNode = currNode->next;
-
-			ref = currNode;
-		}
-		else if (operation == 3) {
-			int position;
-
-			cin >> position;
-
-			for (int i = 0; i < position - 1; i++) {
-				ref = ref->next;
-			}
-
-			cout << ref->data << endl;
 		}
 	}
-	system("Pause");
+	int amerys;
+	while (cin >> amerys) {
+		if (amerys == 1) {
+			int vfads, nwe;
+			wdqs* fuyk = new wdqs;
+			wdqs* amy = ascwgw;
+			cin >> vfads >> nwe;
+			fuyk->d = nwe;
+			for (int i = 0; i < vfads - 1; i++) {
+				amy = amy->ascx;
+			}
+			fuyk->ascx = amy->ascx;
+			amy->ascx = fuyk;
+			for (int i = 0; i < vfads; i++) {
+				ascwgw = ascwgw->ascx;
+			}
+		}
+		else if (amerys == 2) {
+			int vfads;
+			wdqs* amy = ascwgw;
+			wdqs* wnesqn = ascwgw;
+			cin >> vfads;
+			for (int i = 0; i < vfads - 2; i++) {
+				amy = amy->ascx;
+				wnesqn = wnesqn->ascx;
+			}
+			wnesqn = wnesqn->ascx;
+			amy->ascx = wnesqn->ascx;
+			amy = amy->ascx;
+			ascwgw = amy;
+		}
+		else if (amerys == 3) {
+			int vfads;
+			cin >> vfads;
+			for (int i = 0; i < vfads - 1; i++) {
+				ascwgw = ascwgw->ascx;
+			}
+			cout << ascwgw->d << endl;
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

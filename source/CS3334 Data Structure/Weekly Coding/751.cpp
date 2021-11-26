@@ -4,57 +4,87 @@
 #include <stack>
 #include <vector>
 #include <cmath>
-
 using namespace std;
-
 int main() {
-
-	char input[1002];
-
-	while (cin.getline(input, 1001)) {
-		stack<int> container;
-		int result;
-		for (int i = 0; input[i] != '\0'; i++) {
-			if (input[i] != ' ') {
-				if (input[i] >= '0' && input[i] <= '9') {
-					int temp = (int)input[i] - 48;
-					while (input[i + 1] != ' ' && input[i + 1] != '\0') {
+	char bs[1002];
+	while (cin.getline(bs, 1001)) {
+		stack<int> bsz;
+		int bsza;
+		for (int i = 0; bs[i] != '\0'; i++) {
+			if (bs[i] != ' ') {
+				if (bs[i] >= '0' && bs[i] <= '9') {
+					int zsa = (int)bs[i] - 48;
+					while (bs[i + 1] != ' ' && bs[i + 1] != '\0') {
 						i++;
-						temp *= 10;
-						temp += (int)input[i] - 48;
+						zsa *= 10;
+						zsa += (int)bs[i] - 48;
 					}
-					container.push(temp);
+					bsz.push(zsa);
 				}
 				else {
-					
-					int temp = container.top();
-					container.pop();
-						result = container.top();
-						container.pop();
-
-					switch (input[i])
+					int zsa = bsz.top();
+					bsz.pop();
+						bsza = bsz.top();
+						bsz.pop();
+					switch (bs[i])
 					{
 					case '+':
-						result += temp;
+						bsza += zsa;
 						break;
 					case '-':
-						result -= temp;
+						bsza -= zsa;
 						break;
 					case '*':
-						result *= temp;
+						bsza *= zsa;
 						break;
 					case '/':
-						result /= temp;
+						bsza /= zsa;
 						break;
 					default:
 						break;
 					}
-					container.push(result);
+					bsz.push(bsza);
 				}
 			}
-			
 		}
-		cout << result << endl;
+		cout << bsza << endl;
 	}
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

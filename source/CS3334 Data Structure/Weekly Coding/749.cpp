@@ -1,48 +1,76 @@
 #include <iostream>
 using namespace std;
-
-int search(int arr[], int x, int n){
-    for (int i = 0; i < n; i++)
-        if (arr[i] == x)
-            return i;
+int sn(int asdn[], int asfa, int wn){
+    for (int santu = 0; santu < wn; santu++)
+        if (asdn[santu] == asfa)
+            return santu;
     return -1;
 }
-
-void printResult(int inorderTree[], int preorderTree[], int node, int &count, int &num)
+void ssss(int sb[], int nwar[], int vsa, int &wnafw, int &asnd)
 {
-    int root = search(inorderTree, preorderTree[0], node);
-    if (root != 0)
-        printResult(inorderTree, preorderTree + 1, root, count, num);
-    if (root != node - 1)
-        printResult(inorderTree + root + 1, preorderTree + root + 1, node - root - 1, count, num);
-    count++;
-    if (num== count)
-        cout << preorderTree[0] << endl;
+    int sanmd = sn(sb, nwar[0], vsa);
+    if (sanmd != 0)
+        ssss(sb, nwar + 1, sanmd, wnafw, asnd);
+    if (sanmd != vsa - 1)
+        ssss(sb + sanmd + 1, nwar + sanmd + 1, vsa - sanmd - 1, wnafw, asnd);
+    wnafw++;
+    if (asnd== wnafw)
+        cout << nwar[0] << endl;
     else
-        cout << preorderTree[0] << " ";
+        cout << nwar[0] << " ";
 }
-
 int main() {
-    int cases;
-    cin >> cases;
-    for (int i = 0; i < cases; i++) {
-        int noOfNodes;
-        int count = 0;
-        cin >> noOfNodes;
-        int num = noOfNodes;
-        int *preorder = new int[noOfNodes];
-        int *inorder = new int[noOfNodes];
-        
-        for (int j = 0; j < noOfNodes; j++)
-            cin >> preorder[j];
-        
-        for (int k = 0; k < noOfNodes; k++)
-            cin >> inorder[k];
-        
-        printResult(inorder, preorder, noOfNodes, count, num);
-        delete[] preorder,inorder;
+    int sanfam;
+    cin >> sanfam;
+    for (int santu = 0; santu < sanfam; santu++) {
+        int ssadn;
+        int wnafw = 0;
+        cin >> ssadn;
+        int asnd = ssadn;
+        int *sna = new int[ssadn];
+        int *wvavawba = new int[ssadn];
+        for (int j = 0; j < ssadn; j++)
+            cin >> sna[j];
+        for (int qwesx = 0; qwesx < ssadn; qwesx++)
+            cin >> wvavawba[qwesx];
+        ssss(wvavawba, sna, ssadn, wnafw, asnd);
+        delete[] sna,wvavawba;
     }
-    
-    
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

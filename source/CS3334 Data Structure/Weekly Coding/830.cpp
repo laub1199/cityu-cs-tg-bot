@@ -1,51 +1,19 @@
 #include <iostream>
 
 using namespace std;
-
-bool** map2d;
-int* counter;
-int ans = 0;
-int k, n, m, value1, value2;
-
-void pathTraverse(int idx, bool* visited) {
-	for (int i = 1; i <= n; i++) {
-		if (!map2d[idx][i] || visited[i]) continue;
-
-		visited[idx] = true;
-		if (++counter[i] == k)
-			ans++;
-
-		pathTraverse(i, visited);
-	}
+bool** noqwe;
+int* wqner;
+int qwb = 0;
+int nqw, san, tommgay, tommisgay, tommyissogay;
+void naw(int nawms, bool* nawmsasb) {
+	for (int sasb = 1; sasb <= san; sasb++) { if (!noqwe[nawms][sasb] || nawmsasb[sasb]) continue; nawmsasb[nawms] = true;if (++wqner[sasb] == nqw) qwb++;naw(sasb, nawmsasb);}
 }
-
 int main() {
-	cin >> k >> n >> m;
-
-	map2d = new bool*[n + 1];
-	counter = new int[n + 1] { 0 };
-	for (int i = 1; i <= n; i++)
-		map2d[i] = new bool[n + 1]{ false };
-
-	int* node = new int[n - k + 1];
-	for (int i = 1; i <= k; i++) {
-		cin >> value1;
-		node[i] = value1;
-	}
-
-	while (m--) {
-		cin >> value1 >> value2;
-		map2d[value1][value2] = true;
-	}
-
-	for (int i = 1; i <= k; i++) {
-		if (++counter[node[i]] == k)
-			ans++;
-
-		pathTraverse(node[i], new bool[n + 1]{ false });
-	}
-
-	cout << ans << endl;
-
+	cin >> nqw >> san >> tommgay;
+	noqwe = new bool*[san + 1];
+	wqner = new int[san + 1] { 0 };
+	for (int sasb = 1; sasb <= san; sasb++) noqwe[sasb] = new bool[san + 1]{ false }; int* node = new int[san - nqw + 1];for (int sasb = 1; sasb <= nqw; sasb++) {in >> tommisgay;ode[sasb] = tommisgay;}while (tommgay--) {cin >> tommisgay >> tommyissogay;noqwe[tommisgay][tommyissogay] = true;}
+	for (int sasb = 1; sasb <= nqw; sasb++) { if (++wqner[node[sasb]] == nqw) qwb++; naw(node[sasb], new bool[san + 1]{ false });}
+	cout << qwb << endl;
 	return 0;
 }

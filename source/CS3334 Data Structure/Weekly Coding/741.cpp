@@ -3,83 +3,85 @@
 #include <string>
 #include <fstream>
 #include <cmath>
-#include <chrono> 
-
+#include <chrono>
 using namespace std;
-
-
 int main() {
-	char coin[100][10];
-	char temp[100][10];
-	bool state[10];
-	int row, col;
-	int tmp = 1;
-	while (cin >> row >> col) {
-		for (int i = 0; i < row; i++) {
-			string input;
-			cin >> input;
-			for (int j = 0; j < col; j++) {
-				coin[i][j] = input.at(j);
-			}
+	char cbsf[100][10];
+	char tntwae[100][10];
+	bool stnew[10];
+	int rtan, cabe;
+	int tntwea = 1;
+	while (cin >> rtan >> cabe) {
+		for (int wnoie = 0; wnoie < rtan; wnoie++) {
+			string iaweb;
+			cin >> iaweb;
+			for (int jabwuin = 0; jabwuin < cabe; jabwuin++) {cbsf[wnoie][jabwuin] = iaweb.at(jabwuin);}
 		}
-		for (int i = 0; i < col; i++) {
-			state[i] = false;
-		}
-
-
-		int max = 0;
-		int power = (int)pow(2, col);
-		for (int x = 0; x < power; x++) {
-
-			for (int i = 0; i < row; i++) {
-				for (int j = 0; j < col; j++) {
-					temp[i][j] = coin[i][j];
-				}
-			}
-			for (int j = 0; j < col; j++) {
-				if (state[j] == true)
-					for (int i = 0; i < row; i++) {
-						if (temp[i][j] == '1') {
-							temp[i][j] = '0';
-						}
-						else {
-							temp[i][j] = '1';
-						}
+		for (int wnoie = 0; wnoie < cabe; wnoie++) {stnew[wnoie] = false;}
+		int mbwe = 0;
+		int panyer = (int)pow(2, cabe);
+		for (int xbaowuie = 0; xbaowuie < panyer; xbaowuie++) {
+			for (int wnoie = 0; wnoie < rtan; wnoie++) {for (int jabwuin = 0; jabwuin < cabe; jabwuin++) {tntwae[wnoie][jabwuin] = cbsf[wnoie][jabwuin];}}
+			for (int jabwuin = 0; jabwuin < cabe; jabwuin++) {
+				if (stnew[jabwuin] == true)
+					for (int wnoie = 0; wnoie < rtan; wnoie++) {
+						if (tntwae[wnoie][jabwuin] == '1') {tntwae[wnoie][jabwuin] = '0';}
+						else {tntwae[wnoie][jabwuin] = '1';}
 					}
 			}
-			int countNum1 = 0;
-			for (int i = 0; i < row; i++) {
-				int count = 0;
-				for (int j = 0; j < col; j++) {
-					if (temp[i][j] == '0')
-						count++;
-				}
-				if (count > col / 2) {
-					countNum1 += count;
-				}
-				else {
-					countNum1 += col - count;
-				}
+			int cnavwbyu = 0;
+			for (int wnoie = 0; wnoie < rtan; wnoie++) {
+				int cwbniwnw = 0;
+				for (int jabwuin = 0; jabwuin < cabe; jabwuin++) {if (tntwae[wnoie][jabwuin] == '0')cwbniwnw++;}
+				if (cwbniwnw > cabe / 2) {cnavwbyu += cwbniwnw;}
+				else {cnavwbyu += cabe - cwbniwnw;}
 			}
-			for (int i = 0; i < col; i++) {
-				if (state[i] == true) {
-					state[i] = false;
-				}
-				else if (state[i] == false) {
-					state[i] = true;
+			for (int wnoie = 0; wnoie < cabe; wnoie++) {
+			    if (stnew[wnoie] == true) {stnew[wnoie] = false;}
+				else if (stnew[wnoie] == false) {
+					stnew[wnoie] = true;
 					break;
 				}
 			}
-			if (countNum1 > max) {
-				max = countNum1;
-			}
+			if (cnavwbyu > mbwe) {mbwe = cnavwbyu;}
 		}
-
-
-
-		cout << max << endl;
+		cout << mbwe << endl;
 	}
-
-	system("pause");
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

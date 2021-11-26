@@ -3,53 +3,85 @@
 #include <string>
 #include <stack>
 #include <cmath>
-
 using namespace std;
-
-
 int main() {
-	char input[100001];
-	char in[100001];
-	while (cin.getline(input, 100001)) {
-		stack<char> container;
-		stack<int> intContainer;
-		bool success = true;
-
-		for (int i = 0; input[i] !='\0'; i++) {
-			if (input[i] == '[' || input[i] == '{' || input[i] == '(') {
-				container.push(input[i]);
-				intContainer.push(i);
+	char wqb[100001];
+	char nqw[100001];
+	while (cin.getline(wqb, 100001)) {
+		stack<char> nqws;
+		stack<int> sasdnaw;
+		bool qew = true;
+		for (int qewx = 0; wqb[qewx] !='\0'; qewx++) {
+			if (wqb[qewx] == '[' || wqb[qewx] == '{' || wqb[qewx] == '(') {
+				nqws.push(wqb[qewx]);
+				sasdnaw.push(qewx);
 			}
-			else if (input[i] == ']' || input[i] == '}' || input[i] == ')') {
-				if(container.empty()){
-					success = false;
-					cout << i + 1 << endl;
+			else if (wqb[qewx] == ']' || wqb[qewx] == '}' || wqb[qewx] == ')') {
+				if(nqws.empty()){
+					qew = false;
+					cout << qewx + 1 << endl;
 					break;
 				}
-				else if ((input[i] == ']' && container.top() == '[') || (input[i] == ')' && container.top() == '(') || (input[i] == '}' && container.top() == '{')) {
-					container.pop();
-					intContainer.pop();
+				else if ((wqb[qewx] == ']' && nqws.top() == '[') || (wqb[qewx] == ')' && nqws.top() == '(') || (wqb[qewx] == '}' && nqws.top() == '{')) {
+					nqws.pop();
+					sasdnaw.pop();
 				}
 				else {
-					success = false;
-					cout << i + 1 << endl;
+					qew = false;
+					cout << qewx + 1 << endl;
 					break;
 				}
 			}
 		}
-		if (!container.empty() && success) {
-			success = false;
+		if (!nqws.empty() && qew) {
+			qew = false;
 			int temp;
-			while (!intContainer.empty()) {
-				temp = intContainer.top();
-				intContainer.pop();
+			while (!sasdnaw.empty()) {
+				temp = sasdnaw.top();
+				sasdnaw.pop();
 			}
 			cout << temp + 1 << endl;
 		}
-		if (success) {
+		if (qew) {
 			cout << "Success" << endl;
 		}
 	}
-
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

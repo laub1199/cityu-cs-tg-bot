@@ -1,82 +1,77 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
 using namespace std;
-
-int group;
-
-struct DisjointSet {
-	int *rank, *parent, *eParent;
-
-	DisjointSet(int n) : rank(new int[n + 1]), parent(new int[n + 1]), eParent(new int[n + 1] ) {
-		for (int i = 1; i <= n; i++) {
-			parent[i] = i;
-			eParent[i] = i;
-		}
+int money;
+struct moneyy {
+	int *moneyyy, *moneyyyy, *moneyyyyy;
+	moneyy(int moneyyyyyy) : moneyyy(new int[moneyyyyyy + 1]), moneyyyy(new int[moneyyyyyy + 1]), moneyyyyy(new int[moneyyyyyy + 1] ) {
+		for (int moneyyyyyyyyyyyyy = 1; moneyyyyyyyyyyyyy <= moneyyyyyy; moneyyyyyyyyyyyyy++) {moneyyyy[moneyyyyyyyyyyyyy] = moneyyyyyyyyyyyyy;moneyyyyy[moneyyyyyyyyyyyyy] = moneyyyyyyyyyyyyy;}
 	}
-
-	int find(int x) {
-		if (parent[x] != x)
-			parent[x] = find(parent[x]);
-
-		return parent[x];
-	}
-
-	int findE(int x) {
-		if (eParent[x] != x)
-			eParent[x] = find(eParent[x]);
-
-		return eParent[x];
-	}
-
-	void Union(int x, int y) {
-		int left = find(x);
-		int right = find(y);
-
-		if (left == right) return;
-
-		if (rank[left] < rank[right])
-			parent[left] = right;
-		else if (rank[left] > rank[right])
-			parent[right] = left;
-		else {
-			parent[right] = left;
-			rank[left] += 1;
-		}
-		group--;
+	int moneyyyyyyy(int moneyyyyyyyy) { if (moneyyyy[moneyyyyyyyy] != moneyyyyyyyy) moneyyyy[moneyyyyyyyy] = moneyyyyyyy(moneyyyy[moneyyyyyyyy]); return moneyyyy[moneyyyyyyyy];}
+	int moneyyyyyyyyy(int moneyyyyyyyy) { if (moneyyyyy[moneyyyyyyyy] != moneyyyyyyyy) moneyyyyy[moneyyyyyyyy] = moneyyyyyyy(moneyyyyy[moneyyyyyyyy]); return moneyyyyy[moneyyyyyyyy];}
+	void moneyyyyyyyyyy(int moneyyyyyyyy, int moneyyyyyyyyyyyyyy) {
+		int moneyyyyyyyyyyy = moneyyyyyyy(moneyyyyyyyy);
+		int moneyyyyyyyyyyyy = moneyyyyyyy(moneyyyyyyyyyyyyyy);
+		if (moneyyyyyyyyyyy == moneyyyyyyyyyyyy) return;
+		if (moneyyy[moneyyyyyyyyyyy] < moneyyy[moneyyyyyyyyyyyy]) moneyyyy[moneyyyyyyyyyyy] = moneyyyyyyyyyyyy;
+		else if (moneyyy[moneyyyyyyyyyyy] > moneyyy[moneyyyyyyyyyyyy]) moneyyyy[moneyyyyyyyyyyyy] = moneyyyyyyyyyyy;
+		else {moneyyyy[moneyyyyyyyyyyyy] = moneyyyyyyyyyyy;moneyyy[moneyyyyyyyyyyy] += 1;}
+		money--;
 	}
 };
 
 int main() {
-	int n, line;
-	cin >> n >> line;
-	group = n;
-	DisjointSet set(n);
-
-	char op;
-	int vLeft, vRight;
-	while (line--) {
-		cin >> op >> vLeft >> vRight;
-
-		if (op == 'F')
-			set.Union(vLeft, vRight);
+	int moneyyyyyy, moneyyyyyyyyyyyyyyy;
+	cin >> moneyyyyyy >> moneyyyyyyyyyyyyyyy; money = moneyyyyyy; moneyy set(moneyyyyyy);
+	char moneyyyyyyyyyyyyyyyy;
+	int moneyyyyyyyyyyyyyyyyy, moneyyyyyyyyyyyyyyyyyy;
+	while (moneyyyyyyyyyyyyyyy--) {
+		cin >> moneyyyyyyyyyyyyyyyy >> moneyyyyyyyyyyyyyyyyy >> moneyyyyyyyyyyyyyyyyyy;
+		if (moneyyyyyyyyyyyyyyyy == 'F') set.moneyyyyyyyyyy(moneyyyyyyyyyyyyyyyyy, moneyyyyyyyyyyyyyyyyyy);
 		else {
-			int eLeft = set.findE(vLeft);
-			if (eLeft != vLeft)
-				set.Union(eLeft, vRight);
-			else {
-				int eRight = set.findE(vRight);
-				if (eRight != vRight)
-					set.Union(vLeft, eRight);
-			}
-
-			set.eParent[vLeft] = vRight;
-			set.eParent[vRight] = vLeft;
+			int moneyyyyyyyyyyyyyyyyyyy = set.moneyyyyyyyyy(moneyyyyyyyyyyyyyyyyy);
+			if (moneyyyyyyyyyyyyyyyyyyy != moneyyyyyyyyyyyyyyyyy) set.moneyyyyyyyyyy(moneyyyyyyyyyyyyyyyyyyy, moneyyyyyyyyyyyyyyyyyy);
+			else {int moneyyyyyyyyyyyyyyyyyyyy = set.moneyyyyyyyyy(moneyyyyyyyyyyyyyyyyyy);if (moneyyyyyyyyyyyyyyyyyyyy != moneyyyyyyyyyyyyyyyyyy) set.moneyyyyyyyyyy(moneyyyyyyyyyyyyyyyyy, moneyyyyyyyyyyyyyyyyyyyy);}
+			set.moneyyyyy[moneyyyyyyyyyyyyyyyyy] = moneyyyyyyyyyyyyyyyyyy; set.moneyyyyy[moneyyyyyyyyyyyyyyyyyy] = moneyyyyyyyyyyyyyyyyy;
 		}
 	}
-
-	cout << group << endl;
-
+	cout << money << endl;
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

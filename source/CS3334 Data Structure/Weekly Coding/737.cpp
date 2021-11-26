@@ -2,79 +2,104 @@
 #include <vector>
 #include <sstream>
 #include <string>
-
 using namespace std;
-
-
 int main(){
-	string input;
-	vector <string> data;
-	vector <string> words;
-	vector <int> count;
-
-	while (cin >> input) {
-		if (input.compare("0") == 0) { break;}
-		data.push_back(input);
+	string x;
+	vector <string> d;
+	vector <string> w;
+	vector <int> c;
+	while (cin >> x) {
+		if (x.compare("0") == 0) break;
+		d.push_back(x);
 	}
-	words.push_back(data[0]);
-	count.push_back(0);
-
-	for (size_t positionOfData = 0; positionOfData < data.size(); positionOfData++) {
-		bool newWord = true;
-		
-		for (size_t positionOfWords = 0; positionOfWords < words.size(); positionOfWords++) {
-			if (data[positionOfData].compare(words[positionOfWords]) == 0) {
-				count[positionOfWords]++;
-				newWord = false;
+	w.push_back(d[0]);
+	c.push_back(0);
+	for (size_t pd = 0; pd < d.size(); pd++) {
+		bool n = true;
+		for (size_t pw = 0; pw < w.size(); pw++) {
+			if (d[pd].compare(w[pw]) == 0) {
+				c[pw]++;
+				n = false;
 				break;
 			}
 		}
-		
-		if (newWord) {
-			if (words.size() == 1) {
-				if (data[positionOfData].compare(words[0]) > 0) {
-					words.push_back(data[positionOfData]);
-					count.push_back(1);
+		if (n) {
+			if (w.size() == 1) {
+				if (d[pd].compare(w[0]) > 0) {
+					w.push_back(d[pd]);
+					c.push_back(1);
 				}
 				else {
-					words.insert(words.begin(), data[positionOfData]);
-					count.insert(count.begin(), 1);
+					w.insert(w.begin(), d[pd]);
+					c.insert(c.begin(), 1);
 				}
 			}
-			else if (words.size() == 2){
-				if (data[positionOfData].compare(words[0]) < 0) {
-					words.insert(words.begin(), data[positionOfData]);
-					count.insert(count.begin(), 1);
+			else if (w.size() == 2){
+				if (d[pd].compare(w[0]) < 0) {
+					w.insert(w.begin(), d[pd]);
+					c.insert(c.begin(), 1);
 				}
-				else if (data[positionOfData].compare(words[0]) > 0 && data[positionOfData].compare(words[1]) < 0) {
-					words.insert(words.begin() + 1, data[positionOfData]);
-					count.insert(count.begin() + 1, 1);
+				else if (d[pd].compare(w[0]) > 0 && d[pd].compare(w[1]) < 0) {
+					w.insert(w.begin() + 1, d[pd]);
+					c.insert(c.begin() + 1, 1);
 				}
 				else {
-					words.push_back(data[positionOfData]);
-					count.push_back(1);
-				};
+					w.push_back(d[pd]);
+					c.push_back(1);
+				}
 			}
 			else {
-				for (size_t positionOfWords = 0; positionOfWords < words.size(); positionOfWords++) {
-					if (data[positionOfData].compare(words[positionOfWords]) < 0) {
-						words.insert(words.begin() + positionOfWords, data[positionOfData]);
-						count.insert(count.begin() + positionOfWords, 1);
+				for (size_t pw = 0; pw < w.size(); pw++) {
+					if (d[pd].compare(w[pw]) < 0) {
+						w.insert(w.begin() + pw, d[pd]);
+						c.insert(c.begin() + pw, 1);
 						break;
 					}
-					else if (data[positionOfData].compare(words[positionOfWords]) > 0 && positionOfWords == words.size() - 1) {
-						words.push_back(data[positionOfData]);
-						count.push_back(1);
+					else if (d[pd].compare(w[pw]) > 0 && pw == w.size() - 1) {
+						w.push_back(d[pd]);
+						c.push_back(1);
 					}
 				}
 			}
 		}
 	}
-
-	for (size_t positionOfWords = 0; positionOfWords < words.size(); positionOfWords++) {
-		cout << words[positionOfWords] << " " << count[positionOfWords] << endl;
+	for (size_t pw = 0; pw < w.size(); pw++) {
+		cout << w[pw] << " " << c[pw] << endl;
 	}
-
-	system("Pause");
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

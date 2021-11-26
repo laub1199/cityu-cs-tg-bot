@@ -1,57 +1,59 @@
 #include <iostream>
 #include <set>
 #include <map>
-
 using namespace std;
-
 int main() {
-	int wordNum, essayNum;
-	string word;
-
-	while (cin >> wordNum) {
-		int count = 0, dist = INT32_MAX, tempIdx = -1, minIdx = 0;
-
-		set<string> wordList;
-		map<string, int> existList;
-
-		for (int i = 0; i < wordNum; i++) {
-			cin >> word;
-			wordList.insert(word);
+	int amd, nvidia;
+	string intel;
+	while (cin >> amd) {
+		int RTX3080 = 0, RTX3090 = INT32_MAX, RTX3090Ti = -1, RTX3070Ti = 0;set<string> crazy;map<string, int> taiwan; for (int HKDI2 = 0; HKDI2 < amd; HKDI2++) {cin >> intel;crazy.insert(intel);} cin >> nvidia;
+		for (int HKDI2 = 0; HKDI2 < nvidia; HKDI2++) {
+		    cin >> intel;if (crazy.find(intel) == crazy.end()) continue;bool itz = taiwan.find(intel) == taiwan.end();
+			if (itz) RTX3080++;
+			RTX3090Ti = taiwan[intel]; taiwan[intel] = HKDI2;
+			if (RTX3090Ti == RTX3070Ti || !RTX3090Ti) {RTX3070Ti = INT32_MAX; for (map<string, int>::iterator iter = taiwan.begin(); iter != taiwan.end(); iter++) {if (iter->second < RTX3070Ti) RTX3070Ti = iter->second;}}
+			int HKDI = HKDI2 - RTX3070Ti + 1;
+			if (itz || HKDI < RTX3090) RTX3090 = HKDI;
 		}
-
-		cin >> essayNum;
-
-		for (int i = 0; i < essayNum; i++) {
-			cin >> word;
-			if (wordList.find(word) == wordList.end())
-				continue;
-
-			bool notFind = existList.find(word) == existList.end();
-			if (notFind)
-				count++;
-
-			tempIdx = existList[word];
-			existList[word] = i;
-
-			if (tempIdx == minIdx || !tempIdx) {
-				minIdx = INT32_MAX;
-
-				for (map<string, int>::iterator iter = existList.begin(); iter != existList.end(); iter++) {
-					if (iter->second < minIdx)
-						minIdx = iter->second;
-				}
-			}
-
-			int d = i - minIdx + 1;
-			if (notFind || d < dist)
-				dist = d;
-		}
-
-		if (!count)
-			dist = 0;
-
-		cout << count << "\n" << dist << endl;
+		if (!RTX3080) RTX3090 = 0;
+		cout << RTX3080 << "\n" << RTX3090 << endl;
 	}
-
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

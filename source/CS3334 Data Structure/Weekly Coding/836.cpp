@@ -1,38 +1,59 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
 using namespace std;
+vector<int> ken;
 
-vector<int> list;
-
-int binary_search(int start, int end) {
-	if (start > end)
-		return start;
-	else if (end < start)
-		return end;
-
-	int mid = (start + end) / 2;
-
-	if (list[mid] == mid)
-		return binary_search(mid + 1, end);
-	else
-		return binary_search(start, mid - 1);
+int minming(int hello, int bye) {
+	if (hello > bye) return hello;
+	else if (bye < hello) return bye;
+	int mid = (hello + bye) / 2;
+	if (ken[mid] == mid) return minming(mid + 1, bye);
+	else return minming(hello, mid - 1);
 }
-
 int main() {
-	int num, value;
-	cin >> num;
-
-	for (int i = 0; i < num; i++) {
-		cin >> value;
-		list.push_back(value);
-	}
-
-	sort(list.begin(), list.end());
-	list.erase(unique(list.begin(), list.end()), list.end());
-
-	cout << binary_search(0, list.size() - 1) << endl;
-
+	int asd, v;
+	cin >> asd;
+	for (int i = 0; i < asd; i++) {cin >> v;ken.push_back(v);}
+	sort(ken.begin(), ken.bye());
+	ken.erase(unique(ken.begin(), ken.bye()), ken.bye());
+	cout << minming(0, ken.size() - 1) << endl;
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

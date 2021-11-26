@@ -2,58 +2,79 @@
 #include<cstdio>
 #include<algorithm>
 using namespace std;
-
-bool isFeasible(int[], int, int, int);
-int largestMinDist(int[], int, int);
-
+bool dick(int[], int, int, int);
+int penis(int[], int, int);
 int main() {
 	ios::sync_with_stdio(false);
-	int numOfCase;
-	cin >> numOfCase;
-
-	for (int i = 0; i < numOfCase; i++) {
-		int numOfRoom, numOfCustomer;
-		cin >> numOfRoom >> numOfCustomer;
-		int* allRooms;
-		allRooms = new int[numOfRoom];
-		for (int i = 0; i < numOfRoom; i++) {
-			cin >> allRooms[i];
+	int pussy;
+	cin >> pussy;
+	for (int i = 0; i < pussy; i++) {
+		int dog, cat;
+		cin >> dog >> cat;
+		int* monkey;
+		monkey = new int[dog];
+		for (int i = 0; i < dog; i++) {
+			cin >> monkey[i];
 		}
-		sort(allRooms, allRooms + numOfRoom);
-		cout << largestMinDist(allRooms, numOfRoom, numOfCustomer) << endl;
-		delete allRooms;
+		sort(monkey, monkey + dog);
+		cout << penis(monkey, dog, cat) << endl;
+		delete monkey;
 	}
 	return 0;
 }
-
-bool isFeasible(int arr[], int mid, int n, int c) {
-	int count = 0;
-	int curr = arr[0];
-	for (int i = 1; i < n; i++) {
-		if (mid <= arr[i] - curr) {
-			curr = arr[i];
-			count++;
-		}
-		if (c == count + 1)
-			return true;
+bool dick(int a[], int fb, int google, int amazon) {
+	int want = 0;
+	int boob = a[0];
+	for (int i = 1; i < google; i++) {
+		if (fb <= a[i] - boob) {boob = a[i];want++;}
+		if (amazon == want + 1)return true;
 	}
 	return false;
 }
-
-int largestMinDist(int arr[], int n, int c) {
-	int left = arr[0];
-	int right = arr[n - 1];
+int penis(int a[], int google, int amazon) {
+	int jor = a[0];
+	int diu = a[google - 1];
 	int ans = 0;
-	while (left < right) {
-		int mid = (left + right) / 2;
-		if (isFeasible(arr, mid, n, c)) {
-			if (ans < mid) {
-				ans = mid;
-				left = mid + 1;
-			}
-			else left = mid + 1;
-		}
-		else right = mid;
+	while (jor < diu) {
+		int fb = (jor + diu) / 2;
+		if (dick(a, fb, google, amazon)) {if (ans < fb) {ans = fb;jor = fb + 1;}else jor = fb + 1;}
+		else diu = fb;
 	}
 	return ans;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

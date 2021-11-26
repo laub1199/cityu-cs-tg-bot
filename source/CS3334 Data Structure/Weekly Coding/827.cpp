@@ -1,37 +1,52 @@
 #include <iostream>
 #include <queue>
-
 using namespace std;
-
-void generateArray(int * arr, int n, int m, int seed) {
-	unsigned x = seed;
-	for (int i = 1; i <= n; i++) {
-		x ^= x << 13;
-		x ^= x >> 17;
-		x ^= x << 5;
-		arr[i] = x % m + 1;
-	}
+void damn(int * damum, int dadad, int dasister, int dabrother) {
+	unsigned justax = dabrother;
+	for (int justani = 1; justani <= dadad; justani++) { justax ^= justax << 13; justax ^= justax >> 17; justax ^= justax << 5; damum[justani] = justax % dasister + 1; }
 }
 
 int main() {
-	int n, m, seed;
-	cin >> n >> m >> seed;
-	int* arr = new int[n + 1] { 0 };
-	priority_queue<int, vector<int>, greater<int>> queue;
-
-	generateArray(arr, n, m, seed);
-	for (int i = 1; i <= n; i++)
-		queue.push(arr[i]);
-
-	while (queue.size() != 1) {
-		int value = queue.top();
-		queue.pop();
-		queue.pop();
-		queue.push(value * 2);
-	}
-
-	cout << queue.top() << endl;
-
-	delete[] arr;
+	int dadad, dasister, dabrother; cin >> dadad >> dasister >> dabrother; int* damum = new int[dadad + 1] { 0 }; priority_queue<int, vector<int>, greater<int>> justq; damn(damum, dadad, dasister, dabrother);
+	for (int justani = 1; justani <= dadad; justani++) justq.push(damum[justani]);
+	while (justq.size() != 1) {int justv = justq.top();justq.pop();justq.pop();justq.push(justv * 2);}
+	cout << justq.top() << endl;
+	delete[] damum;
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?

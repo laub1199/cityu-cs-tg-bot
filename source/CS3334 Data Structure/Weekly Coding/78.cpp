@@ -2,80 +2,86 @@
 #include <vector>
 #include <sstream>
 #include <string>
-
 using namespace std;
-
-char* getSubsequences(string input);
+char* a(string input);
 
 int main() {
-
-	int count;
-
-	cin >> count;
-
-	for (int i = 0; i < count; i++) {
-
-		string input;
-
-		cin >> input;
-
-		cout << getSubsequences(input) << endl;
-
+	int n;
+	cin >> n;
+	for (int i=0; i<n; i++) {
+		string x;
+		cin >> x;
+		cout << a(x) << endl;
 	}
-
-	system("Pause");
 }
 
-char* getSubsequences(string input) {
-	
-	int length = input.length();
-	char* strToChar = new char [length + 1];
-
-	input.copy(strToChar, length + 1);
-	strToChar[length] = '\0';
-
-	char largestChar = strToChar[0];
-	int position = 0;
-
-	for (int i = 0; i < length; i++) {
-		if (strToChar[i] > largestChar) {
-			largestChar = strToChar[i];
-			position = i;
+char* a(string x) {
+	int l = x.length();
+	char* c = new char [l + 1];
+	x.copy(c, l + 1);
+	c[l] = '\0';
+	char z = c[0];
+	int p = 0;
+	for (int i=0; i<length; i++) {
+		if (c[i] > z) {
+			z = c[i];
+			p = i;
 		}
 	}
-
-	bool notEnd = true;
-	int begin = 0;
-	char* result = new char[length + 1];
-
-	result[begin++] = largestChar;
-	largestChar = strToChar[++position];
-
-	while (notEnd && length - position > 0) {
-		for (int i = position + 1; i < length; i++)
-		{
-			if (strToChar[i] > largestChar) {
-				largestChar = strToChar[i];
-				position = i;
+	bool e = true;
+	int b = 0;
+	char* r = new char[length + 1];
+	r[b++] = z;
+	z = c[++position];
+	while (e && l - p > 0) {
+		for (int i = p + 1; i < l; i++) {
+			if (c[i] > z) {
+				z = c[i];
+				p = i;
 			}
 		}
-
-		result[begin++] = largestChar;
-		largestChar = strToChar[++position];
-
-		if (position == length - 1) {
-			notEnd = false;
-		}
-
+		r[b++] = z;
+		z = c[++p];
+		if (p == l - 1) e = false;
 	}
-
-	if (position <= length - 1) {
-		result[begin++] = strToChar[length - 1];
-	}
-	
-	result[begin] = '\0';
-
-	return result;
+	if (p <= l - 1) r[b++] = c[l - 1];
+	r[b] = '\0';
+	return r;
 }
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dont submit directly ok?
