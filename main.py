@@ -92,13 +92,10 @@ def fileHandler(update, context):
     context.bot.sendDocument(chat_id=query.message.chat.id, document=r.content, filename=filename)
     print(document)
 
-def help(update, context):
-    url = helpers.create_deep_linked_url(context.bot.get_me().username, 'city-cs')
-    keyboard = InlineKeyboardMarkup.from_button(
-        InlineKeyboardButton(text='Get Resource here!', url=url)
-    )
-
-    update.message.reply_text("Heyyy", reply_markup=keyboard)
+def updatelog(update, context):
+    chat_id=update.message.chat.id
+    txt = open("update_log.txt", "r").read()
+    context.bot.sendMessage(chat_id=chat_id,text = txt, parse_mode= 'HTML')
 
 def echo(update, context):
     """Echo the user message."""
@@ -127,6 +124,7 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
     dp.add_handler(CommandHandler("help", help, filters=Filters.group))
+    dp.add_handler(CommandHandler("updatelog", updatelog))
 
     # on noncommand i.e message - echo the message on Telegram
     # dp.add_handler(MessageHandler(Filters.text, echo))
@@ -164,5 +162,6 @@ if __name__ == '__main__':
 
 '''
 help - launch the bot and get some help
+updatelog - get update log
 '''
 

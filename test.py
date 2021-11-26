@@ -100,9 +100,11 @@ def help(update, context):
 
     update.message.reply_text("Heyyy", reply_markup=keyboard)
 
-def echo(update, context):
-    """Echo the user message."""
-    update.message.reply_text(update.message.text)
+def updatelog(update, context):
+    chat_id=update.message.chat.id
+    txt = open("update_log.txt", "r").read()
+    context.bot.sendMessage(chat_id=chat_id,text = txt, parse_mode= 'HTML')
+
 
 def error(update, context):
     """Log Errors caused by Updates."""
@@ -127,6 +129,7 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
     dp.add_handler(CommandHandler("help", help, filters=Filters.group))
+    dp.add_handler(CommandHandler("updatelog", updatelog))
 
     # on noncommand i.e message - echo the message on Telegram
     # dp.add_handler(MessageHandler(Filters.text, echo))
@@ -164,4 +167,5 @@ if __name__ == '__main__':
 
 '''
 help - launch the bot and get some help
+updatelog - get update log
 '''
