@@ -53,9 +53,9 @@ def source_type_query(update, context):
         qno = [
             '78',
             '142',
-            '185',
+            #'185',
             '372',
-            '438',
+            #'438',
             '737', '738', '739',
             '740', '741', '742', '743', '744', '745', '746', '747', '748', '749',
             '750', '751', '752', '753', '754', '755', '756', '757', '758',
@@ -117,10 +117,6 @@ def geguide(update, context):
         )
 
         update.message.reply_text("Quick link!", reply_markup=keyboard)
-
-def error(update, context):
-    """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 def end():
     query = update.callback_query

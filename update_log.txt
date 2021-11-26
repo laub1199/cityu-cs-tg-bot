@@ -1,9 +1,6 @@
 2021-11-26 20:58
 added geguide command
 
-2021-11-26 20:30
-CS3334 oj +185,438
-
 2021-11-26 20:20
 added updatelog command
 
