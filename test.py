@@ -4,8 +4,9 @@ from telegram import  InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.utils import helpers
 import os
 import requests
-import instaloader
-from instaloader import Profile
+from module.tginstatracker import InstaTracker
+from dotenv import load_dotenv
+load_dotenv()
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -13,9 +14,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 TOKEN = '2136290861:AAHSZBdx_CP7UlZyDgyD7x-AdroIPucSCn4'
 PORT = int(os.environ.get("PORT", "8443"))
-insta = instaloader.Instaloader()
-insta.login(USERNAME, PASSWORD)
-insta_track_dict = {}
 
 Subject, Type, File = range(3)
 
@@ -127,35 +125,11 @@ def error(update, context):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
-def end():
+def end(update):
     query = update.callback_query
     query.answer()
     query.edit_message_text(text="See you next time!")
     return ConversationHandler.END
-
-def insta_track(context: CallbackContext):
-    track_names = ['thestandnews', 'nba']
-    group_id = -1001338851560
-    global insta_track_dict
-    for username in track_names:
-        profile = Profile.from_username(insta.context, username)
-        for post in profile.get_posts():
-            shortcode = post.shortcode
-            url = "https://www.instagram.com/p/" + shortcode + "/"
-            photo_url = post.url
-            text = 'Check out ' + username + '\'s latest post!'
-            keyboard = InlineKeyboardMarkup.from_button(
-                InlineKeyboardButton(text=text, url=url)
-            )
-            if (not username in insta_track_dict):
-                insta_track_dict[username] = shortcode
-                context.bot.send_photo(chat_id=group_id, photo=photo_url, reply_markup=keyboard)
-                print('Added latest post ' + insta_track_dict[username])
-            elif (insta_track_dict[username] != shortcode):
-                insta_track_dict[username] = shortcode
-                context.bot.send_photo(chat_id=group_id, photo=photo_url, reply_markup=keyboard)
-                print('New post ' + insta_track_dict[username])
-            break
 
 def main():
     """Start the bot."""
@@ -187,7 +161,14 @@ def main():
 
     # scheduled task
     j = updater.job_queue
-    j.run_repeating(insta_track, 300, job_kwargs={'max_instances': 20})
+
+    insta_tracker = InstaTracker(
+        os.environ.get("INSTA_TRACK_USERNAME"),
+        os.environ.get("INSTA_TRACK_PASSWORD"),
+        group_list=[-1001338851560],
+        target_username_list=['thestandnews', 'nba']
+    )
+    j.run_repeating(insta_tracker.insta_track, 5, job_kwargs={'max_instances': 20})
     # Start the Bot
     updater.start_polling()
     #updater.start_webhook(listen="0.0.0.0",
