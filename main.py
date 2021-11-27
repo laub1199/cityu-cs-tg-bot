@@ -4,12 +4,16 @@ from telegram import  InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.utils import helpers
 import os
 import requests
+from module.tginstatracker import InstaTracker
+from dotenv import load_dotenv
+load_dotenv()
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
-TOKEN = os.environ["APIKEY"]
+APP_ENV_IS_TEST = True if os.environ.get("APP_ENV") == 'test' else False
+TOKEN = os.environ.get("TOKEN")
 PORT = int(os.environ.get("PORT", "8443"))
 
 Subject, Type, File = range(3)
@@ -86,7 +90,6 @@ def fileHandler(update, context):
         filename = query.data.split('/Weekly Coding/')[1]
         
     query.edit_message_text(text="Selected option: {}".format(filename))
-
     
     context.bot.sendDocument(chat_id=query.message.chat.id, document=r.content, filename=filename)
     print(document)
@@ -122,20 +125,24 @@ def error(update, context):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
-def end():
+def end(update):
     query = update.callback_query
     query.answer()
     query.edit_message_text(text="See you next time!")
     return ConversationHandler.END
 
 def main():
+    print('=======================================================')
+    if APP_ENV_IS_TEST:
+        print('Testing Environment...')
+    else:
+        print('Product Environment...')
+    print('=======================================================')
     """Start the bot."""
     updater = Updater(TOKEN, use_context=True)
     
     dp = updater.dispatcher
 
-
-    
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("updatelog", updatelog))
     dp.add_handler(CommandHandler('geguide', geguide))
@@ -155,13 +162,27 @@ def main():
     dp.add_handler(source_conv_handler)
 
     dp.add_error_handler(error)
-    
+
+    # scheduled task
+    j = updater.job_queue
+
+    group_list = [-1001338851560] if APP_ENV_IS_TEST else [-1001278050153]
+    target_username_list = ['thestandnews', 'nba'] if APP_ENV_IS_TEST else ['cityusu', 'cityucss_nebulae']
+    insta_tracker = InstaTracker(
+        os.environ.get("INSTA_TRACK_USERNAME"),
+        os.environ.get("INSTA_TRACK_PASSWORD"),
+        group_list=group_list,
+        target_username_list=target_username_list
+    )
+    j.run_repeating(insta_tracker.insta_track, 300, job_kwargs={'max_instances': 20})
     # Start the Bot
-    # updater.start_polling()
-    updater.start_webhook(listen="0.0.0.0",
-                          port=int(PORT),
-                          url_path=TOKEN)
-    updater.bot.setWebhook('https://citycs-tg-bot.herokuapp.com/' + TOKEN)
+    if APP_ENV_IS_TEST:
+        updater.start_polling()
+    else:
+        updater.start_webhook(listen="0.0.0.0",
+                             port=int(PORT),
+                             url_path=TOKEN)
+        updater.bot.setWebhook('https://citycs-tg-bot.herokuapp.com/' + TOKEN)
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
@@ -176,4 +197,3 @@ help - launch the bot and get some help
 updatelog - get update log
 geguide - get quick link to ge guide
 '''
-

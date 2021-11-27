@@ -1,3 +1,6 @@
+2021-11-28 02:50
+added ig post auto track
+
 2021-11-26 20:58
 added geguide command
 
