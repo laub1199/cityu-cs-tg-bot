@@ -2,8 +2,10 @@ import random
 from telegram.utils import helpers
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
+
 def start(update, context):
     update.message.reply_text('/source for getting source')
+
 
 def help(update, context):
     url = helpers.create_deep_linked_url(context.bot.get_me().username, 'city-cs')
@@ -13,10 +15,12 @@ def help(update, context):
 
     update.message.reply_text("Heyyy", reply_markup=keyboard)
 
+
 def updatelog(update, context):
-    chat_id=update.message.chat.id
+    chat_id = update.message.chat.id
     txt = open("update_log.txt", "r").read()
-    context.bot.sendMessage(chat_id=chat_id,text = txt, parse_mode= 'HTML')
+    context.bot.sendMessage(chat_id=chat_id, text=txt, parse_mode='HTML')
+
 
 def geguide(update, context):
     if (not context.args):
@@ -31,6 +35,7 @@ def geguide(update, context):
         )
 
         update.message.reply_text("Quick link!", reply_markup=keyboard)
+
 
 def wantpokemon(update, context):
     poke_id = str(random.randrange(897) + 1).zfill(3)

@@ -1,6 +1,6 @@
 import requests
-from telegram import  InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import  CommandHandler, Filters, CallbackQueryHandler, ConversationHandler
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import CommandHandler, Filters, CallbackQueryHandler, ConversationHandler
 from module.utils import end
 
 Subject, Type, File = range(3)
@@ -8,7 +8,9 @@ Subject, Type, File = range(3)
 
 def source(update, context):
     keyboard = [
-        [InlineKeyboardButton("CS3334 Data Structure", callback_data='CS3334 Data Structure')]
+        [InlineKeyboardButton("CS3334 Data Structure", callback_data='CS3334 Data Structure')],
+        [InlineKeyboardButton("CS3481 Fundamentals of Data Science",
+                              callback_data='CS3481 Fundamentals of Data Science')]
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -23,9 +25,18 @@ def source_subject_query(update, context):
     query = update.callback_query
     query.answer()
 
-    if (query.data == 'CS3334 Data Structure'):
+    if query.data == 'CS3334 Data Structure':
         keyboard = [
             [InlineKeyboardButton("Weekly Coding", callback_data='CS3334 Data Structure/Weekly Coding')]
+        ]
+
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        text = 'Select a source type'
+
+        query.edit_message_text(reply_markup=reply_markup, text=text)
+    elif query.data == 'CS3481 Fundamentals of Data Science':
+        keyboard = [
+            [InlineKeyboardButton("Lecture Notes", callback_data='CS3481 Fundamentals of Data Science/Lecture Notes')]
         ]
 
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -40,7 +51,7 @@ def source_type_query(update, context):
     query = update.callback_query
     query.answer()
     keyboard = []
-    if (query.data == 'CS3334 Data Structure/Weekly Coding'):
+    if query.data == 'CS3334 Data Structure/Weekly Coding':
         qno = [
             '78',
             '142',
@@ -56,6 +67,15 @@ def source_type_query(update, context):
         ]
         for no in qno:
             keyboard += [[InlineKeyboardButton(no, callback_data='CS3334 Data Structure/Weekly Coding/' + no + '.cpp')]]
+    elif query.data == 'CS3481 Fundamentals of Data Science/Lecture Notes':
+        files = ['all', '1_Introduction', '2_Data', '3_Decision Tree',
+                 '4_Classifier Evaluation', '5_Nearest Neighbor Classifier and Probabilistic Classification Model',
+                 '6_Cluster Analysis (K-means)', '7_Cluster Analysis (Hierarchical Clustering)',
+                 '7_Cluster Analysis (Hierarchical Clustering)']
+        for file in files:
+            file_format = '.zip' if file == 'all' else '.zip'
+            keyboard += [[InlineKeyboardButton(file,
+                                               callback_data='CS3481 Fundamentals of Data Science/Lecture Notes/' + file + file_format)]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     text = 'Please select'
 
@@ -64,30 +84,34 @@ def source_type_query(update, context):
     return File
 
 
-def fileHandler(update, context):
+def file_handler(update, context):
     query = update.callback_query
     update.callback_query.answer()
     path = "https://github.com/laub1199/cityu-cs-tg-bot/raw/master/source/"
     document = path + str(query.data)
 
-    r = requests.get(document)
+    if '.cpp' in query.data:
+        document = requests.get(document).content
 
     filename = 'untitled.txt'
 
-    if ('Weekly Coding' in query.data):
+    if 'Weekly Coding' in query.data:
         filename = query.data.split('/Weekly Coding/')[1]
+    elif 'Lecture Notes' in query.data:
+        filename = query.data.split('/Lecture Notes/')[1]
 
     query.edit_message_text(text="Selected option: {}".format(filename))
 
-    context.bot.sendDocument(chat_id=query.message.chat.id, document=r.content, filename=filename)
-    print(document)
+    context.bot.sendDocument(chat_id=query.message.chat.id, document=document, filename=filename)
+    print('{} - {} requested for {}'.format(query.message.chat.username, query.message.chat.first_name, query.data))
+
 
 source_conv_handler = ConversationHandler(
-        entry_points=[CommandHandler('source', source, filters=~Filters.group)],
-        states={
-            Subject: [CallbackQueryHandler(source_subject_query)],
-            Type: [CallbackQueryHandler(source_type_query)],
-            File: [CallbackQueryHandler(fileHandler)]
-        },
-        fallbacks=[CommandHandler('end', end)],
-    )
+    entry_points=[CommandHandler('source', source, filters=~Filters.group)],
+    states={
+        Subject: [CallbackQueryHandler(source_subject_query)],
+        Type: [CallbackQueryHandler(source_type_query)],
+        File: [CallbackQueryHandler(file_handler)]
+    },
+    fallbacks=[CommandHandler('end', end)],
+)
