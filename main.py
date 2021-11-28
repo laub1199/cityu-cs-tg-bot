@@ -9,6 +9,7 @@ from module.conv_source import source_conv_handler
 from module.tginstatracker import InstaTracker
 
 
+
 load_dotenv()
 
 APP_ENV_IS_TEST = True if os.environ.get("APP_ENV") == 'test' else False
@@ -31,6 +32,7 @@ def main():
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("updatelog", updatelog))
     dp.add_handler(CommandHandler('geguide', geguide))
+    dp.add_handler(CommandHandler('wantpokemon', wantpokemon))
     
     dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
 

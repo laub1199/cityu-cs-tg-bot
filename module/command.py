@@ -1,5 +1,6 @@
+import random
 from telegram.utils import helpers
-from telegram import  InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 def start(update, context):
     update.message.reply_text('/source for getting source')
@@ -30,3 +31,8 @@ def geguide(update, context):
         )
 
         update.message.reply_text("Quick link!", reply_markup=keyboard)
+
+def wantpokemon(update, context):
+    poke_id = str(random.randrange(897) + 1).zfill(3)
+    photo_url = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/{}.png'.format(poke_id)
+    context.bot.send_photo(chat_id=update.message.chat.id, photo=photo_url)
