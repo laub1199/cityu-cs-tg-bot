@@ -73,4 +73,5 @@ if __name__ == '__main__':
 help - launch the bot and get some help
 updatelog - get update log
 geguide - get quick link to ge guide
+wantpokemon - send you a pokemon!
 '''
