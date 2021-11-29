@@ -1,3 +1,6 @@
+2021-11-29 22:04
+added caption for wantpokemon
+
 2021-11-29 19:20
 bugfix conversation handler, callback limitation
 
