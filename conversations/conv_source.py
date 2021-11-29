@@ -1,7 +1,7 @@
 import requests
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CommandHandler, Filters, CallbackQueryHandler, ConversationHandler
-from module.utils import end
+from modules.utils import end
 
 Subject, Type, File = range(3)
 

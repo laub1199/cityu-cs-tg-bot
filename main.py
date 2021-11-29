@@ -3,12 +3,10 @@ from telegram.ext import Updater, CommandHandler, Filters
 import os
 from dotenv import load_dotenv
 
-from module.command import *
-from module.utils import *
-from module.conv_source import source_conv_handler
-from module.tginstatracker import InstaTracker
-
-
+from commands.hub import *
+from conversations.hub import *
+from modules.utils import *
+from modules.tginstatracker import InstaTracker
 
 load_dotenv()
 
