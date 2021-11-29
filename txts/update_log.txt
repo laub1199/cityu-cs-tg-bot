@@ -1,5 +1,8 @@
+2021-11-30 03:45
+added /lauchbot, /pin, updated /help
+
 2021-11-30 00:50
-added my903 command
+added /my903 command
 
 2021-11-29 22:04
 added caption for wantpokemon
@@ -14,16 +17,16 @@ run in 6 threads
 added CS3481 source
 
 2021-11-29 01:32
-added wantpokemon command
+added /wantpokemon command
 
 2021-11-28 02:50
 added ig post auto track
 
 2021-11-26 20:58
-added geguide command
+added /geguide command
 
 2021-11-26 20:20
-added updatelog command
+added /updatelog command
 
 2021-11-26 03:00
 CS3334 coding question update
