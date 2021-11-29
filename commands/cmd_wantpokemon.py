@@ -3,10 +3,15 @@ import random
 
 
 def wantpokemon(update, context):
+    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     client = pokepy.V2Client()
+    print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
     poke_id = random.randrange(897) + 1
+    print('cccccccccccccccccccccccccccccccc')
     poke = client.get_pokemon(poke_id)
+    print('dddddddddddddddddddddddddddddddd')
     print(poke.types)
+    print('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
     print(poke.types[0])
     indefinite = 'an' if poke.types[0].type.name in ['a', 'e', 'i', 'o', 'u'] else 'a'
     text = 'This is {},\n {} '.format(poke.name, indefinite)
