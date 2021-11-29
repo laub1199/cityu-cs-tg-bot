@@ -6,8 +6,10 @@ def wantpokemon(update, context):
     client = pokepy.V2Client()
     poke_id = random.randrange(897) + 1
     poke = client.get_pokemon(poke_id)
+    print(dir(poke))
+    text = ''
     # indefinite = 'an' if poke.types[0].type.name in ['a', 'e', 'i', 'o', 'u'] else 'a'
-    text = 'This is {}!'.format(poke.name)
+    # text = 'This is {}!'.format(poke.name)
     # text = 'This is {},\n {} '.format(poke.name, indefinite)
     # for index, poketype in enumerate(poke.types):
     #     if index > 0:
