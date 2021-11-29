@@ -1,3 +1,6 @@
+2021-11-29 19:20
+bugfix conversation handler, callback limitation
+
 2021-11-29 15:45
 run in 6 threads
 

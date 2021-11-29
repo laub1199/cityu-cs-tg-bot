@@ -42,18 +42,20 @@ def main():
     # Error handler
     dp.add_error_handler(error)
 
-    # scheduled task
-    j = updater.job_queue
+    if not APP_ENV_IS_TEST:
+        # scheduled task
+        j = updater.job_queue
 
-    group_list = [-1001338851560] if APP_ENV_IS_TEST else [-1001278050153]
-    target_username_list = ['thestandnews', 'nba'] if APP_ENV_IS_TEST else ['cityusu', 'cityucss_nebulae', 'cityusu_welfare']
-    insta_tracker = InstaTracker(
-        os.environ.get("INSTA_TRACK_USERNAME"),
-        os.environ.get("INSTA_TRACK_PASSWORD"),
-        group_list=group_list,
-        target_username_list=target_username_list
-    )
-    j.run_repeating(insta_tracker.insta_track, 300, job_kwargs={'max_instances': 20})
+        group_list = [-1001338851560] if APP_ENV_IS_TEST else [-1001278050153]
+        target_username_list = ['thestandnews', 'nba'] if APP_ENV_IS_TEST else ['cityusu', 'cityucss_nebulae', 'cityusu_welfare']
+
+        insta_tracker = InstaTracker(
+            os.environ.get("INSTA_TRACK_USERNAME"),
+            os.environ.get("INSTA_TRACK_PASSWORD"),
+            group_list=group_list,
+            target_username_list=target_username_list
+        )
+        j.run_repeating(insta_tracker.insta_track, 300, job_kwargs={'max_instances': 20})
 
     # Start the Bot
     if APP_ENV_IS_TEST:
