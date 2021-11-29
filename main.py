@@ -24,7 +24,7 @@ def main():
         print('Product Environment...')
     print('=======================================================')
     """Start the bot."""
-    updater = Updater(TOKEN, use_context=True)
+    updater = Updater(TOKEN, use_context=True, workers=6)
     
     dp = updater.dispatcher
 

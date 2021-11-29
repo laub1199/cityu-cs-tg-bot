@@ -1,3 +1,6 @@
+2021-11-29 15:45
+run in 6 threads
+
 2021-11-29 04:55
 added CS3481 source
 
