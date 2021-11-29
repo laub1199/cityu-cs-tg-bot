@@ -46,7 +46,7 @@ def main():
         j = updater.job_queue
 
         group_list = [-1001338851560] if APP_ENV_IS_TEST else [-1001278050153]
-        target_username_list = ['thestandnews', 'nba'] if APP_ENV_IS_TEST else ['cityusu', 'cityucss_nebulae', 'cityusu_welfare']
+        target_username_list = ['thestandnews'] if APP_ENV_IS_TEST else ['cityusu', 'cityucss_nebulae', 'cityusu_welfare']
 
         insta_tracker = InstaTracker(
             os.environ.get("INSTA_TRACK_USERNAME"),
