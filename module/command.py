@@ -18,8 +18,10 @@ def help(update, context):
 
 def updatelog(update, context):
     chat_id = update.message.chat.id
-    txt = open("update_log.txt", "r").read()
-    context.bot.sendMessage(chat_id=chat_id, text=txt, parse_mode='HTML')
+    #txt = open("update_log.txt", "r").read()
+    with open("update_log.txt") as myfile:
+        text = ''.join(str(s) for s in [next(myfile) for x in range(8)])
+    context.bot.sendMessage(chat_id=chat_id, text=text, parse_mode='HTML')
 
 
 def geguide(update, context):
