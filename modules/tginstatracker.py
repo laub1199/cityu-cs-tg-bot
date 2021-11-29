@@ -37,10 +37,10 @@ class InstaTracker:
                     InlineKeyboardButton(text=text, url=url)
                 )
                 caption = post.caption
-
-                self.latest_post[username] = shortcode
-                for id in self.group_list:
-                    context.bot.send_photo(chat_id=id, photo=photo_url, reply_markup=keyboard, caption=caption)
+                if self.latest_post[username] != shortcode:
+                    self.latest_post[username] = shortcode
+                    for id in self.group_list:
+                        context.bot.send_photo(chat_id=id, photo=photo_url, reply_markup=keyboard, caption=caption)
                 break
 
     def add_group(self, group_id):
