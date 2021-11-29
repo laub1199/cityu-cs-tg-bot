@@ -3,3 +3,4 @@ requests
 instaloader
 python-dotenv
 pokepy
+urllib3
