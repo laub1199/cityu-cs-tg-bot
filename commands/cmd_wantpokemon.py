@@ -10,7 +10,7 @@ def wantpokemon(update, context):
     print('cccccccccccccccccccccccccccccccc')
     poke = client.get_pokemon(poke_id)
     print('dddddddddddddddddddddddddddddddd')
-    print(poke.types)
+    print(poke)
     print('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
     print(poke.types[0])
     indefinite = 'an' if poke.types[0].type.name in ['a', 'e', 'i', 'o', 'u'] else 'a'
