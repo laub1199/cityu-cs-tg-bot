@@ -31,6 +31,7 @@ def main():
     dp.add_handler(CommandHandler("updatelog", updatelog))
     dp.add_handler(CommandHandler('geguide', geguide))
     dp.add_handler(CommandHandler('wantpokemon', wantpokemon))
+    dp.add_handler(CommandHandler('my903', my903))
     
     dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
 
