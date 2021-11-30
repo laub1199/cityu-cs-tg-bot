@@ -79,8 +79,8 @@ def source_type_query(update, context):
             keyboard += [[InlineKeyboardButton(no, callback_data=no + '.cpp')]]
     elif query.data == 'Lecture Notes':
         files = ['all', '1_Introduction', '2_Data', '3_Decision Tree',
-                 '4_Classifier Evaluation', '5_Nearest Neighbor Classifier & Probabilistic Classification',
-                 '6_Cluster Analysis (K-means)', '7_Cluster Analysis (Hierarchical Clustering)',
+                 '4_Classifier Evaluation', '5_Nearest Neighbor Classifier Probabilistic Classification',
+                 '6_Cluster Analysis (Kmeans)', '7_Cluster Analysis (Hierarchical Clustering)',
                  '8_Association Analysis']
         for file in files:
             file_format = '.zip' if file == 'all' else '.pdf'
