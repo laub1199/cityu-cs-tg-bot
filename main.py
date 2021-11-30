@@ -1,10 +1,11 @@
-from telegram.ext import Updater, CommandHandler, Filters
+from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
 
 import os
 from dotenv import load_dotenv
 
 from commands.hub import *
 from conversations.hub import *
+from messagehandlers.hub import *
 from modules.utils import *
 from modules.tginstatracker import InstaTracker
 
@@ -36,6 +37,9 @@ def main():
     
     dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
     dp.add_handler(CommandHandler('pin', pin, filters=~Filters.group))
+
+    # Message handler
+    dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcome))
 
     # Conversation handler
     dp.add_handler(source_conv_handler)

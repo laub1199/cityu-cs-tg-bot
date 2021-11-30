@@ -1,3 +1,6 @@
+2021-11-30 21:03
+added welcoming message
+
 2021-11-30 03:45
 added /launchbot, /pin, updated /help
 
