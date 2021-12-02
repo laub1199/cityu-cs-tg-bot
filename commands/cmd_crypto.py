@@ -36,9 +36,12 @@ def crypto(update, context):
             text += '💰 Price [USD]: {}\n'.format(price_string(target_usd['current_price']))
             text += '⚖ H: {} | L: {}\n'.format(price_string(target_usd['high_24h']), price_string(target_usd['low_24h']))
             text += '🇭🇰 Price [HKD]: {}\n'.format(price_string(target_hkd['current_price']))
-            text += '📉 1h: {:,.2f}%\n'.format(target_usd['price_change_percentage_1h_in_currency'])
-            text += '📉 24h: {:,.2f}%\n'.format(target_usd['price_change_percentage_24h_in_currency'])
-            text += '📉 7d: {:,.2f}%\n'.format(target_usd['price_change_percentage_7d_in_currency'])
+            text += '📈 ' if target_usd['price_change_percentage_1h_in_currency'] > 0 else '📉 '
+            text += '1h: {:,.2f}%\n'.format(target_usd['price_change_percentage_1h_in_currency'])
+            text += '📈 ' if target_usd['price_change_percentage_24h_in_currency'] > 0 else '📉 '
+            text += '24h: {:,.2f}%\n'.format(target_usd['price_change_percentage_24h_in_currency'])
+            text += '📈 ' if target_usd['price_change_percentage_7d_in_currency'] > 0 else '📉 '
+            text += '7d: {:,.2f}%\n'.format(target_usd['price_change_percentage_7d_in_currency'])
             text += '📊 Volume: ${:,.0f}\n'.format(target_usd['total_volume'])
             text += '💎 MarketCap: ${:,.0f}\n'.format(target_usd['market_cap'])
             break
