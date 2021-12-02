@@ -19,6 +19,7 @@ def price_string(p):
     return ('${:,.' + check_precision(p) + 'f}').format(p)
 
 def crypto(update, context):
+    additional_coins = [{'id': 'avalanche-2', 'symbol': 'avax', 'name': 'Avalanche'}]
     if not context.args:
         update.message.reply_text("Symbol is missing, e.g. /crypto btc")
     elif len(context.args) > 1:
@@ -26,6 +27,7 @@ def crypto(update, context):
     else:
         cg = CoinGeckoAPI()
         crypto_list = cg.get_coins_list()
+        crypto_list.extend(additional_coins)
         text = ''
         for crypto in crypto_list:
             if crypto['symbol'] == context.args[0].lower():
