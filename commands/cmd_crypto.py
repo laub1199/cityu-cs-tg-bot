@@ -29,9 +29,10 @@ def crypto(update, context):
         text = ''
         for crypto in crypto_list:
             if crypto['symbol'] == context.args[0].lower():
-                target_usd = cg.get_coins_markets(ids=crypto['id'], vs_currency='usd', price_change_percentage='1h,24h,7d')[ 0]
-                target_hkd = cg.get_coins_markets(ids=crypto['id'], vs_currency='hkd', price_change_percentage='1h,24h,7d')[ 0]
-
+                target_usd = cg.get_coins_markets(ids=crypto['id'], vs_currency='usd', price_change_percentage='1h,24h,7d')[0]
+                if target_usd['market_cap_rank'] is None:
+                    continue
+                target_hkd = cg.get_coins_markets(ids=crypto['id'], vs_currency='hkd', price_change_percentage='1h,24h,7d')[0]
                 text += '{} - ${} [{}]\n'.format(target_usd['name'], target_usd['symbol'].upper(), target_usd['market_cap_rank'])
                 text += '💰 Price [USD]: {}\n'.format(price_string(target_usd['current_price']))
                 text += '⚖ H: {} | L: {}\n'.format(price_string(target_usd['high_24h']), price_string(target_usd['low_24h']))
