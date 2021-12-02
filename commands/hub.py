@@ -6,4 +6,4 @@ from commands.cmd_wantpokemon import *
 from commands.cmd_my903 import *
 from commands.cmd_pin import *
 from commands.cmd_help import *
-
+from commands.cmd_crypto import *
