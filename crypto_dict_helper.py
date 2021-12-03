@@ -31,16 +31,4 @@ for page in range(1, 115):
     print('Finish processing {}'.format(page))
 with open('pickles/crypto_dict.pickle', 'wb') as f:
     pickle.dump(crypto_dict, f)
-#
-# msft = yf.Ticker("nvda")
-#
-# print(msft.info['currentPrice'])
-# print(msft.info['dayHigh'])
-# print(msft.info['dayLow'])
-# print(msft.info['targetLowPrice'])
-# print(msft.info['targetMeanPrice'])
-# print(msft.info['targetHighPrice'])
-# print(msft.info['preMarketPrice'])
-# print(msft.info['volume'])
-# print(msft.info['marketCap'])
-# print(msft.info['regularMarketPreviousClose'])
+    
