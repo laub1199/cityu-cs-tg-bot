@@ -1,3 +1,6 @@
+import pickle
+import requests
+import json
 from pycoingecko import CoinGeckoAPI
 from math import log10, floor
 
@@ -34,8 +37,10 @@ def crypto(update, context):
                 target_usd = cg.get_coins_markets(ids=crypto['id'], vs_currency='usd', price_change_percentage='1h,24h,7d')[0]
                 if target_usd['market_cap_rank'] is None:
                     continue
+                coingecko_url = 'https://www.coingecko.com/en/coins/' + crypto['id']
+                twitter_url = 'https://twitter.com/search?q=%24' + crypto['symbol'].upper()
                 target_hkd = cg.get_coins_markets(ids=crypto['id'], vs_currency='hkd', price_change_percentage='1h,24h,7d')[0]
-                text += '{} - ${} [{}]\n'.format(target_usd['name'], target_usd['symbol'].upper(), target_usd['market_cap_rank'])
+                text += '<a href="{}">{}</a> - <a href="{}">${}</a> [{}]\n'.format(coingecko_url, target_usd['name'], twitter_url, target_usd['symbol'].upper(), target_usd['market_cap_rank'])
                 text += '💰 Price [USD]: {}\n'.format(price_string(target_usd['current_price']))
                 text += '⚖ H: {} | L: {}\n'.format(price_string(target_usd['high_24h']), price_string(target_usd['low_24h']))
                 text += '🇭🇰 Price [HKD]: {}\n'.format(price_string(target_hkd['current_price']))
@@ -50,6 +55,13 @@ def crypto(update, context):
                 break
 
         if text == '':
-            text = "Couldn't find your Shitcoin!"
+            update.message.reply_text("Couldn't find your Shitcoin!")
 
-        update.message.reply_text(text)
+        else:
+            # with open('pickles/crypto_dict.pickle', 'rb') as f:
+            #     crypto_dict = pickle.load(f)
+            # if context.args[0].upper() in crypto_dict:
+            #     url = 'https://www.coingecko.com/coins/{}/sparkline'.format(crypto_dict[context.args[0].upper()])
+            #     context.bot.send_message(chat_id=update.message.chat.id, text=text, parse_mode='HTML')
+            #     return
+            context.bot.send_message(chat_id=update.message.chat.id, text=text, parse_mode='HTML')
