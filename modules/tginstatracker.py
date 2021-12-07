@@ -30,8 +30,8 @@ class InstaTracker:
         for username in self.target_username_list:
             profile = Profile.from_username(self.insta.context, username)
             # for instant control
-            if username == 'cityusu':
-                instant_flag = True
+            # if username == 'cityusu':
+            #     instant_flag = True
             for post in profile.get_posts():
                 shortcode = post.shortcode
                 url = "https://www.instagram.com/p/" + shortcode + "/"
