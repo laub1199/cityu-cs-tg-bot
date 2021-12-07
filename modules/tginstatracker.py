@@ -26,8 +26,8 @@ class InstaTracker:
             return post.shortcode
 
     def insta_track(self, context: CallbackContext):
-        instant_flag = False
         for username in self.target_username_list:
+            instant_flag = False
             profile = Profile.from_username(self.insta.context, username)
             # for instant control
             # if username == 'cityusu':
