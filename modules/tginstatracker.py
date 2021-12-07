@@ -26,6 +26,8 @@ class InstaTracker:
             return post.shortcode
 
     def insta_track(self, context: CallbackContext):
+        print('=======================================================')
+        print('Running insta_track function...')
         for username in self.target_username_list:
             instant_flag = False
             profile = Profile.from_username(self.insta.context, username)
@@ -34,6 +36,8 @@ class InstaTracker:
             #     instant_flag = True
             for post in profile.get_posts():
                 shortcode = post.shortcode
+                print('[Tracking] {} - {}'.format(username, self.latest_post[username]))
+                print('[Latest post]: {}'.format(shortcode))
                 url = "https://www.instagram.com/p/" + shortcode + "/"
                 photo_url = post.url
                 text = 'Check out ' + username + '\'s latest post!'
@@ -42,10 +46,12 @@ class InstaTracker:
                 )
                 caption = post.caption
                 if self.latest_post[username] != shortcode or instant_flag:
+                    print('[New post commit] {} from {} to {}'.format(username, shortcode, self.latest_post[username]))
                     self.latest_post[username] = shortcode
                     for id in self.group_list:
                         context.bot.send_photo(chat_id=id, photo=photo_url, reply_markup=keyboard, caption=caption)
                 break
+        print('=======================================================')
 
     def add_group(self, group_id):
         self.group_list.append(group_id)
