@@ -61,7 +61,7 @@ def main():
             group_list=group_list,
             target_username_list=target_username_list
         )
-        j.run_repeating(insta_tracker.insta_track, 300, job_kwargs={'max_instances': 20})
+        j.run_repeating(insta_tracker.insta_track, 60, job_kwargs={'max_instances': 20})
 
     # Start the Bot
     if APP_ENV_IS_TEST:

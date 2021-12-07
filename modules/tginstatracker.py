@@ -26,8 +26,12 @@ class InstaTracker:
             return post.shortcode
 
     def insta_track(self, context: CallbackContext):
+        instant_flag = False
         for username in self.target_username_list:
             profile = Profile.from_username(self.insta.context, username)
+            # for instant control
+            if username == 'cityusu':
+                instant_flag = True
             for post in profile.get_posts():
                 shortcode = post.shortcode
                 url = "https://www.instagram.com/p/" + shortcode + "/"
@@ -37,7 +41,7 @@ class InstaTracker:
                     InlineKeyboardButton(text=text, url=url)
                 )
                 caption = post.caption
-                if self.latest_post[username] != shortcode:
+                if self.latest_post[username] != shortcode or instant_flag:
                     self.latest_post[username] = shortcode
                     for id in self.group_list:
                         context.bot.send_photo(chat_id=id, photo=photo_url, reply_markup=keyboard, caption=caption)
