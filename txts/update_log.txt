@@ -1,3 +1,6 @@
+2021-12-10 03:25
+added /css and /su command
+
 2021-12-04 02:44
 added CoinGecko url for /crypto
 

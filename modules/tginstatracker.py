@@ -1,42 +1,48 @@
 import instaloader
+import os
 from instaloader import Profile
 from telegram.ext import CallbackContext
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from dotenv import load_dotenv
 
 
-class InstaTracker:
+class _InstaTracker:
     def __init__(self, ig_username, ig_password, group_list=None, target_username_list=None):
-        self.insta = instaloader.Instaloader()
-        self.insta.login(ig_username, ig_password)
-        self.group_list = group_list if not group_list is None else []
-        self.target_username_list = target_username_list if not target_username_list is None else []
+        self._insta = instaloader.Instaloader()
+        self._insta.login(ig_username, ig_password)
+        self._group_list = group_list if not group_list is None else []
+        self._target_username_list = target_username_list if not target_username_list is None else []
         if target_username_list is not None:
-            self.latest_post = self.init_latest_post()
+            self._latest_post = self._init_latest_post()
 
-    def init_latest_post(self):
+    def _init_latest_post(self):
         latest_post = {}
-        for username in self.target_username_list:
+        for username in self._target_username_list:
             if username not in latest_post:
-                latest_post[username] = self.get_latest_post(username)
+                latest_post[username] = self._crawl_latest_post(username)
         return latest_post
 
-    def get_latest_post(self, username):
-        profile = Profile.from_username(self.insta.context, username)
+    def _crawl_latest_post(self, username):
+        profile = Profile.from_username(self._insta.context, username)
         for post in profile.get_posts():
-            return post.shortcode
+            return {
+                'shortcode': post.shortcode,
+                'photo_url': post.url,
+                'caption': post.caption
+            }
 
     def insta_track(self, context: CallbackContext):
         print('=======================================================')
         print('Running insta_track function...')
-        for username in self.target_username_list:
+        for username in self._target_username_list:
             instant_flag = False
-            profile = Profile.from_username(self.insta.context, username)
+            profile = Profile.from_username(self._insta.context, username)
             # for instant control
             # if username == 'cityusu':
             #     instant_flag = True
             for post in profile.get_posts():
                 shortcode = post.shortcode
-                print('[Tracking] {} - {}'.format(username, self.latest_post[username]))
+                print('[Tracking] {} - {}'.format(username, self._latest_post[username]))
                 print('[Latest post]: {}'.format(shortcode))
                 url = "https://www.instagram.com/p/" + shortcode + "/"
                 photo_url = post.url
@@ -45,24 +51,28 @@ class InstaTracker:
                     InlineKeyboardButton(text=text, url=url)
                 )
                 caption = post.caption
-                if self.latest_post[username] != shortcode or instant_flag:
-                    print('[New post commit] {} from {} to {}'.format(username, shortcode, self.latest_post[username]))
-                    self.latest_post[username] = shortcode
-                    for id in self.group_list:
+                if self._latest_post[username]['shortcode'] != shortcode or instant_flag:
+                    print('[New post commit] {} from {} to {}'.format(username, shortcode, self._latest_post[username]['shortcode']))
+                    self._latest_post[username]['shortcode'] = shortcode
+                    self._latest_post[username]['photo_url'] = photo_url
+                    self._latest_post[username]['caption'] = caption
+                    for id in self._group_list:
                         context.bot.send_photo(chat_id=id, photo=photo_url, reply_markup=keyboard, caption=caption)
                 break
         print('=======================================================')
 
-    def add_group(self, group_id):
-        self.group_list.append(group_id)
+    def get_post(self, username):
+        return self._latest_post[username]
 
-    def remove_group(self, group_id):
-        self.group_list.remove(group_id)
 
-    def add_target_user(self, username):
-        self.target_username_list.append(username)
-        self.latest_post[username] = self.get_latest_post(username)
+load_dotenv()
+APP_ENV_IS_TEST = True if os.environ.get("APP_ENV") == 'test' else False
+group_list = [-1001338851560] if APP_ENV_IS_TEST else [-1001278050153]
+target_username_list = ['thestandnews', 'cityucss_nebulae', 'cityusu'] if APP_ENV_IS_TEST else ['cityusu', 'cityucss_nebulae', 'cityusu_welfare']
 
-    def remove_target_user(self, username):
-        self.target_username_list.remove(username)
-        del self.latest_post[username]
+insta_tracker = _InstaTracker(
+    os.environ.get("INSTA_TRACK_USERNAME"),
+    os.environ.get("INSTA_TRACK_PASSWORD"),
+    group_list=group_list,
+    target_username_list=target_username_list
+)

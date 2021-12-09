@@ -7,13 +7,14 @@ from commands.hub import *
 from conversations.hub import *
 from messagehandlers.hub import *
 from modules.utils import *
-from modules.tginstatracker import InstaTracker
+from modules.tginstatracker import insta_tracker
 
 load_dotenv()
 
 APP_ENV_IS_TEST = True if os.environ.get("APP_ENV") == 'test' else False
 TOKEN = os.environ.get("TOKEN")
 PORT = int(os.environ.get("PORT", "8443"))
+
 
 def main():
     print('=======================================================')
@@ -35,6 +36,8 @@ def main():
     dp.add_handler(CommandHandler('wantpokemon', wantpokemon))
     dp.add_handler(CommandHandler('my903', my903))
     dp.add_handler(CommandHandler('crypto', crypto))
+    dp.add_handler(CommandHandler('css', css))
+    dp.add_handler(CommandHandler('su', su))
     
     dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
     dp.add_handler(CommandHandler('pin', pin, filters=~Filters.group))
@@ -48,19 +51,9 @@ def main():
     # Error handler
     dp.add_error_handler(error)
 
+    # Scheduled tasks
     if not APP_ENV_IS_TEST:
-        # scheduled task
         j = updater.job_queue
-
-        group_list = [-1001338851560] if APP_ENV_IS_TEST else [-1001278050153]
-        target_username_list = ['thestandnews'] if APP_ENV_IS_TEST else ['cityusu', 'cityucss_nebulae', 'cityusu_welfare']
-
-        insta_tracker = InstaTracker(
-            os.environ.get("INSTA_TRACK_USERNAME"),
-            os.environ.get("INSTA_TRACK_PASSWORD"),
-            group_list=group_list,
-            target_username_list=target_username_list
-        )
         j.run_repeating(insta_tracker.insta_track, 300, job_kwargs={'max_instances': 20})
 
     # Start the Bot
@@ -74,6 +67,7 @@ def main():
 
     updater.idle()
 
+
 if __name__ == '__main__':
     main()
 
@@ -85,4 +79,6 @@ geguide - get quick link to ge guide
 wantpokemon - send you a pokemon!
 my903 - check out this week's top 10 songs
 crypto - check crypto price
+css - get our society's latest ig post
+su - get student union's latest ig post
 '''

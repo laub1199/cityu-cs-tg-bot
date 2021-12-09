@@ -6,6 +6,8 @@ Group command如下：
 /wantpokemon - 隨機睇隻pokemon
 /my903 睇903專業推介top10
 /crypto - 查下crypto價格
+/css 查看我哋科Society(CSS)最新嘅IG Post
+/su 查看學生會(SU)最新嘅IG Post
 
 Private command:
 /start - 了解private mode下嘅其他command

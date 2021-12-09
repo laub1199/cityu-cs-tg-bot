@@ -7,3 +7,5 @@ from commands.cmd_my903 import *
 from commands.cmd_pin import *
 from commands.cmd_help import *
 from commands.cmd_crypto import *
+from commands.cmd_css import *
+from commands.cmd_su import *
