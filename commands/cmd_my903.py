@@ -8,8 +8,8 @@ def my903(update, context):
     photo_url = 'https://my903.com/903openbox' + posts[0]['thumbnail_image_url']
     caption = posts[0]['post_title'] + '\n'
     for index, song in enumerate(posts[0]['post_content'].split('<br />')):
-        if index > 10:
+        if index > 9:
             break
-        elif index > 0:
-            caption += song + '\n'
+        else:
+            caption += song.replace('<p>', '') + '\n'
     context.bot.send_photo(chat_id=update.message.chat.id, photo=photo_url, caption=caption)
