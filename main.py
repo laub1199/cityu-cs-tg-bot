@@ -38,6 +38,7 @@ def main():
     dp.add_handler(CommandHandler('crypto', crypto))
     dp.add_handler(CommandHandler('css', css))
     dp.add_handler(CommandHandler('su', su))
+    dp.add_handler(CommandHandler('cityuinfo', cityuinfo))
     
     dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
     dp.add_handler(CommandHandler('pin', pin, filters=~Filters.group))
@@ -81,4 +82,5 @@ my903 - check out this week's top 10 songs
 crypto - check crypto price
 css - get our society's latest ig post
 su - get student union's latest ig post
+cityuinfo - get hkcityu.info latest ig post
 '''

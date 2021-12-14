@@ -9,3 +9,4 @@ from commands.cmd_help import *
 from commands.cmd_crypto import *
 from commands.cmd_css import *
 from commands.cmd_su import *
+from commands.cmd_cityuinfo import *
