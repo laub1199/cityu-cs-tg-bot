@@ -1,87 +1,60 @@
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <stack>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
-int main() {
-	char wqb[100001];
-	char nqw[100001];
-	while (cin.getline(wqb, 100001)) {
-		stack<char> nqws;
-		stack<int> sasdnaw;
-		bool qew = true;
-		for (int qewx = 0; wqb[qewx] !='\0'; qewx++) {
-			if (wqb[qewx] == '[' || wqb[qewx] == '{' || wqb[qewx] == '(') {
-				nqws.push(wqb[qewx]);
-				sasdnaw.push(qewx);
-			}
-			else if (wqb[qewx] == ']' || wqb[qewx] == '}' || wqb[qewx] == ')') {
-				if(nqws.empty()){
-					qew = false;
-					cout << qewx + 1 << endl;
-					break;
-				}
-				else if ((wqb[qewx] == ']' && nqws.top() == '[') || (wqb[qewx] == ')' && nqws.top() == '(') || (wqb[qewx] == '}' && nqws.top() == '{')) {
-					nqws.pop();
-					sasdnaw.pop();
-				}
-				else {
-					qew = false;
-					cout << qewx + 1 << endl;
-					break;
-				}
-			}
-		}
-		if (!nqws.empty() && qew) {
-			qew = false;
-			int temp;
-			while (!sasdnaw.empty()) {
-				temp = sasdnaw.top();
-				sasdnaw.pop();
-			}
-			cout << temp + 1 << endl;
-		}
-		if (qew) {
-			cout << "Success" << endl;
-		}
-	}
-	return 0;
+// [32, 126]
+// () 40 41 
+// {} 123 125
+// [] 91 93
+
+stack<char> stk;
+
+bool match(char c)
+{
+    if(stk.empty()){
+        return false;
+    }
+    switch(c){
+        case '}':
+            return stk.top() == '{';
+        case ')':
+            return stk.top() == '(';
+        case ']':
+            return stk.top() == '[';
+    }
+    return false;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?
+int main()
+{
+    string str;
+    while(getline(cin, str)){
+        // clear
+        while(!stk.empty()) stk.pop();
+        // stack
+        int first;
+        bool done = false;
+        for(int i=0; i<str.size(); i++){
+            if(done) break;
+            char c = str[i];
+            switch(c){
+                case '{': case '(': case '[':
+                    if(stk.empty()){
+                        first = i;
+                    }
+                    stk.push(c); break;
+                case '}': case ')': case']':
+                    if(match(c)){
+                        stk.pop();
+                    }
+                    else{
+                        printf("%d\n", i+1);
+                        done = true;
+                    }break;
+                default: break;
+            }
+        }
+        if(!done){
+            stk.empty() ? printf("Success\n") : printf("%d\n", first+1);  
+        }
+    }
+    return 0;
+}

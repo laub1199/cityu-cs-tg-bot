@@ -1,76 +1,37 @@
-#include <iostream>
-#include <stack>
+#include<bits/stdc++.h>
+#define maxN 100010
 using namespace std;
-long long int cs3334(long long int cs4486[], long long int cs3440) {
-	stack <int> cs2456;
-	long long int ugh = 0, somafan, malunfan, jm9;
-	jm9 = 0;
-	while (jm9 < cs3440) {
-		if (cs2456.empty() || cs4486[cs2456.top()] <= cs4486[jm9]) cs2456.push(jm9++);
-		else {
-			somafan = cs2456.top();
-			cs2456.pop();
-			if (cs2456.empty()) malunfan = cs4486[somafan] * jm9;
-			else malunfan = cs4486[somafan] * (jm9 - cs2456.top() - 1);
-			if (ugh < malunfan) ugh = malunfan;
-		}
-	}
-	while (!cs2456.empty()) {
-		somafan = cs2456.top();
-		cs2456.pop();
-		if (cs2456.empty()) malunfan = cs4486[somafan] * jm9;
-		else malunfan = cs4486[somafan] * (jm9 - cs2456.top() - 1);
-		if (ugh < malunfan) ugh = malunfan;
-	}
-	return ugh;
+typedef long long ll;
+
+stack<ll> stk;
+ll arr[maxN];
+
+int main()
+{
+    ll T, N;
+    scanf("%lld", &T);
+    while(T--)
+    {
+        // handle the input
+        scanf("%lld", &N);
+        ll i;
+        for(i=0; i<N; i++)
+        {
+            scanf("%lld", &arr[i]);
+        }arr[i] = 0;
+        // ascending stack
+        ll res = 0;
+        while(!stk.empty()) stk.pop(); // initialization
+        for(ll i=0; i<=N; i++)
+        {
+            while(!stk.empty() && arr[stk.top()]>=arr[i])
+            {
+                ll val = stk.top(); stk.pop();
+                res = max(res, arr[val]*(stk.empty() ? i : (i-stk.top()-1)));
+            }
+            stk.push(i);
+        }
+        printf("%lld\n", res);
+    }
+    return 0;
 }
-int main() {
-	long long int longlongdick;
-	cin >> longlongdick;
-	for (long long int jm9 = 0; jm9 < longlongdick; jm9++) {
-		long long int wet;
-		cin >> wet;
-		long long int *length = new long long int[wet];
-		for (long long int jm9 = 0; jm9 < wet; jm9++)
-			cin >> length[jm9];
-		cout << cs3334(length, wet) << endl;
-		delete[] length;
-	}
-	return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?

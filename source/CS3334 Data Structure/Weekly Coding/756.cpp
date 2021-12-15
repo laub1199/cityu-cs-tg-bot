@@ -1,97 +1,65 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#define maxn 100001
 using namespace std;
-void gg(int*, int, int);
-void goodgame(int*, int);
-void dllm(int*, int);
-int main() {
-	int haha;
-	while (cin >> haha) {
-		int damn = 0;
-		int *bro = new int[haha + 1];
-		for (int sls = 0; sls < haha; sls++) {
-			char cls;
-			cin >> cls;
-			switch (cls) {
-			case 'iron':
-				damn++;
-				int nmsl;
-				cin >> nmsl;
-				gg(bro, damn, nmsl);
-				break;
-			case 'r':
-				dllm(bro, damn);
-				break;
-			case 'p':
-				goodgame(bro, damn);
-				damn--;
-				break;
+// {0, ... , n-1}
 
-			}
-		}
-		delete[] bro;
-	}
-	return 0;
-}
-void gg(int* iron, int gold, int nmsl) {
-	int jeng = gold;
-	iron[jeng] = nmsl;
-	int nmslese;
-	if (jeng > 1) {
-		nmslese = jeng / 2;
-		while (iron[jeng] > iron[nmslese] && nmslese != 0) {int temp = iron[jeng];iron[jeng] = iron[nmslese];iron[nmslese] = temp;jeng = jeng / 2;nmslese = jeng / 2;}
-	}
+int sz, sum, arr[maxn];
+
+void init()
+{
+    sz = sum = 0;
+    memset(arr, 0, sizeof(arr));
 }
 
-void goodgame(int*iron, int damn) {
-	int silver = 1;
-	iron[silver] = iron[damn];
-	iron[damn] = 0;
-	while ((silver * 2 <= (damn - 1)) && (iron[silver * 2] > iron[silver] || iron[((silver * 2) + 1)] > iron[silver])) {
-		if (iron[silver * 2] > iron[silver] && iron[((silver * 2) + 1)] > iron[silver]) {
-			if (iron[silver * 2] > iron[((silver * 2) + 1)]) {int temp = iron[silver * 2];iron[silver * 2] = iron[silver];iron[silver] = temp;silver = silver * 2;}
-			else {int temp = iron[((silver * 2) + 1)];iron[((silver * 2) + 1)] = iron[silver];iron[silver] = temp;silver = (silver * 2) + 1;}
-		}
-		else if (iron[silver * 2] > iron[silver]) {int temp = iron[silver * 2];iron[silver * 2] = iron[silver];iron[silver] = temp;silver = silver * 2;}
-		else if (iron[((silver * 2) + 1)] > iron[silver]) {int temp = iron[((silver * 2) + 1)];iron[((silver * 2) + 1)] = iron[silver];iron[silver] = temp;silver = (silver * 2) + 1;}
-	}
-}
-void dllm(int* iron, int damn) {
-	int wtf = 0; for (int sls = 1; sls <= damn; sls++) {wtf += iron[sls];}
-	cout << wtf << endl;
+void ins(int val)
+{
+    int tmp = sz;
+    arr[sz] = val;
+    while(arr[tmp]>arr[(tmp-1)/2] && tmp>0){
+        swap(arr[tmp], arr[(tmp-1)/2]);
+        tmp = (tmp-1)/2;
+    }
+    sz++; sum+=val;
 }
 
+void del()
+{
+    int tmp = 0;
+    sum -= arr[0];
+    arr[0] = arr[sz-1];
+    arr[sz-1] = 0;
+    sz--;
+    while(arr[tmp]<max(arr[2*tmp+1],arr[2*tmp+2]) && tmp<sz){
+        if(arr[2*tmp+1] > arr[2*tmp+2]){
+            swap(arr[tmp], arr[2*tmp+1]);
+            tmp = 2*tmp+1;
+        }else{
+            swap(arr[tmp], arr[2*tmp+2]);
+            tmp = 2*tmp+2;
+        }
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?
+int main()
+{
+    int m;
+    while(scanf("%d", &m) == 1){
+        init();
+        for(int i=0; i<m; i++){
+            char opt; cin>>opt;
+            switch(opt){
+                case 'a':
+                    int num; scanf("%d", &num);
+                    ins(num);
+                    break;
+                case 'p':
+                    del();
+                    break;
+                case 'r':
+                    printf("%d\n", sum);
+                    break;
+            }
+        }
+    }
+    return 0;
+}

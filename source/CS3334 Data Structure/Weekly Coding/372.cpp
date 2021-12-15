@@ -1,65 +1,22 @@
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <stack>
-#include <vector>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
-int main() {
-	int n;
-	cin >> n;
-	for (int i = 0; i < n; i++) {
-		int d;
-		cin >> d;
-		int* a = new int[d];
-		for (int j = 0; j < d; j++) {
-			cin >> a[j];
-		}
-		int u = 0;
-		int b = 0;
-		if (d > 1) {
-			for (int j = 0; j < d - 1; j++) {
-				if (a[j] > a[j + 1]) b++;
-				else if (a[j] < a[j + 1]) u++;
-			}
-		}
-		cout << "Case " << i + 1 << ": " << u << " " << b << endl;
-	}
-	return 0;
+
+int main()
+{
+    int T, N, pre, cur;
+    scanf("%d", &T);
+    for(int cas=1; cas<=T; cas++)
+    {
+        int high=0, low=0;
+        scanf("%d%d", &N, &pre);
+        for(int i=0; i<N-1; i++)
+        {
+            scanf("%d", &cur);
+            if(cur > pre) high++;
+            if(cur < pre) low++;
+            pre = cur;
+        }
+        printf("Case %d: %d %d\n", cas, high, low);
+    }
+    return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?

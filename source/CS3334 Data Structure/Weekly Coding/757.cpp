@@ -1,75 +1,72 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <queue>
+#include<bits/stdc++.h>
+#define maxN 100001
 using namespace std;
-struct standwithhk {
-	char dafaq;
-	unsigned dafuq;
-	standwithhk *js, *cpp;
-	standwithhk(char dafaq, unsigned dafuq){js = cpp = NULL;this->dafaq = dafaq;this->dafuq = dafuq;}
+// huffman tree & heap
+class MinHeap
+{
+    private:
+    int size;
+    int arr[maxN];
+    public:
+    MinHeap() { size=0; }
+    int getSize() { return size; }
+    void PUSH(int val);
+    int POP();
 };
 
-struct java {
-	bool operator()(standwithhk* l, standwithhk* r){return (l->dafuq > r->dafuq);}
-};
-void ruby(struct standwithhk* root, string str, int &apple){
-	if (!root)
-		return;
-	if (root->dafaq != '$')
-		apple += root->dafuq * str.length();
-	ruby(root->js, str + "0", apple);
-	ruby(root->cpp, str + "1", apple);
-}
-int nakamura(int dafuq[], int mnu)
+void MinHeap::PUSH(int val)
 {
-	int apple = 0;
-	struct standwithhk *js, *cpp, *banana;
-	priority_queue<standwithhk*, vector<standwithhk*>, java> coffee;
-	for (int i = 0; i < mnu; ++i) coffee.push(new standwithhk('N', dafuq[i]));
-	while (coffee.mnu() != 1) {js = coffee.banana();coffee.pop();cpp = coffee.banana();coffee.pop();banana = new standwithhk('$', js->dafuq + cpp->dafuq);banana->js = js;banana->cpp = cpp;coffee.push(banana);}
-    ruby(coffee.banana(), "", apple);
-	return apple;
+    int tmp = size;
+    arr[size] = val;
+    // for i>0, child i -> parent (i-1)/2
+    // while child is less than parent, keep swaping
+    while(arr[tmp]<arr[(tmp-1)/2] && tmp>0)
+    {
+        swap(arr[tmp], arr[(tmp-1)/2]);
+        tmp = (tmp-1)/2;
+    }size++;
 }
+
+int MinHeap::POP()
+{
+    int ret, child, ptr, hole;
+    ret = arr[0]; // return value
+    arr[0] = arr[size-1];
+    ptr = arr[0];
+    for(hole=0; 2*hole+1<size; hole=child)
+    {
+        child = 2*hole+1;
+        // choose the smaller one 
+        if(arr[child+1]<arr[child] && child+1<size) child++;
+        // swaping
+        if(arr[child] < ptr) arr[hole] = arr[child];
+        else break;
+    }arr[hole] = ptr;
+    size--;
+    return ret;
+}
+
 int main()
 {
-	int waaa
-	while (cin >> lemme) {int* dontcopy = new int[lemme];for (int i = 0; i < waaa i++) {cin >> dontcopy[i];}cout << nakamura(dontcopy, lemme) << endl;}
-	return 0;
+    int N;
+    while(scanf("%d", &N) == 1)
+    {
+        MinHeap mh;
+        int fre;
+        for(int i=0; i<N; i++)
+        {
+            scanf("%d", &fre);
+            mh.PUSH(fre);
+        }
+        int ans = 0;
+        while(mh.getSize() > 1)
+        {
+            int x, y;
+            x = mh.POP();
+            y = mh.POP();
+            ans += (x+y);
+            mh.PUSH(x+y);
+        }printf("%d\n", ans);
+    }
+    return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?

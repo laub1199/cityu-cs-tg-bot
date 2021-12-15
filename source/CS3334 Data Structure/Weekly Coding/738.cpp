@@ -1,61 +1,27 @@
-#include <iostream>
-#include <vector>
-#include <sstream>
-#include <string>
+#include <bits/stdc++.h>
+#define mod 10
+#define maxn 1005
 using namespace std;
-int F(int);
-int main() {
-	int x;
-	while (cin >> x) {
-		cout << F(x) << endl;
-	}
-}
-int F(int nx) {
-	if (nx <= 1) return nx;
-	int fn = 0;
-	int sn = 1;
-	int t;
-	for (int i = 1; i < nx; i++) {
-		t = (fn + sn) % 10;
-		fn = sn;
-		sn = t;
-	}
-	return sn;
+
+int f[maxn];
+
+int fib(int n)
+{
+    if(f[n]){
+        return f[n];
+    }else if(n<=1){
+        return f[n]=n;
+    }else{
+        return f[n]=(fib(n-1)+fib(n-2))%mod;
+    }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?
+int main()
+{
+    int n;
+    memset(f, 0, sizeof(f));
+    while(scanf("%d", &n) == 1){
+        printf("%d\n", fib(n));
+    }
+    return 0;
+}

@@ -1,93 +1,60 @@
-#include <iostream>
-#include <utility>
-#include <queue>
+#include <bits/stdc++.h>
+#define INF 0x7fffffff
 using namespace std;
-int az(int, int);
-int main() {
-	int nas, nsas, sm, sma, smsa, smjsa, smkjsa, kjsa;
-	pair <int, int>sjksa;
-	cin >> nas;
-	for (int kjksa = 0; kjksa < nas; kjksa++) {
-		cin >> nsas >> sm;
-		deque <pair<int, int> >lkjksa;
-		deque <pair<int, int> >ljkjksa;
-		for (sma = 1; sma <= nsas; sma++) {
-			cin >> smjsa;
-			lkjksa.push_back(make_pair(smjsa, sma));
-		}
-		for (sma = 1; sma <= nsas; sma++) {
-			int ljkmasjksa = az(sm, lkjksa.size());
-			smkjsa = lkjksa.front().first;
-			kjsa = lkjksa.front().second;
-			for (smsa = 1; smsa <= ljkmasjksa; smsa++) {
-				sjksa = lkjksa.front();
-				if (smkjsa < sjksa.first)
-				{
-					smkjsa = sjksa.first;
-					kjsa = sjksa.second;
-				}
-				lkjksa.pop_front();
-				ljkjksa.push_back(sjksa);
-			}
-			ljkmasjksa = ljkjksa.size();
-			for (smsa = 1; smsa <= ljkmasjksa; smsa++) {
-				sjksa = ljkjksa.front();
-				ljkjksa.pop_front();
-				if (kjsa != sjksa.second) {
-					sjksa.first--;
-					lkjksa.push_back(sjksa);
-				}
-			}
-			if (sma != nsas) {
-				cout << kjsa;
-				cout << " ";
-			}
-			else {
-				cout << kjsa;
-			}
-		}
-		cout << endl;
-	}
-	return 0;
+
+queue< pair<int, int> > s;
+queue< pair<int, int> > tmp;
+
+int main(){
+    int T; scanf("%d", &T);
+    while(T--){
+        int n, k; // index start from 1
+        scanf("%d%d", &n, &k);
+        // initialize s
+        for(int i=1; i<=n; i++){
+            int val; scanf("%d", &val);
+            s.push({val, i});
+        }
+        // boring job
+        bool isFirst = true;
+        while(!s.empty()){
+            // pop
+            int Vmax = -INF, idx = -1;
+            if(s.size() >= k){
+                for(int i=0; i<k; i++){
+                    auto p = s.front(); s.pop();
+                    tmp.push(p);
+                    if(p.first > Vmax){
+                        Vmax = p.first;
+                        idx = p.second;
+                    }
+                }
+            }else{
+                while(!s.empty()){
+                    auto p = s.front(); s.pop();
+                    tmp.push(p);
+                    if(p.first > Vmax){
+                        Vmax = p.first;
+                        idx = p.second;
+                    }
+                }
+            }
+            // append
+            while(!tmp.empty()){
+                auto p = tmp.front(); tmp.pop();
+                if(p.second == idx){
+                    if(isFirst){
+                        printf("%d", p.second);
+                        isFirst = false;
+                    }else{
+                        printf(" %d", p.second);
+                    }
+                }else{
+                    p.first--;
+                    s.push(p);
+                }
+            }
+        }printf("\n");
+    }
+    return 0;
 }
-int az(int a, int b) {
-	if (a < b)
-		return a;
-	return b;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?

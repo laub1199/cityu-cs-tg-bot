@@ -1,96 +1,63 @@
-#include<stdio.h>
-#include<string.h>
-#include <iostream>
+#include <bits/stdc++.h>
+#define maxn 30005
 using namespace std;
-#define N 100000
-static int p[N];
-static int r[N];
-static int e[N];
-int m;
-void f1(int n){
-    for(int i = 0; i < n; ++i){
-        p[i]  = i;
-        r[i] = 0;
-        e[i] = 1;
-    }
-}
-int f2(int x){
-    if( x != p[x] )
-        p[x] = f2( p[x] );
-    return p[x];
-}
-bool f3(int x, int y){
-    return f2(x) == f2(y);
-}
-void f4(int x, int y) {
-    if( !f3(x, y)) {
-        if(r[x] > r[y]) {
-            p[y] = x;
-            e[x] += e[y];
-            m = ( m < e[x] ) ? e[x] : m;
-        } else {
-            p[x] = y;
-            e[y] += e[x];
-            m = ( m < e[y] ) ? e[y] : m;
-            if(r[x] == r[y]) r[y] = r[y] + 1;
-        }
 
+int read(){
+    int ret = 0;
+    char ch = getchar();
+    while(ch<'0' || ch>'9'){
+        ch = getchar();
+    }
+    while('0'<=ch && ch<='9'){
+        ret = ret*10 + ch - '0';
+        ch = getchar();
+    }
+    return ret;
+}
+
+int ret;
+int arr[maxn];
+
+void init(){
+    ret = 0;
+    memset(arr, -1, sizeof(arr));
+}
+
+int find(int x){
+    return arr[x]<0 ? x : arr[x]=find(arr[x]);
+}
+
+void UNION_SET(int s1, int s2){
+    arr[s1] += arr[s2];
+    if(arr[s1]+ret < 0){
+        ret = -arr[s1];
+    }
+    arr[s2] = s1; 
+}
+
+void UNION(int a, int b){
+    int ra=find(a), rb=find(b);
+    if(ra != rb){
+        if(ra < rb){
+            UNION_SET(ra, rb);
+        }else{
+            UNION_SET(rb, ra);
+        }
     }
 }
-void U(int x, int y){
-    f4( f2(x), f2(y) );
-}
+
 int main(){
-    int c, a, f1, f2, k;
-    cin>>k;
-    for(int i = 0; i<k;i++){
-        cin>>c>>a;
-        f1(c);
-        m = 1;
-        for(int j = 0; j<a;j++){
-            cin>>f1>>f2;
-            --f1;
-            --f2;
-            U(f1, f2);
+    int T = read();
+    while(T--){
+        int N = read();
+        int M = read();
+        init();
+        for(int i=0; i<M; i++){
+            int a = read();
+            int b = read();
+            UNION(a, b);
         }
-        cout<<m<<endl;
+        printf("%d\n",ret);
     }
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?

@@ -1,111 +1,85 @@
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <cmath>
-#include <vector>
+#include <bits/stdc++.h>
+#define maxn 105
 using namespace std;
-class wsx {
-private:
-	int wsxa;
-	vector<wsx*> wsxag;
-public:
-	wsx(int);
-	void wsxsag(wsx*);
-	wsx* wsxsazg(int);
-	void pazg(int, int, int&);
-	int pazgx();
-};
-int main() {
-	int pazgxg;
-	cin >> pazgxg;
-	for (int pgxg = 0; pgxg < pazgxg; pgxg++) {
-		int pgzxg, pgzxqg;
-		cin >> pgzxg >> pgzxqg;
-		wsx* pgzvdqg = new wsx(pgzxg);
-		for (int j = 0; j < pgzxqg - 1; j++) {
-			int wsxa, parant;
-			cin >> wsxa >> parant;
-			wsx* jtg = pgzvdqg->wsxsazg(parant);
-			jtg->wsxsag(new wsx(wsxa));
-		}
-		int jrtg, jrstg;
-		int jrstgq;
-		cin >> jrtg >> jrstg;
-		pgzvdqg->pazg(jrtg, jrstg, jrstgq);
-		cout << jrstgq << endl;
-	}
-	return 0;
-}
-wsx::wsx(int sb) {
-	wsxa = sb;
-}
-void wsx::wsxsag(wsx* child) {
-	wsxag.push_back(child);
-}
-wsx* wsx::wsxsazg(int n) {
-	if (wsxa == n)
-		return this;
-	else {
-		for (unsigned pgxg = 0; pgxg < wsxag.size(); pgxg++) {
-			wsx* jtg = wsxag.at(pgxg);
-			if (jtg->wsxsazg(n)) {
-				return jtg->wsxsazg(n);
-			}
-		}
-		return NULL;
-	}
-}
-void wsx::pazg(int jrtg, int jrstg, int& jrstgq) {
-	bool gsne = false;
-	bool sae = false;
-	if (this->wsxsazg(jrtg)) {
-		gsne = true;
-	}
-	if (this->wsxsazg(jrstg)) {
-		sae = true;
-	}
-	if (gsne && sae) {
-		jrstgq = this->wsxa;
-		for (unsigned pgxg = 0; pgxg < wsxag.size(); pgxg++)
-			wsxag.at(pgxg)->pazg(jrtg, jrstg, jrstgq);
-	}
-}
-int wsx::pazgx() {
-	return wsxa;
+
+struct edge{
+    int nxt, dest;
+}edges[maxn<<1];
+
+int cnt, head[maxn];
+
+void init_tree(){
+    cnt = 0;
+    memset(head, -1, sizeof(head));
 }
 
+void add(int u, int v){
+    edges[cnt].dest = v;
+    edges[cnt].nxt = head[u];
+    head[u] = cnt++;
+}
 
+int lg[maxn];
+void generate_log(){
+    for(int i=1; i<maxn; i++){
+        lg[i] = lg[i-1] + (1<<lg[i-1] == i);
+    }
+}
 
+int dep[maxn], fa[maxn][30];
+void dfs(int cur, int f){
+    fa[cur][0] = f; dep[cur] = dep[f]+1;
+    // update fa
+    for(int i=1; i<=lg[dep[cur]]; i++){
+        fa[cur][i] = fa[fa[cur][i-1]][i-1];
+    }
+    // bfs
+    for(int i=head[cur]; ~i; i=edges[i].nxt){
+        if(edges[i].dest != f){
+            dfs(edges[i].dest, cur);
+        }
+    }
+}
+// lca
+int lca(int x, int y){
+    // 保证 dep[x]>dep[y]
+    if(dep[x] < dep[y]){
+        swap(x, y);
+    }
+    
+    while(dep[x] > dep[y]){
+        x = fa[x][lg[dep[x]-dep[y]]-1]; // -1?
+    }
+    
+    if(x == y){
+        return x;
+    }
+    // find ancestor
+    for(int i=lg[dep[x]]-1; i>=0; i--){
+        if(fa[x][i] != fa[y][i]){
+            x = fa[x][i]; y = fa[y][i];
+        }
+    }
+    return fa[x][0];
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?
+int main(){
+    generate_log();
+    int T; scanf("%d",&T);
+    while(T--){
+        // idx of root, #node
+        int root, n;
+        scanf("%d%d",&root,&n);
+        init_tree();
+        for(int i=0; i<n-1; i++){
+            int a, b; scanf("%d%d",&a,&b);
+            add(a, b); add(b, a);
+        }
+        dfs(root, 0);
+        int a, b, ret; 
+        scanf("%d%d",&a,&b);
+        ret = lca(a, b);
+        printf("%d\n",ret);
+    }
+    return 0;
+}

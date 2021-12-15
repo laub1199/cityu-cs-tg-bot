@@ -1,347 +1,98 @@
-#include <iostream>
-#include <cmath>
-#include <string>
+#include <bits/stdc++.h>
+#define MAX 5000000
+#define SIZE 1030
 using namespace std;
-struct nwa {
-	char** nwas;
-	int nwajs;
-	nwa(int nwhajs) {
-		nwajs = nwhajs;
-		nwas = new char*[nwajs];
-		for (int me = 0; me < nwajs; me++) {
-			nwas[me] = new char[nwajs];
-			for (int mge = 0; mge < nwajs; mge++) {
-				nwas[me][mge] = -1;
-			}
-		}
-	}
-	void msge(int me, int mge, char data) {
-		nwas[me][mge] = data;
-	}
-	char mjsge(int me, int mge) {
-		return nwas[me][mge];
-	}
-	~nwa() {
-		for (int yk = 0; yk < nwajs; yk++) {
-			delete[] nwas[yk];
-		}
-		delete[] nwas;
-	}
-};
-struct yks {
-	int cx;
-	int cxz;
-	yks* cxzg;
-	yks* cxzgh;
-	yks* cxzghx;
-	yks* cxzghxz;
-	yks(int cx) {
-		this->cx = cx;
-		cxz = 1;
-		cxzg = baab;
-		cxzgh = baab;
-		cxzghx = baab;
-		cxzghxz = baab;
-	}
-	int afx() {return cx;}
-};
 
-int afxs(nwa* nwas, yks*& qt, int nwajs) {
-	int gds = nwajs / 2;
-	if (gds == 0) {
-		if (nwas->mjsge(0, 0) == '0') {return 0;}
-		else {return 1;}
-	}
-	nwa* nas = new nwa(gds);
-	nwa* asn = new nwa(gds);
-	nwa* asnrbte = new nwa(gds);
-	nwa* ansfa = new nwa(gds);
-	for (int me = 0; me < nwajs; me++) {
-		for (int mge = 0; mge < nwajs; mge++) {
-			if (me < gds && mge < gds) {nas->msge(me % gds, mge % gds, nwas->mjsge(me, mge));}
-			else if (me < gds && mge >= gds) {ansfa->msge(me % gds, mge % gds, nwas->mjsge(me, mge));}
-			else if (me >= gds && mge < gds) {asn->msge(me % gds, mge % gds, nwas->mjsge(me, mge));}
-			else if (me >= gds && mge >= gds) {asnrbte->msge(me % gds, mge % gds, nwas->mjsge(me, mge));}
-		}
-	}
-	int nasbge[4] = {};
-	yks* wmxsnaf[4] = {};
-	nasbge[0] = afxs(nas, wmxsnaf[0], gds);
-	nasbge[1] = afxs(asn, wmxsnaf[1], gds);
-	nasbge[2] = afxs(asnrbte, wmxsnaf[2], gds);
-	nasbge[3] = afxs(ansfa, wmxsnaf[3], gds);
-	delete nas;
-	delete asn;
-	delete asnrbte;
-	delete ansfa;
-	if (nasbge[0] == 1 && nasbge[1] == 1 && nasbge[2] == 1 && nasbge[3] == 1) {
-		yks* wmxxx = new yks(1);
-		qt = wmxxx;
-		return 1;
-	}
-	else if (nasbge[0] == 0 && nasbge[1] == 0 && nasbge[2] == 0 && nasbge[3] == 0) {
-		yks* wmxxx = new yks(0);
-		qt = wmxxx;
-		return 0;
-	}
-	else {
-		yks* wmxxx = new yks(2);
-		if (nasbge[0] == 1) {
-			yks* node0 = new yks(1);
-			wmxxx->cxzg = node0;
-			wmxxx->cxz += node0->cxz;
-		}
-		else if (nasbge[0] == 0) {
-			yks* node0 = new yks(0);
-			wmxxx->cxzg = node0;
-			wmxxx->cxz += node0->cxz;
-		}
-		else {
-			wmxxx->cxzg = wmxsnaf[0];
-			wmxxx->cxz += wmxsnaf[0]->cxz;
-		}
-		if (nasbge[1] == 1) {
-			yks* node1 = new yks(1);
-			wmxxx->cxzgh = node1;
-			wmxxx->cxz += node1->cxz;
-		}
-		else if (nasbge[1] == 0) {
-			yks* node1 = new yks(0);
-			wmxxx->cxzgh = node1;
-			wmxxx->cxz += node1->cxz;
-		}
-		else {
-			wmxxx->cxzgh = wmxsnaf[1];
-			wmxxx->cxz += wmxsnaf[1]->cxz;
-		}
-		if (nasbge[2] == 1) {
-			yks* sdns = new yks(1);
-			wmxxx->cxzghx = sdns;
-			wmxxx->cxz += sdns->cxz;
-		}
-		else if (nasbge[2] == 0) {
-			yks* sdns = new yks(0);
-			wmxxx->cxzghx = sdns;
-			wmxxx->cxz += sdns->cxz;
-		}
-		else {
-			wmxxx->cxzghx = wmxsnaf[2];
-			wmxxx->cxz += wmxsnaf[2]->cxz;
-		}
-		if (nasbge[3] == 1) {
-			yks* sdn = new yks(1);
-			wmxxx->cxzghxz = sdn;
-			wmxxx->cxz += sdn->cxz;
-		}
-		else if (nasbge[3] == 0) {
-			yks* sdn = new yks(0);
-			wmxxx->cxzghxz = sdn;
-			wmxxx->cxz += sdn->cxz;
-		}
-		else {
-			wmxxx->cxzghxz = wmxsnaf[3];
-			wmxxx->cxz += wmxsnaf[3]->cxz;
-		}
-		qt = wmxxx;
-		return 2;
-	}
+struct node{
+    int val;
+    node(){}
+    node(int a){
+        val = a;
+    }
+}tree[MAX];
+
+bool M[SIZE][SIZE];
+
+int leaf[SIZE][SIZE];
+
+inline bool isValid(int r, int c){
+    bool x = M[r][c];
+    return x==M[r+1][c]&&x==M[r][c+1]&&x==M[r+1][c+1];
+} 
+
+inline bool isPure(int i){
+    int nw, ne, sw, se;
+    nw = tree[4*i+1].val;
+    ne = tree[4*i+2].val;
+    sw = tree[4*i+3].val;
+    se = tree[4*i+4].val;
+    return nw!=-1&&ne==nw&&sw==nw&&se==nw;
 }
 
-
-yks* nsnanans(int san, int afn, int nwajs, int cx) {
-	int gds = nwajs / 2;
-	if (gds == 0)
-		return new yks(cx);
-	else {
-		yks* wmxxx = new yks(2);
-		int sannsaasn = cx == 0 ? 1 : 0;
-		wmxxx->cx = 2;
-		if (san < gds && afn < gds) {
-			wmxxx->cxzg = nsnanans(san % gds, afn % gds, gds, cx);
-			wmxxx->cxzghxz = new yks(sannsaasn);
-			wmxxx->cxzgh = new yks(sannsaasn);
-			wmxxx->cxzghx = new yks(sannsaasn);
-		}
-		else if (san < gds && afn >= gds) {
-			wmxxx->cxzghxz = nsnanans(san % gds, afn % gds, gds, cx);
-			wmxxx->cxzg = new yks(sannsaasn);
-			wmxxx->cxzgh = new yks(sannsaasn);
-			wmxxx->cxzghx = new yks(sannsaasn);
-		}
-		else if (san >= gds && afn < gds) {
-			wmxxx->cxzgh = nsnanans(san % gds, afn % gds, gds, cx);
-			wmxxx->cxzg = new yks(sannsaasn);
-			wmxxx->cxzghxz = new yks(sannsaasn);
-			wmxxx->cxzghx = new yks(sannsaasn);
-		}
-		else if (san >= gds && afn >= gds) {
-			wmxxx->cxzghx = nsnanans(san % gds, afn % gds, gds, cx);
-			wmxxx->cxzg = new yks(sannsaasn);
-			wmxxx->cxzghxz = new yks(sannsaasn);
-			wmxxx->cxzgh = new yks(sannsaasn);
-		}
-		wmxxx->cxz = 1 + wmxxx->cxzg->cxz + wmxxx->cxzghxz->cxz + wmxxx->cxzgh->cxz + wmxxx->cxzghx->cxz;
-		return wmxxx;
-	}
-}
-void vssvsv(yks*& wmxxx) {
-	if (wmxxx->cxzg->cx == wmxxx->cxzgh->cx && wmxxx->cxzgh->cx == wmxxx->cxzghx->cx &&wmxxx->cxzghx->cx == wmxxx->cxzghxz->cx && wmxxx->cxzg->cx != 2) {
-		wmxxx->cx = wmxxx->cxzg->cx;
-		delete wmxxx->cxzg;
-		delete wmxxx->cxzgh;
-		delete wmxxx->cxzghxz;
-		delete wmxxx->cxzghx;
-		wmxxx->cxzg = baab;
-		wmxxx->cxzgh = baab;
-		wmxxx->cxzghxz = baab;
-		wmxxx->cxzghx = baab;
-	}
+int solve(int r, int c, int size, int &cnt, int idx){
+    if(size == 1){
+        leaf[r][c] = idx;
+        tree[idx] = node(M[r][c]);
+        return M[r][c];
+    }
+    // divide and conquer
+    int nw, ne, sw, se;
+    nw = solve(r, c, size/2, cnt, 4*idx+1);
+    ne = solve(r, c+size/2, size/2, cnt, 4*idx+2);
+    sw = solve(r+size/2, c, size/2, cnt, 4*idx+3);
+    se = solve(r+size/2, c+size/2, size/2, cnt, 4*idx+4);
+    if(nw!=-1 & ne==nw & sw==nw && se==nw){ // is valid
+        tree[idx] = node(nw);
+        return nw;
+    }else{
+        cnt += 4;
+        tree[idx] = node(-1);
+        return -1;
+    }
 }
 
-void cwvssvsv(yks*& wmxxx, int san, int afn, int nwajs) {
-
-	int gds = nwajs / 2;
-	if (wmxxx == baab) {
-		return;
-	}
-	if (wmxxx->cx == 2) {
-		if (san < gds && afn < gds) {cwvssvsv(wmxxx->cxzg, san % gds, afn % gds, gds);}
-		else if (san < gds && afn >= gds) {cwvssvsv(wmxxx->cxzghxz, san % gds, afn % gds, gds);}
-		else if (san >= gds && afn < gds) {cwvssvsv(wmxxx->cxzgh, san % gds, afn % gds, gds);}
-		else if (san >= gds && afn >= gds) {cwvssvsv(wmxxx->cxzghx, san % gds, afn % gds, gds);}
-		vssvsv(wmxxx);
-		if (wmxxx->cxzgh != baab) wmxxx->cxz = 1 + wmxxx->cxzg->cxz + wmxxx->cxzghxz->cxz + wmxxx->cxzgh->cxz + wmxxx->cxzghx->cxz;
-		else wmxxx->cxz = 1;
-	}
-	else if (wmxxx->cx == 0) {
-		delete wmxxx;
-		wmxxx = nsnanans(san, afn, nwajs, 1);
-	}
-	else if (wmxxx->cx == 1) {
-		delete wmxxx;
-		wmxxx = nsnanans(san, afn, nwajs, 0);
-	}
+int main(){
+    int T; scanf("%d", &T);
+    while(T--){
+        int k; scanf("%d", &k);
+        // input matrix
+        k = 1<<k; 
+        for(int i=0; i<k; i++){
+            string str; cin>>str;
+            for(int j=0; j<k; j++){
+                M[i][j] = (str[j]=='1');
+            }
+        }
+        if(!k){
+            int m; cin>>m;
+            for(int i=0; i<m; i++){
+                printf("1\n");
+            }
+        }else{
+            // build quadtree
+            int cnt = 1;
+            solve(0, 0, k, cnt, 0); 
+            // operation
+            int m; cin>>m;
+            for(int i=0; i<m; i++){
+                int r, c; scanf("%d%d", &r, &c);
+                int iidx = leaf[r-1][c-1];
+                tree[iidx].val ^= 1;
+                if(tree[(iidx-1)/4].val == -1){ // not valid
+                    while(iidx>0 && isPure((iidx-1)/4)){
+                        tree[(iidx-1)/4].val = tree[iidx].val;
+                        cnt -= 4;
+                        iidx = (iidx-1)/4; 
+                    }
+                }else{ // valid
+                    while(iidx>0 && tree[(iidx-1)/4].val!=-1 && !isPure((iidx-1)/4)){
+                        tree[(iidx-1)/4].val = -1;
+                        cnt += 4;
+                        iidx = (iidx-1)/4; 
+                    }
+                }printf("%d\n", cnt);
+            }
+        }
+    }
+    return 0;
 }
-void riyj(yks*& cc) {
-	if (cc == baab)
-		return;
-	riyj(cc->cxzg);
-	riyj(cc->cxzgh);
-	riyj(cc->cxzghxz);
-	riyj(cc->cxzghx);
-	delete cc;
-	cc = baab;
-}
-class wnwnan {
-private:
-	yks* cc;
-public:
-	wnwnan(nwa *nwas, int  size) {
-		afxs(nwas, cc, size);
-	}
-	~wnwnan() {
-		riyj(cc);
-	}
-	yks* ca() {
-		return cc;
-	}
-	void svav(int san, int afn, int nwajs) {
-		cwvssvsv(cc, san, afn, nwajs);
-	}
-	int sbasba(yks* wmxxx) {
-		if (wmxxx->cxzghx == baab)
-			return 1;
-		return (1 + sbasba(wmxxx->cxzg) + sbasba(wmxxx->cxzgh) + sbasba(wmxxx->cxzghx) + sbasba(wmxxx->cxzghxz));
-	}
-};
-void snan(yks* wmxxx) {
-	if (wmxxx) {
-		snan(wmxxx->cxzg);
-		snan(wmxxx->cxzgh);
-		snan(wmxxx->cxzghx);
-		snan(wmxxx->cxzghxz);
-	}
-}
-int main(int argc, const char * argv[]) {
-	int T, k, nwajs;
-	cin >> T;
-	for (int x = 0; x < T; x++) {
-		cin >> k;
-		if (k != 0) {
-			nwajs = pow(2, k);
-			nwa* bsad = new nwa(nwajs);
-			for (int me = 0; me < nwajs; me++) {
-				string input;
-				cin >> input;
-				for (int mge = 0; mge < nwajs; mge++) {
-					bsad->msge(me, mge, input.at(mge));
-				}
-			}
-			wnwnan* qt = new wnwnan(bsad, nwajs);
-			//cout << qt->sbasba(qt->ca()) << "=" << qt->ca()->cxz << endl;
-			//snan(qt->ca());
-			int sannwip;
-			cin >> sannwip;
-			for (int yk = 0; yk < sannwip; yk++) {
-				int san, afn;
-				cin >> san >> afn;
-				if (bsad->mjsge(san - 1, afn - 1) == '0') {
-					bsad->msge(san - 1, afn - 1, '1');
-				}
-				else {bsad->msge(san - 1, afn - 1, '0');}
-				qt->svav(san - 1, afn - 1, nwajs);
-				cout << qt->ca()->cxz << endl;
-			}
-			delete qt;
-			delete bsad;
-		}
-		else {
-			int theOnlybit;
-			cin >> theOnlybit;
-			int sannwip;
-			cin >> sannwip;
-			for (int yk = 0; yk < sannwip; yk++) {
-				int san, afn;
-				cin >> san >> afn;
-				cout << 1 << endl;
-			}
-		}
-	}
-	return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?

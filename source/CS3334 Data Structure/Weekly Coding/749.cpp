@@ -1,76 +1,59 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#define maxn 105
 using namespace std;
-int sn(int asdn[], int asfa, int wn){
-    for (int santu = 0; santu < wn; santu++)
-        if (asdn[santu] == asfa)
-            return santu;
-    return -1;
+
+// preOrder array, inOrder array
+int preOrder[maxn], inOrder[maxn], postOrder[maxn];
+// idx for preOrder array
+int idx;
+// cnt for postOrder array
+int cnt;
+
+void solve(int left, int right){
+    // base case ?
+    if(left > right){
+        idx--;
+        return;
+    }
+    // find idx of root
+    int root = preOrder[idx];
+
+    int i;
+    for(i=left; i<=right; i++){
+        if(inOrder[i] == root){
+            break;
+        }
+    }
+    // divide and conquer
+    idx++; solve(left, i-1);
+    idx++; solve(i+1, right);
+    postOrder[cnt++] = root;
 }
-void ssss(int sb[], int nwar[], int vsa, int &wnafw, int &asnd)
-{
-    int sanmd = sn(sb, nwar[0], vsa);
-    if (sanmd != 0)
-        ssss(sb, nwar + 1, sanmd, wnafw, asnd);
-    if (sanmd != vsa - 1)
-        ssss(sb + sanmd + 1, nwar + sanmd + 1, vsa - sanmd - 1, wnafw, asnd);
-    wnafw++;
-    if (asnd== wnafw)
-        cout << nwar[0] << endl;
-    else
-        cout << nwar[0] << " ";
-}
-int main() {
-    int sanfam;
-    cin >> sanfam;
-    for (int santu = 0; santu < sanfam; santu++) {
-        int ssadn;
-        int wnafw = 0;
-        cin >> ssadn;
-        int asnd = ssadn;
-        int *sna = new int[ssadn];
-        int *wvavawba = new int[ssadn];
-        for (int j = 0; j < ssadn; j++)
-            cin >> sna[j];
-        for (int qwesx = 0; qwesx < ssadn; qwesx++)
-            cin >> wvavawba[qwesx];
-        ssss(wvavawba, sna, ssadn, wnafw, asnd);
-        delete[] sna,wvavawba;
+
+int main(){
+    int T; scanf("%d",&T);
+    while(T--){
+        int N; scanf("%d",&N);
+        // input preOrder
+        for(int i=0; i<N; i++){
+            scanf("%d",&preOrder[i]);
+        }
+        // input inOrder
+        for(int i=0; i<N; i++){
+            scanf("%d",&inOrder[i]);
+        }
+        // solve
+        idx = cnt = 0;
+        solve(0, N-1);
+        // output result
+        for(int i=0; i<cnt; i++){
+            if(i == 0){
+                printf("%d",postOrder[i]);
+            }else{
+                printf(" %d",postOrder[i]);
+            }
+        }
+        printf("\n");
     }
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?

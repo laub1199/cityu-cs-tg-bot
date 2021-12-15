@@ -1,80 +1,33 @@
-#include <iostream>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
-int main() {
-	int za, zae, zfae, zfaes, zfhaes;
-	while (cin >> za) {
-		queue<int> zfhkaes;
-		cin >> zae;
-		cin >> zfae;
-		cin >> zfaes;
-		zfhkaes.push(zae + zfae);
-		if (za == 1) {
-			cout << zae << endl;
-		}
-		else {
-			for (int i = 1; i < za - 1; i++) {
-				cin >> zae;
-				cin >> zfae;
-				cin >> zfaes;
-				while (!zfhkaes.empty() && zfhkaes.front() <= zae)
-					zfhkaes.pop();
-				if (zfaes >= zfhkaes.size()) {
-					if (zae > zfhkaes.back())
-						zfhaes = zae + zfae;
-					else
-						zfhaes = zfhkaes.back() + zfae;
-					zfhkaes.push(zfhaes);
-				}
-			}
-			cin >> zae >> zfae >> zfaes;
-			while (!zfhkaes.empty() && zfhkaes.front() <= zae)
-				zfhkaes.pop();
-			if (zfhkaes.size() <= zfaes) {
-				if (zae > zfhkaes.back())
-					cout << zae << endl;
-				else
-					cout << zfhkaes.back() << endl;
-			}
-			else
-				cout << -1 << endl;
-		}
-	}
-	return 0;
+
+int main(){
+    int n;
+    while(scanf("%d",&n) == 1){
+	
+        queue<int> q;
+        while(!q.empty()) q.pop();
+        // input
+        for(int i=0; i<n; i++){
+            int a, o, l;
+            scanf("%d%d%d",&a,&o,&l);
+            while(!q.empty() && q.front()<=a){
+                q.pop(); // dequeue
+            }
+            if(i == n-1){
+                if(q.size() <= l){
+                    int ret = q.empty() ? a : q.back();
+                    printf("%d\n",ret);
+                }else{
+                    printf("-1\n");
+                }
+            }else{
+                if(q.size() <= l){
+                    int ret = q.empty() ? a+o : q.back()+o ;
+                    q.push(ret);
+                }
+            }
+        }
+    }
+    return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?

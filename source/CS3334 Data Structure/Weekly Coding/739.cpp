@@ -1,116 +1,96 @@
-#include <iostream>
-#include <vector>
-#include <sstream>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
-class wdqs {
-public:
-	int d;
-	wdqs* ascx;
-};
-int main() {
-	int wcacv;
-	int saveads;
-	cin >> wcacv;
-	wdqs* ascwgw = NULL;
-	for (int i = 0; i < wcacv; i++) {
-		wdqs* fuyk = new wdqs;
-		int grsebt;
-		cin >> grsebt;
-		fuyk->d = grsebt;
-		if (!ascwgw) {
-			fuyk->ascx = ascwgw;
-			ascwgw = fuyk;
-		}
-		else {
-			wdqs* amy = ascwgw;
-			while (amy->ascx) {
-				amy = amy->ascx;
-			}
-			amy->ascx = fuyk;
-			amy = fuyk;
-			if (i == wcacv - 1) {
-				amy->ascx = ascwgw;
-			}
-			else {
-				amy->ascx = NULL;
-			}
-		}
-	}
-	int amerys;
-	while (cin >> amerys) {
-		if (amerys == 1) {
-			int vfads, nwe;
-			wdqs* fuyk = new wdqs;
-			wdqs* amy = ascwgw;
-			cin >> vfads >> nwe;
-			fuyk->d = nwe;
-			for (int i = 0; i < vfads - 1; i++) {
-				amy = amy->ascx;
-			}
-			fuyk->ascx = amy->ascx;
-			amy->ascx = fuyk;
-			for (int i = 0; i < vfads; i++) {
-				ascwgw = ascwgw->ascx;
-			}
-		}
-		else if (amerys == 2) {
-			int vfads;
-			wdqs* amy = ascwgw;
-			wdqs* wnesqn = ascwgw;
-			cin >> vfads;
-			for (int i = 0; i < vfads - 2; i++) {
-				amy = amy->ascx;
-				wnesqn = wnesqn->ascx;
-			}
-			wnesqn = wnesqn->ascx;
-			amy->ascx = wnesqn->ascx;
-			amy = amy->ascx;
-			ascwgw = amy;
-		}
-		else if (amerys == 3) {
-			int vfads;
-			cin >> vfads;
-			for (int i = 0; i < vfads - 1; i++) {
-				ascwgw = ascwgw->ascx;
-			}
-			cout << ascwgw->d << endl;
-		}
-	}
+
+// insert, remove, query
+
+class node
+{
+    public:
+    int tag;
+    node* nxt;
+}*ptr;
+
+void init(int n)
+{
+    node *newNode, *preNode; 
+    // head
+    int t;
+    scanf("%d", &t);
+    ptr = new node;
+    ptr->tag = t;
+    preNode = ptr;
+    // new node
+    for(int i=0; i<n-1; i++)
+    {
+        scanf("%d", &t);
+        newNode = new node;
+        newNode->tag = t;
+        preNode->nxt = newNode;
+        preNode = newNode;
+    }preNode->nxt = ptr;
 }
 
+void Insert(int idx, int t)
+{
+    node *preNode, *postNode, *newNode; 
+    preNode = ptr;
+    for(int i=0; i<idx-1; i++)
+    {
+        preNode = preNode->nxt;
+    }postNode = preNode->nxt;
+    newNode = new node;
+    newNode->tag = t;
+    newNode->nxt = postNode;
+    preNode->nxt = newNode;
+    ptr = newNode;
+}
 
+void Remove(int idx)
+{
+    node *cur, *pre, *post;
+    cur = ptr;
+    for(int i=0; i<idx-2; i++)
+    {
+        cur = cur->nxt;
+    }pre=cur, cur=cur->nxt;
+    post = cur->nxt;
+    pre->nxt = post;
+    ptr = post;
+}
 
+void Query(int idx)
+{
+    for(int i=0; i<idx-1; i++)
+    {
+        ptr = ptr->nxt;
+    }printf("%d\n", ptr->tag);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?
+int main()
+{
+    int N, Q;
+    while(scanf("%d", &N) == 1)
+    {
+        init(N); // initialize list
+        scanf("%d", &Q);
+        int opt, idx, t;
+        for(int i=0; i<Q; i++)
+        {
+            scanf("%d%d", &opt, &idx);
+            switch(opt)
+            {
+                case 1:
+                    scanf("%d", &t); 
+                    Insert(idx, t);
+                    break;
+                case 2:
+                    Remove(idx);
+                    break;
+                case 3: 
+                    Query(idx);
+                    break;
+            }
+        }
+    }
+    return 0;
+}

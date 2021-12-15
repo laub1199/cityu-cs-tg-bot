@@ -1,70 +1,42 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
+#define maxn 20005
 using namespace std;
-int main() {
-	int zxc, zxcs;
-	cin >> zxc;
-	for (int i = 0; i < zxc; i++) {
-		cin >> zxcs;
-		vector <int> zxchs;
-		for (int zxvhchs = 0; zxvhchs < zxcs; zxvhchs++) {
-			int zxhchs;
-			cin >> zxhchs;
-			zxchs.push_back(zxhchs);
-		}
-		int zxnvhchs;
-		cin >> zxnvhchs;
-		for (int zxvhchs = 0; zxvhchs < zxnvhchs; zxvhchs++) {
-			char zxnvzchs;
-			cin >> zxnvzchs;
-			if (zxnvzchs == 'm') {cout << *max_element(zxchs.begin(), zxchs.end()) << endl;}
-			if (zxnvzchs == 'r') {zxchs.pop_back();}
-			if (zxnvzchs == 'a') {
-				int zxnnvzchs;
-				cin >> zxnnvzchs;
-				zxchs.push_back(zxnnvzchs);
-			}
-		}
-		zxchs.clear();
-	}
-	return 0;
+
+int dp[maxn];
+
+int main()
+{
+    int T; scanf("%d", &T);
+    while(T--){
+        // initialization
+        memset(dp, 0, sizeof(dp));
+        // input initial pile
+        int mmax = 0;
+        int n; scanf("%d", &n);
+        for(int i=1; i<=n; i++){
+            int num; scanf("%d", &num);
+            if(num > mmax){
+                mmax = num;
+            }dp[i] = mmax;
+        }
+        // operation
+        int m; cin>>m;
+        for(int i=0; i<m; i++){
+            char opt; cin>>opt;
+            switch(opt){
+                case 'm':
+                    printf("%d\n", dp[n]);
+                    break;
+                case 'r':
+                    n--;
+                    break;
+                case 'a':
+                    int val; scanf("%d", &val);
+                    mmax = dp[n];
+                    dp[++n] = max(val, mmax);
+                    break;
+            }
+        }
+    }
+    return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// dont submit directly ok?
-
