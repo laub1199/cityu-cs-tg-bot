@@ -45,6 +45,7 @@ def main():
 
     # Message handler
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcome))
+    dp.add_handler(MessageHandler(Filters.status_update.left_chat_member, remove_member))
 
     # Conversation handler
     dp.add_handler(source_conv_handler)
