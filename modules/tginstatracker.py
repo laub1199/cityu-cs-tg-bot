@@ -68,7 +68,7 @@ class _InstaTracker:
 load_dotenv()
 APP_ENV_IS_TEST = True if os.environ.get("APP_ENV") == 'test' else False
 group_list = [-1001338851560] if APP_ENV_IS_TEST else [-1001278050153]
-target_username_list = ['thestandnews', 'cityucss_nebulae', 'cityusu', 'hkcityu.info'] if APP_ENV_IS_TEST else ['cityusu', 'cityucss_nebulae', 'cityusu_welfare', 'hkcityu.info']
+target_username_list = ['cityusu', 'cityucss_nebulae', 'cityusu_welfare', 'hkcityu.info', 'cityusu.cbc', 'cityusu.edb']
 
 insta_tracker = _InstaTracker(
     os.environ.get("INSTA_TRACK_USERNAME"),

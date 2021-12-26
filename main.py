@@ -39,6 +39,8 @@ def main():
     dp.add_handler(CommandHandler('css', css))
     dp.add_handler(CommandHandler('su', su))
     dp.add_handler(CommandHandler('cityuinfo', cityuinfo))
+    dp.add_handler(CommandHandler('cbc', cbc))
+    dp.add_handler(CommandHandler('edb', edb))
     
     dp.add_handler(CommandHandler("start", start, filters=~Filters.group))
     dp.add_handler(CommandHandler('pin', pin, filters=~Filters.group))
@@ -84,4 +86,6 @@ crypto - check crypto price
 css - get our society's latest ig post
 su - get student union's latest ig post
 cityuinfo - get hkcityu.info latest ig post
+cbc - get SU City Broadcasting Channel latest ig post
+edb - get SU Editorial Board latest ig post
 '''
