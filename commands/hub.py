@@ -12,3 +12,4 @@ from commands.cmd_su import *
 from commands.cmd_cityuinfo import *
 from commands.cmd_cbc import *
 from commands.cmd_edb import *
+from commands.cmd_nhk import *

@@ -1,3 +1,6 @@
+2022-01-23 01:16
+added /nhk command
+
 2021-12-26 18:20
 added /cbc and /edb command
 

@@ -11,6 +11,7 @@ Group command如下：
 /cityuinfo 查看城大人資訊最新嘅IG Post
 /cbc 查看城市廣播最新嘅IG Post
 /edb 查看城大編委最新嘅IG Post
+/nhk 查看NHK - NFTS.HK最新嘅IG Post
 
 Private command:
 /start - 了解private mode下嘅其他command
