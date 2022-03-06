@@ -34,31 +34,35 @@ class _InstaTracker:
     def insta_track(self, context: CallbackContext):
         print('=======================================================')
         print('Running insta_track function...')
-        for username in self._target_username_list:
-            instant_flag = False
-            profile = Profile.from_username(self._insta.context, username)
-            # for instant control
-            # if username == 'cityusu':
-            #     instant_flag = True
-            for post in profile.get_posts():
-                shortcode = post.shortcode
-                print('[Tracking] {} - {}'.format(username, self._latest_post[username]))
-                print('[Latest post]: {}'.format(shortcode))
-                url = "https://www.instagram.com/p/" + shortcode + "/"
-                photo_url = post.url
-                text = 'Check out ' + username + '\'s latest post!'
-                keyboard = InlineKeyboardMarkup.from_button(
-                    InlineKeyboardButton(text=text, url=url)
-                )
-                caption = post.caption
-                if self._latest_post[username]['shortcode'] != shortcode or instant_flag:
-                    print('[New post commit] {} from {} to {}'.format(username, shortcode, self._latest_post[username]['shortcode']))
-                    self._latest_post[username]['shortcode'] = shortcode
-                    self._latest_post[username]['photo_url'] = photo_url
-                    self._latest_post[username]['caption'] = caption
-                    for id in self._group_list:
-                        context.bot.send_photo(chat_id=id, photo=photo_url, reply_markup=keyboard, caption=caption)
-                break
+        try:
+            for username in self._target_username_list:
+                instant_flag = False
+                profile = Profile.from_username(self._insta.context, username)
+                # for instant control
+                # if username == 'cityusu':
+                #     instant_flag = True
+                for post in profile.get_posts():
+                    shortcode = post.shortcode
+                    print('[Tracking] {} - {}'.format(username, self._latest_post[username]))
+                    print('[Latest post]: {}'.format(shortcode))
+                    url = "https://www.instagram.com/p/" + shortcode + "/"
+                    photo_url = post.url
+                    text = 'Check out ' + username + '\'s latest post!'
+                    keyboard = InlineKeyboardMarkup.from_button(
+                        InlineKeyboardButton(text=text, url=url)
+                    )
+                    caption = post.caption
+                    if self._latest_post[username]['shortcode'] != shortcode or instant_flag:
+                        print('[New post commit] {} from {} to {}'.format(username, shortcode, self._latest_post[username]['shortcode']))
+                        self._latest_post[username]['shortcode'] = shortcode
+                        self._latest_post[username]['photo_url'] = photo_url
+                        self._latest_post[username]['caption'] = caption
+                        for id in self._group_list:
+                            context.bot.send_photo(chat_id=id, photo=photo_url, reply_markup=keyboard, caption=caption)
+                    break
+        except Exception as e:
+            print('[InstaTracker] Error on insta_traclk function')
+            print(e)
         print('=======================================================')
 
     def get_post(self, username):
@@ -68,11 +72,15 @@ class _InstaTracker:
 load_dotenv()
 APP_ENV_IS_TEST = True if os.environ.get("APP_ENV") == 'test' else False
 group_list = [-1001338851560] if APP_ENV_IS_TEST else [-1001278050153]
-target_username_list = ['cityusu', 'cityucss_nebulae', 'cityusu_welfare', 'hkcityu.info', 'cityusu.cbc', 'cityusu.edb', 'nfts.hk']
+target_username_list = ['cityusu', 'cityucss_nebulae', 'cityusu_welfare', 'hkcityu.info', 'cityusu.cbc', 'cityusu.edb']
 
-insta_tracker = _InstaTracker(
-    os.environ.get("INSTA_TRACK_USERNAME"),
-    os.environ.get("INSTA_TRACK_PASSWORD"),
-    group_list=group_list,
-    target_username_list=target_username_list
-)
+try:
+    insta_tracker = _InstaTracker(
+        os.environ.get("INSTA_TRACK_USERNAME"),
+        os.environ.get("INSTA_TRACK_PASSWORD"),
+        group_list=group_list,
+        target_username_list=target_username_list
+    )
+except Exception as e:
+    print('[InstaTracker] Error on initialization')
+    print(e)
