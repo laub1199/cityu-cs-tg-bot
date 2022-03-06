@@ -51,6 +51,10 @@ def main():
 
     # Conversation handler
     dp.add_handler(source_conv_handler)
+    dp.add_handler(new_poll_conv_handler)
+    dp.add_handler(poll_conv_handler)
+    dp.add_handler(result_conv_handler)
+    dp.add_handler(new_poll_conv_handler)
 
     # Error handler
     dp.add_error_handler(error)
