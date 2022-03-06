@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 class _InstaTracker:
     def __init__(self, ig_username, ig_password, group_list=None, target_username_list=None):
         self._insta = instaloader.Instaloader()
-        self._insta.login(ig_username, ig_password)
+        # self._insta.login(ig_username, ig_password)
         self._group_list = group_list if not group_list is None else []
         self._target_username_list = target_username_list if not target_username_list is None else []
         if target_username_list is not None:
