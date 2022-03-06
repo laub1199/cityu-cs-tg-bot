@@ -1,3 +1,6 @@
+2022-03-06 17:58
+added try except for ig tracking function
+
 2022-01-23 01:16
 added /nhk command
 
